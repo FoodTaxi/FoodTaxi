@@ -1,1 +1,4 @@
-/*.DS_Store
+**/*.DS_Store
+**/.DS_Store
+source/backend/.metadata
+source/backend/RemoteSystemsTempFiles
