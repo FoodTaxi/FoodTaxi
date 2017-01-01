@@ -37,18 +37,18 @@ public class HibernateConfiguration {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/foodtaxi");
-        dataSource.setUsername("root");
-        dataSource.setPassword("910403");
+        dataSource.setDriverClassName(environment.getProperty("env.datasource.driver"));
+        dataSource.setUrl(environment.getProperty("env.datasource.url"));
+        dataSource.setUsername(environment.getProperty("env.datasource.username"));
+        dataSource.setPassword(environment.getProperty("env.datasource.password"));
         return dataSource;
     }
      
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        properties.put("hibernate.show_sql", true);
-        properties.put("hibernate.format_sql",true);
+        properties.put("hibernate.dialect", environment.getProperty("env.datasource.dialect"));
+        properties.put("hibernate.show_sql", environment.getProperty("env.datasource.showSql"));
+        properties.put("hibernate.format_sql",environment.getProperty("env.datasource.formatSql"));
         return properties;        
     }
      
