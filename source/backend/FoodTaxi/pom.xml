@@ -46,6 +46,38 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		
+		<!-- Spring ORM support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -66,7 +98,7 @@
 					<diffChangeLogFile>src/main/resources/liquibase/changelogs/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
 					<driver>com.mysql.jdbc.Driver</driver>
 					<url>jdbc:mysql://127.0.0.1:3306/foodtaxi</url>
-					<referenceUrl>hibernate:spring:com.aim.foodtaxi.entities?dialect=org.hibernate.dialect.MySQLInnoDBDialect</referenceUrl>
+					<referenceUrl>hibernate:spring:com.aim.foodtaxi.domain?dialect=org.hibernate.dialect.MySQLInnoDBDialect</referenceUrl>
 					<username>root</username>
 					<password>910403</password>
 					<verbose>true</verbose>

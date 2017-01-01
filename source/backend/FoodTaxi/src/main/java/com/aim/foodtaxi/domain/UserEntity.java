@@ -1,4 +1,4 @@
-package com.aim.foodtaxi.entities;
+package com.aim.foodtaxi.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
