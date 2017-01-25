@@ -1,42 +1,30 @@
-package com.aim.foodtaxi.domain;
+package com.aim.foodtaxi.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class Shop {
 
-@Entity
-@Table(name="T_SHOP")
-public class ShopEntity {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
     private Long id;
-    
-    @Column(name="NAME")
     private String name;
-    
-    @Column(name="LONGTITUDE")
     private String longtitude;
-    
-    @Column(name="LATITUDE")
     private String latitude;
-    
-    @Column(name="ORDERS_PHONE")
     private String ordersPhone;
-    
-    @Column(name="ORDERS_EMAIL")
     private String ordersEmail;
-    
-    @Column(name="ORDERS_SMS")
     private String ordersSMS;
-    
-    @ManyToOne
-    private BrandEntity brand;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getLongtitude() {
         return longtitude;

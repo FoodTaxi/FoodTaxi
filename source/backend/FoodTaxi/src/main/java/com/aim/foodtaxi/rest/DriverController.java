@@ -19,17 +19,17 @@ import com.aim.foodtaxi.services.DriverService;
 public class DriverController {
     
     @Inject
-    private DriverService userService;
+    private DriverService driverService;
     
     @RequestMapping(value = "/driver", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createDriver(@RequestBody Driver driver) {
-        userService.createDriver(driver);
+        driverService.createDriver(driver);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
     
     @RequestMapping(value = "/driver", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getDriver(@RequestParam Long driverId) {
-        Driver driver = userService.getDriverById(driverId);
+        Driver driver = driverService.getDriverById(driverId);
         return new ResponseEntity<>(driver, HttpStatus.CREATED);
     }
 }
