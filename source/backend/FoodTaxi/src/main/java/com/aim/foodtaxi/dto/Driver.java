@@ -2,7 +2,7 @@ package com.aim.foodtaxi.dto;
 
 import java.util.Date;
 
-public class User {
+public class Driver {
 
     private Long id;
     private String firstName;

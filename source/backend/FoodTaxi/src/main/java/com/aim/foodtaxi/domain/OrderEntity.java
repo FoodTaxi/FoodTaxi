@@ -35,7 +35,7 @@ public class OrderEntity {
     private Date shipmentDate;
     
     @ManyToOne
-    private UserEntity driver;
+    private DriverEntity driver;
     
 
     public Double getPrice() {
@@ -78,11 +78,11 @@ public class OrderEntity {
         this.latitude = latitude;
     }
 
-    public UserEntity getDriver() {
+    public DriverEntity getDriver() {
         return driver;
     }
 
-    public void setDriver(UserEntity driver) {
+    public void setDriver(DriverEntity driver) {
         this.driver = driver;
     }
 }

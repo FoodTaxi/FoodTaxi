@@ -20,8 +20,11 @@ public class BrandEntiry {
     @Column
     private Long id;
     
-    @Column
+    @Column(name="NAME")
     private String name;
+    
+    @Column(name="LOGO_PATH")
+    private String logoPath;
     
     @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="brand")
     private List<ShopEntity> shops;
@@ -48,5 +51,13 @@ public class BrandEntiry {
 
     public void setShops(List<ShopEntity> shops) {
         this.shops = shops;
+    }
+
+    public String getLogoPath() {
+        return logoPath;
+    }
+
+    public void setLogoPath(String logoPath) {
+        this.logoPath = logoPath;
     }
 }

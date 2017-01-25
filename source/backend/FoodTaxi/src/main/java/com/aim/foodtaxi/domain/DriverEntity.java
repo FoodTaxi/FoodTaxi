@@ -13,8 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "T_USER")
-public class UserEntity {
+@Table(name = "T_DRIVER")
+public class DriverEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,6 +56,9 @@ public class UserEntity {
 
 	@Column(name="LATITUDE")
 	private String latitude;
+	
+	@Column(name="IMAGE_PATH")
+    private String imagePath;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="driver")
 	List<OrderEntity> orders;

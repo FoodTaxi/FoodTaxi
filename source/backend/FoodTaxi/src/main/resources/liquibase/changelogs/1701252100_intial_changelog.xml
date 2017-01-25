@@ -1,14 +1,35 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="mihailkarev (generated)" id="1483651438233-1">
+    <changeSet author="mihailkarev (generated)" id="1485378024923-1">
         <createTable tableName="T_BRAND">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="T_BRANDPK"/>
             </column>
-            <column name="name" type="VARCHAR(255)"/>
+            <column name="LOGO_PATH" type="VARCHAR(255)"/>
+            <column name="NAME" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="mihailkarev (generated)" id="1483651438233-2">
+    <changeSet author="mihailkarev (generated)" id="1485378024923-2">
+        <createTable tableName="T_DRIVER">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_DRIVERPK"/>
+            </column>
+            <column name="ACCOUNT_STATUS" type="VARCHAR(255)"/>
+            <column name="CAB_NUMBER" type="VARCHAR(255)"/>
+            <column name="CURRENT_STATUS" type="VARCHAR(255)"/>
+            <column name="FIRST_NAME" type="VARCHAR(255)"/>
+            <column name="IMAGE_PATH" type="VARCHAR(255)"/>
+            <column name="LAST_NAME" type="VARCHAR(255)"/>
+            <column name="LATITUDE" type="VARCHAR(255)"/>
+            <column name="LONGTITUDE" type="VARCHAR(255)"/>
+            <column name="PASSWORD" type="VARCHAR(255)"/>
+            <column name="PALTE" type="VARCHAR(255)"/>
+            <column name="RATING" type="INT"/>
+            <column name="REGISTER_DATE" type="datetime"/>
+            <column name="USERNAME" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="mihailkarev (generated)" id="1485378024923-3">
         <createTable tableName="T_ORDER">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="T_ORDERPK"/>
@@ -21,7 +42,7 @@
             <column name="driver_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="mihailkarev (generated)" id="1483651438233-3">
+    <changeSet author="mihailkarev (generated)" id="1485378024923-4">
         <createTable tableName="T_SHOP">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="T_SHOPPK"/>
@@ -32,29 +53,10 @@
             <column name="brand_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="mihailkarev (generated)" id="1483651438233-4">
-        <createTable tableName="T_USER">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints primaryKey="true" primaryKeyName="T_USERPK"/>
-            </column>
-            <column name="ACCOUNT_STATUS" type="VARCHAR(255)"/>
-            <column name="CAB_NUMBER" type="VARCHAR(255)"/>
-            <column name="CURRENT_STATUS" type="VARCHAR(255)"/>
-            <column name="FIRST_NAME" type="VARCHAR(255)"/>
-            <column name="LAST_NAME" type="VARCHAR(255)"/>
-            <column name="LATITUDE" type="VARCHAR(255)"/>
-            <column name="LONGTITUDE" type="VARCHAR(255)"/>
-            <column name="PASSWORD" type="VARCHAR(255)"/>
-            <column name="PALTE" type="VARCHAR(255)"/>
-            <column name="RATING" type="INT"/>
-            <column name="REGISTER_DATE" type="datetime"/>
-            <column name="USERNAME" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="mihailkarev (generated)" id="1483651438233-5">
+    <changeSet author="mihailkarev (generated)" id="1485378024923-5">
         <addForeignKeyConstraint baseColumnNames="brand_id" baseTableName="T_SHOP" constraintName="FK_dfxtbkjvrjds60rua29kx0x8h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_BRAND"/>
     </changeSet>
-    <changeSet author="mihailkarev (generated)" id="1483651438233-6">
-        <addForeignKeyConstraint baseColumnNames="driver_id" baseTableName="T_ORDER" constraintName="FK_e5q8bw4os74yys3yjwy1g0krj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_USER"/>
+    <changeSet author="mihailkarev (generated)" id="1485378024923-6">
+        <addForeignKeyConstraint baseColumnNames="driver_id" baseTableName="T_ORDER" constraintName="FK_e5q8bw4os74yys3yjwy1g0krj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
     </changeSet>
 </databaseChangeLog>
