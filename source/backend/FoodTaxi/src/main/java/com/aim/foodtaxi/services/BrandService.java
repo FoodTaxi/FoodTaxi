@@ -24,6 +24,7 @@ public class BrandService {
 
     public void createBrand(Brand brand) {
         BrandEntity brandEntity = brandMapper.brandToBrandEntity(brand);
+        brandEntity.getShops().stream().forEach(shop -> shop.setBrand(brandEntity));
         brandRepository.save(brandEntity);
     }
 

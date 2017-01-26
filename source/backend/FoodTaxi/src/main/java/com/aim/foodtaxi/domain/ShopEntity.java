@@ -77,4 +77,28 @@ public class ShopEntity {
     public void setOrdersSMS(String ordersSMS) {
         this.ordersSMS = ordersSMS;
     }
+
+    public BrandEntity getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandEntity brand) {
+        this.brand = brand;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
