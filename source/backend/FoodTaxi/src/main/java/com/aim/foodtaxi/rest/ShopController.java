@@ -22,8 +22,8 @@ public class ShopController {
     private ShopService shopService;
 
     @RequestMapping(value = "/shop", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createShop(@RequestBody Shop shop) {
-        shopService.createShop(shop);
+    public ResponseEntity<?> createShop(@RequestParam Long brandId, @RequestBody Shop shop) {
+        shopService.createShop(brandId, shop);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
