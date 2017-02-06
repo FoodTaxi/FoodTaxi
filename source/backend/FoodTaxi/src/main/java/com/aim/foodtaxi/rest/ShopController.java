@@ -30,6 +30,6 @@ public class ShopController {
     @RequestMapping(value = "/shop", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getShop(@RequestParam Long shopId) {
         Shop shop = shopService.getShopById(shopId);
-        return new ResponseEntity<>(shop, HttpStatus.CREATED);
+        return new ResponseEntity<>(shop, HttpStatus.OK);
     }
 }

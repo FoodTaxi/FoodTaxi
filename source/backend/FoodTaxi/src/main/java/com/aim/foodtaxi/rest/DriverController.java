@@ -30,6 +30,6 @@ public class DriverController {
     @RequestMapping(value = "/driver", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getDriver(@RequestParam Long driverId) {
         Driver driver = driverService.getDriverById(driverId);
-        return new ResponseEntity<>(driver, HttpStatus.CREATED);
+        return new ResponseEntity<>(driver, HttpStatus.OK);
     }
 }

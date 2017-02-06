@@ -20,8 +20,6 @@ public interface BrandMapper {
     @Named("brandToBrandEntity")
     public BrandEntity brandToBrandEntity(Brand brand);
 
-//    public List<ShopEntity> map(List<Shop> shops);
-//   
     @IterableMapping(qualifiedByName = "brandEntityToBrand")
     public List<Shop> map(List<ShopEntity> shopsEntities);
     

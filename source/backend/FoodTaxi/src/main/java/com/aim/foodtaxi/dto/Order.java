@@ -1,50 +1,15 @@
-package com.aim.foodtaxi.domain;
+package com.aim.foodtaxi.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class Order {
 
-@Entity
-@Table(name="T_ORDER")
-public class OrderEntity {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
     private Long id;
-    
-    @Column(name="PRICE")
     private Double price;
-    
-    @Column(name="PAYMENT_TYPE")
     private String paymnentType;
-    
-    @Column(name="LONGTITUDE")
     private String longtitude;
-    
-    @Column(name="LATITUDE")
     private String latitude;
-    
-    @Column(name="SHIPMENT_DATE")
     private Date shipmentDate;
-    
-    @ManyToOne(optional=true)
-    private DriverEntity driver;
-    
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 
     public Long getId() {
         return id;
@@ -52,6 +17,14 @@ public class OrderEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getPaymnentType() {
@@ -78,14 +51,6 @@ public class OrderEntity {
         this.latitude = latitude;
     }
 
-    public DriverEntity getDriver() {
-        return driver;
-    }
-
-    public void setDriver(DriverEntity driver) {
-        this.driver = driver;
-    }
-
     public Date getShipmentDate() {
         return shipmentDate;
     }
@@ -93,4 +58,5 @@ public class OrderEntity {
     public void setShipmentDate(Date shipmentDate) {
         this.shipmentDate = shipmentDate;
     }
+
 }

@@ -30,7 +30,7 @@ public class BrandController {
     @RequestMapping(value = "/brand", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getBrand(@RequestParam Long brandId) {
         Brand brand = brandService.getBrandById(brandId);
-        return new ResponseEntity<>(brand, HttpStatus.CREATED);
+        return new ResponseEntity<>(brand, HttpStatus.OK);
     }
 
 }
