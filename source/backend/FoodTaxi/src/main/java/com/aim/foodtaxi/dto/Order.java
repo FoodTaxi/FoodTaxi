@@ -7,9 +7,10 @@ public class Order {
     private Long id;
     private Double price;
     private String paymnentType;
-    private String longtitude;
-    private String latitude;
+    private Double longtitude;
+    private Double latitude;
     private Date shipmentDate;
+    private Long brandId;
 
     public Long getId() {
         return id;
@@ -35,28 +36,36 @@ public class Order {
         this.paymnentType = paymnentType;
     }
 
-    public String getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
     public Date getShipmentDate() {
         return shipmentDate;
     }
 
     public void setShipmentDate(Date shipmentDate) {
         this.shipmentDate = shipmentDate;
+    }
+
+    public Double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(Double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
     }
 
 }

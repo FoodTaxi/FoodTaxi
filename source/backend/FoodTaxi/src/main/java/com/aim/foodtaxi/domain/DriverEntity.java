@@ -52,10 +52,10 @@ public class DriverEntity {
 	private String currentStatus;
 	
 	@Column(name="LONGTITUDE")
-	private String longtitude;
+	private Double longtitude;
 
 	@Column(name="LATITUDE")
-	private String latitude;
+	private Double latitude;
 	
 	@Column(name="IMAGE_PATH")
     private String imagePath;
@@ -148,28 +148,28 @@ public class DriverEntity {
         this.currentStatus = currentStatus;
     }
 
-    public String getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
     public String getAccountStatus() {
         return accountStatus;
     }
 
     public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public Double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(Double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
 }

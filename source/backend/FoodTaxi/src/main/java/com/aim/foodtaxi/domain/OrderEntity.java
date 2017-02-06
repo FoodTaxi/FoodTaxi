@@ -26,10 +26,10 @@ public class OrderEntity {
     private String paymnentType;
     
     @Column(name="LONGTITUDE")
-    private String longtitude;
+    private Double longtitude;
     
     @Column(name="LATITUDE")
-    private String latitude;
+    private Double latitude;
     
     @Column(name="SHIPMENT_DATE")
     private Date shipmentDate;
@@ -37,7 +37,12 @@ public class OrderEntity {
     @ManyToOne(optional=true)
     private DriverEntity driver;
     
-
+    @ManyToOne(optional=true)
+    private ShopEntity shop;
+    
+    @ManyToOne(optional=true)
+    private BrandEntity brand;
+    
     public Double getPrice() {
         return price;
     }
@@ -62,22 +67,6 @@ public class OrderEntity {
         this.paymnentType = paymnentType;
     }
 
-    public String getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
     public DriverEntity getDriver() {
         return driver;
     }
@@ -92,5 +81,37 @@ public class OrderEntity {
 
     public void setShipmentDate(Date shipmentDate) {
         this.shipmentDate = shipmentDate;
+    }
+
+    public Double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(Double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public ShopEntity getShop() {
+        return shop;
+    }
+
+    public void setShop(ShopEntity shop) {
+        this.shop = shop;
+    }
+
+    public BrandEntity getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandEntity brand) {
+        this.brand = brand;
     }
 }

@@ -9,50 +9,34 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_SHOP")
+@Table(name = "T_SHOP")
 public class ShopEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
-    
-    @Column(name="NAME")
+
+    @Column(name = "NAME")
     private String name;
-    
-    @Column(name="LONGTITUDE")
-    private String longtitude;
-    
-    @Column(name="LATITUDE")
-    private String latitude;
-    
-    @Column(name="ORDERS_PHONE")
+
+    @Column(name = "LONGTITUDE")
+    private Double longtitude;
+
+    @Column(name = "LATITUDE")
+    private Double latitude;
+
+    @Column(name = "ORDERS_PHONE")
     private String ordersPhone;
-    
-    @Column(name="ORDERS_EMAIL")
+
+    @Column(name = "ORDERS_EMAIL")
     private String ordersEmail;
-    
-    @Column(name="ORDERS_SMS")
+
+    @Column(name = "ORDERS_SMS")
     private String ordersSMS;
-    
+
     @ManyToOne
     private BrandEntity brand;
-
-    public String getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
 
     public String getOrdersPhone() {
         return ordersPhone;
@@ -100,5 +84,21 @@ public class ShopEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(Double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }

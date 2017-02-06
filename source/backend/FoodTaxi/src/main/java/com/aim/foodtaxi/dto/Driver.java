@@ -10,13 +10,13 @@ public class Driver {
     private Date registerDate;
     private String username;
     private String password;
-    private String accountStatus; 
+    private String accountStatus;
     private String cabNumber;
     private String plate;
     private Integer rating;
     private String currentStatus;
-    private String longtitude;
-    private String latitude;
+    private Double longtitude;
+    private Double latitude;
 
     public Long getId() {
         return id;
@@ -98,27 +98,27 @@ public class Driver {
         this.currentStatus = currentStatus;
     }
 
-    public String getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
     public String getAccountStatus() {
         return accountStatus;
     }
 
     public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public Double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(Double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }

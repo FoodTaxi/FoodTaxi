@@ -24,8 +24,8 @@ public class OrderController {
 
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createOrder(@RequestBody Order order) {
-        orderService.createOrder(order);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        HttpStatus createOrderStatus = orderService.createOrder(order);
+        return new ResponseEntity<>(null, createOrderStatus);
     }
 
     @RequestMapping(value = "/openOrders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

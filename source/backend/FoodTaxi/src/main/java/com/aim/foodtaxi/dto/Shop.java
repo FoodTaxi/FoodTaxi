@@ -4,8 +4,8 @@ public class Shop {
 
     private Long id;
     private String name;
-    private String longtitude;
-    private String latitude;
+    private Double longtitude;
+    private Double latitude;
     private String ordersPhone;
     private String ordersEmail;
     private String ordersSMS;
@@ -24,22 +24,6 @@ public class Shop {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
     }
 
     public String getOrdersPhone() {
@@ -64,5 +48,21 @@ public class Shop {
 
     public void setOrdersSMS(String ordersSMS) {
         this.ordersSMS = ordersSMS;
+    }
+
+    public Double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(Double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }
