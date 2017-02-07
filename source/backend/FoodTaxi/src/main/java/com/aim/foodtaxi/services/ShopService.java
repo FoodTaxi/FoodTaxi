@@ -31,7 +31,7 @@ public class ShopService {
         Optional<BrandEntity> brandEntity = brandRepository.findOneById(brandId);
         if (brandEntity.isPresent()) {
             ShopEntity shopEntity = shopMapper.shopToShopEntity(shop);
-            brandEntity.get().getShops().add(shopEntity);
+//            brandEntity.get().getShops().add(shopEntity);
             shopEntity.setBrand(brandEntity.get());
             shopRepository.save(shopEntity);
             return true;
