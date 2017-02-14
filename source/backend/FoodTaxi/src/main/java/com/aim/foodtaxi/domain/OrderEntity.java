@@ -7,42 +7,48 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="T_ORDER")
+@Table(name = "T_ORDER")
 public class OrderEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private Long id;
-    
-    @Column(name="PRICE")
+
+    @Column(name = "PRICE")
     private Double price;
-    
-    @Column(name="PAYMENT_TYPE")
+
+    @Column(name = "PAYMENT_TYPE")
     private String paymnentType;
-    
-    @Column(name="LONGTITUDE")
+
+    @Column(name = "LONGTITUDE")
     private Double longtitude;
-    
-    @Column(name="LATITUDE")
+
+    @Column(name = "LATITUDE")
     private Double latitude;
-    
-    @Column(name="SHIPMENT_DATE")
+
+    @Column(name = "SHIPMENT_DATE")
     private Date shipmentDate;
-    
-    @ManyToOne(optional=true)
+
+    @ManyToOne(optional = true)
     private DriverEntity driver;
-    
-    @ManyToOne(optional=true)
+
+    @ManyToOne(optional = true)
     private ShopEntity shop;
-    
-    @ManyToOne(optional=true)
+
+    @ManyToOne(optional = true)
     private BrandEntity brand;
-    
+
+    @OneToOne
+    @JoinColumn(name="BEST_BID_FK") 
+    private BidEntity bestBid;
+
     public Double getPrice() {
         return price;
     }
@@ -113,5 +119,13 @@ public class OrderEntity {
 
     public void setBrand(BrandEntity brand) {
         this.brand = brand;
+    }
+
+    public BidEntity getBestBid() {
+        return bestBid;
+    }
+
+    public void setBestBid(BidEntity bestBid) {
+        this.bestBid = bestBid;
     }
 }

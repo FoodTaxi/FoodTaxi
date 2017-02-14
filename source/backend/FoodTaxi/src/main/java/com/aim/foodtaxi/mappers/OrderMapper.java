@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
 import com.aim.foodtaxi.domain.OrderEntity;
 import com.aim.foodtaxi.dto.Order;
 
-@Mapper(componentModel = "spring", uses = {DriverMapper.class, }, unmappedTargetPolicy= ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", uses = {DriverMapper.class, BidMapper.class, }, unmappedTargetPolicy= ReportingPolicy.IGNORE)
 public interface OrderMapper {
    
     @Mapping(source = "brand.id", target = "brandId")

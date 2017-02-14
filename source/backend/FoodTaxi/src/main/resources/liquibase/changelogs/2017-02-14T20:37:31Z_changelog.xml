@@ -1,0 +1,31 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="mihailkarev (generated)" id="1487104654037-8">
+        <dropForeignKeyConstraint baseTableName="T_ORDER" constraintName="FK_9kfda37abtvbtx3yucc06kd3y"/>
+        <addForeignKeyConstraint baseColumnNames="brand_id" baseTableName="T_ORDER" constraintName="FK_9kfda37abtvbtx3yucc06kd3y" referencedColumnNames="id" referencedTableName="T_BRAND"/>
+    </changeSet>
+    <changeSet author="mihailkarev (generated)" id="1487104654037-9">
+        <dropForeignKeyConstraint baseTableName="T_BID" constraintName="FK_d5y8xvg0cqor5tybcmmey6qfb"/>
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="T_BID" constraintName="FK_d5y8xvg0cqor5tybcmmey6qfb" referencedColumnNames="id" referencedTableName="T_ORDER"/>
+    </changeSet>
+    <changeSet author="mihailkarev (generated)" id="1487104654037-10">
+        <dropForeignKeyConstraint baseTableName="T_SHOP" constraintName="FK_dfxtbkjvrjds60rua29kx0x8h"/>
+        <addForeignKeyConstraint baseColumnNames="brand_id" baseTableName="T_SHOP" constraintName="FK_dfxtbkjvrjds60rua29kx0x8h" referencedColumnNames="id" referencedTableName="T_BRAND"/>
+    </changeSet>
+    <changeSet author="mihailkarev (generated)" id="1487104654037-11">
+        <dropForeignKeyConstraint baseTableName="T_ORDER" constraintName="FK_e5q8bw4os74yys3yjwy1g0krj"/>
+        <addForeignKeyConstraint baseColumnNames="driver_id" baseTableName="T_ORDER" constraintName="FK_e5q8bw4os74yys3yjwy1g0krj" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
+    </changeSet>
+    <changeSet author="mihailkarev (generated)" id="1487104654037-12">
+        <dropForeignKeyConstraint baseTableName="T_ORDER" constraintName="FK_ehjyrqub2qro09y586hksfume"/>
+        <addForeignKeyConstraint baseColumnNames="bestBid_id" baseTableName="T_ORDER" constraintName="FK_ehjyrqub2qro09y586hksfume" referencedColumnNames="id" referencedTableName="T_BID"/>
+    </changeSet>
+    <changeSet author="mihailkarev (generated)" id="1487104654037-13">
+        <dropForeignKeyConstraint baseTableName="T_ORDER" constraintName="FK_ekte2rgmcs0tajvmith2hbrsw"/>
+        <addForeignKeyConstraint baseColumnNames="shop_id" baseTableName="T_ORDER" constraintName="FK_ekte2rgmcs0tajvmith2hbrsw" referencedColumnNames="id" referencedTableName="T_SHOP"/>
+    </changeSet>
+    <changeSet author="mihailkarev (generated)" id="1487104654037-14">
+        <dropForeignKeyConstraint baseTableName="T_BID" constraintName="FK_t6dkxjg0273tryrih8rcqu8ex"/>
+        <addForeignKeyConstraint baseColumnNames="driver_id" baseTableName="T_BID" constraintName="FK_t6dkxjg0273tryrih8rcqu8ex" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
+    </changeSet>
+</databaseChangeLog>

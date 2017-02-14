@@ -10,8 +10,9 @@ public class Order {
     private Double longtitude;
     private Double latitude;
     private Date shipmentDate;
-    private Long brandId;
-
+    private Long brandId; 
+    private Bid bestBid;
+    
     public Long getId() {
         return id;
     }
@@ -66,6 +67,14 @@ public class Order {
 
     public void setBrandId(Long brandId) {
         this.brandId = brandId;
+    }
+
+    public Bid getBestBid() {
+        return bestBid;
+    }
+
+    public void setBestBid(Bid bestBid) {
+        this.bestBid = bestBid;
     }
 
 }
