@@ -1,2 +1,9 @@
 <ion-content padding>
+  <div *ngIf="!authenticated" id="loginForm">
+	<h3>Please login</h3>
+
+    <div><span>Username</span> <input type="text" name="username"/></div>
+    <div><span>Password</span> <input type="password" name="password"/></div>
+    <button ion-button (click)="login()">Login</button>
+  </div>
 </ion-content>
