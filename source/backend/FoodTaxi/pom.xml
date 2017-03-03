@@ -98,12 +98,13 @@
 					<changeLogFile>src/main/resources/liquibase/master.xml</changeLogFile>
 					<diffChangeLogFile>src/main/resources/liquibase/changelogs/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
 					<driver>com.mysql.jdbc.Driver</driver>
-					<url>jdbc:mysql://127.0.0.1:3306/foodtaxi</url>
+					<url>jdbc:mysql://us-cdbr-iron-east-04.cleardb.net:3306/heroku_17b99e2d36d1205</url>
 					<referenceUrl>hibernate:spring:com.aim.foodtaxi.domain?dialect=org.hibernate.dialect.MySQLInnoDBDialect</referenceUrl>
-					<username>root</username>
-					<password>910403</password>
+					<username>b0c29b15aa181c</username>
+					<password>412520d0</password>
 					<verbose>true</verbose>
 					<logging>debug</logging>
+						
 				</configuration>
 				<dependencies>
 					<dependency>
