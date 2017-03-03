@@ -26,6 +26,9 @@ public class OrderEntity {
 
     @Column(name = "PAYMENT_TYPE")
     private String paymnentType;
+    
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @Column(name = "LONGTITUDE")
     private Double longtitude;
@@ -127,5 +130,13 @@ public class OrderEntity {
 
     public void setBestBid(BidEntity bestBid) {
         this.bestBid = bestBid;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

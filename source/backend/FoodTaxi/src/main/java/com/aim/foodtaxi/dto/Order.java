@@ -12,6 +12,7 @@ public class Order {
     private Date shipmentDate;
     private Long brandId; 
     private Bid bestBid;
+    private String description;
     
     public Long getId() {
         return id;
@@ -75,6 +76,14 @@ public class Order {
 
     public void setBestBid(Bid bestBid) {
         this.bestBid = bestBid;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
