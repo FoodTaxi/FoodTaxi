@@ -15,6 +15,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import liquibase.integration.spring.SpringLiquibase;
  
 @Configuration
 @EnableTransactionManagement
@@ -51,7 +53,16 @@ public class HibernateConfiguration {
         properties.put("hibernate.format_sql",environment.getProperty("env.datasource.formatSql"));
         return properties;        
     }
-     
+
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setDataSource(dataSource());
+        liquibase.setChangeLog("classpath:liquibase/master.xml");
+        liquibase.setContexts("development");
+        return liquibase;
+    }
+
     @Bean
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory s) {
