@@ -5,11 +5,11 @@ import {BidService} from '../../providers/bid-service';
 import {OrderService} from '../../providers/order-service';
 
 @Component({
-  selector: 'page-activeBids',
-  templateUrl: 'activeBids.html',
+  selector: 'page-dashboard',
+  templateUrl: 'dashboard.html',
   providers: [BidService,OrderService]
 })
-export class ActiveBids {
+export class Dashboard {
   public orders = [];
   constructor(public navCtrl: NavController, public orderService: OrderService) {
     this.loadOrders();

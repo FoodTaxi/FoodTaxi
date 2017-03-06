@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Dashboard</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h4>Active Orders</h4>
+  <ion-list>
+    <ion-item class="order-row" *ngFor="let order of orders" (click)="clicked($event, order)">
+      <table>
+        <tr class="order-table-row">
+          <td class="order-table-row-part10">
+            <img class="brand-icon" src="https://cari373.files.wordpress.com/2010/03/mcdonalds_logo.jpg"/>
+          </td>
+          <td class="order-table-row-part20">
+            <h2>From:</h2>
+            <h4>{{order.longtitude}}</h4>
+            <h4>{{order.latitude}}</h4>
+          </td>
+          <td class="order-table-row-part20">
+            <h2>To:</h2>
+            <h4>{{order.longtitude}}</h4>
+            <h4>{{order.latitude}}</h4>
+          </td>
+          <td class="order-table-row-part10">
+            <h2 >Current Bid:</h2>
+            <h4>{{order.bestBid.price}}</h4>
+          </td>
+          <td class="order-table-row-part20">
+            <h2>Holder:</h2>
+            <h4>{{order.bestBid.driverFullName}}</h4>
+          </td>
+          <td class="order-table-row-part20">
+            <h2>Time Left:</h2>
+          </td>
+        </tr>
+      </table>
+    </ion-item>
+  </ion-list>
+</ion-content>
