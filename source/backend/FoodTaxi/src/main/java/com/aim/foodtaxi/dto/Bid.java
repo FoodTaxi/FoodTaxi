@@ -8,6 +8,7 @@ public class Bid {
     private Double price;
     private Date bidTime;
     private Long driverId;
+    private String driverFullName;
     private Long orderId;
 
     public Long getId() {
@@ -48,5 +49,13 @@ public class Bid {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public String getDriverFullName() {
+        return driverFullName;
+    }
+
+    public void setDriverFullName(String driverFullName) {
+        this.driverFullName = driverFullName;
     }
 }

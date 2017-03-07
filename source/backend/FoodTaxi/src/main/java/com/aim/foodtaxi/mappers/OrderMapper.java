@@ -14,6 +14,8 @@ import com.aim.foodtaxi.dto.Order;
 public interface OrderMapper {
    
     @Mapping(source = "brand.id", target = "brandId")
+    @Mapping(source = "brand.logoPath", target = "brandLogoPath")
+    @Mapping(source = "shop.addressText", target = "shopAddressText")
     public Order orderEntityToOrder(OrderEntity orderEntity);
     
     @Mapping(target = "driver", ignore = true)

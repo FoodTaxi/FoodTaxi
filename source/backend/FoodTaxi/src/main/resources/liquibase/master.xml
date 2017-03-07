@@ -13,4 +13,6 @@
 		relativeToChangelogFile="true" />
 	<include file="changelogs/1702271957_add_description.xml" 
 		relativeToChangelogFile="true" />
+	<include file="changelogs/1703072138_add_address_text_changelog.xml" 
+		relativeToChangelogFile="true" />
 </databaseChangeLog>

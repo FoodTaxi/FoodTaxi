@@ -13,6 +13,9 @@ public class Order {
     private Long brandId; 
     private Bid bestBid;
     private String description;
+    private String addressText;
+    private String brandLogoPath;
+    private String shopAddressText;
     
     public Long getId() {
         return id;
@@ -84,6 +87,30 @@ public class Order {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAddressText() {
+        return addressText;
+    }
+
+    public void setAddressText(String addressText) {
+        this.addressText = addressText;
+    }
+
+    public String getBrandLogoPath() {
+        return brandLogoPath;
+    }
+
+    public void setBrandLogoPath(String brandLogoPath) {
+        this.brandLogoPath = brandLogoPath;
+    }
+
+    public String getShopAddressText() {
+        return shopAddressText;
+    }
+
+    public void setShopAddressText(String shopAddressText) {
+        this.shopAddressText = shopAddressText;
     }
 
 }

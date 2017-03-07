@@ -34,6 +34,9 @@ public class ShopEntity {
 
     @Column(name = "ORDERS_SMS")
     private String ordersSMS;
+    
+    @Column(name = "ADDRESS_TEXT")
+    private String addressText;
 
     @ManyToOne
     private BrandEntity brand;
@@ -100,5 +103,13 @@ public class ShopEntity {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getAddressText() {
+        return addressText;
+    }
+
+    public void setAddressText(String addressText) {
+        this.addressText = addressText;
     }
 }

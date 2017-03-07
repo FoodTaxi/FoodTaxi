@@ -9,6 +9,7 @@ public class Shop {
     private String ordersPhone;
     private String ordersEmail;
     private String ordersSMS;
+    private String addressText;
 
     public Long getId() {
         return id;
@@ -64,5 +65,13 @@ public class Shop {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getAddressText() {
+        return addressText;
+    }
+
+    public void setAddressText(String addressText) {
+        this.addressText = addressText;
     }
 }

@@ -35,6 +35,9 @@ public class OrderEntity {
 
     @Column(name = "LATITUDE")
     private Double latitude;
+    
+    @Column(name = "ADDRESS_TEXT")
+    private String addressText;
 
     @Column(name = "SHIPMENT_DATE")
     private Date shipmentDate;
@@ -138,5 +141,13 @@ public class OrderEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAddressText() {
+        return addressText;
+    }
+
+    public void setAddressText(String addressText) {
+        this.addressText = addressText;
     }
 }
