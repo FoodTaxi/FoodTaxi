@@ -10,7 +10,7 @@
 <ion-content padding>
   <h4>Active Orders</h4>
   <ion-list>
-    <ion-item class="order-row" *ngFor="let order of orders" (click)="clicked($event, order)">
+    <ion-item class="order-row" *ngFor="let order of orders" (click)="openOrder(order)">
       <table>
         <tr class="order-table-row">
           <td class="order-table-row-part10">

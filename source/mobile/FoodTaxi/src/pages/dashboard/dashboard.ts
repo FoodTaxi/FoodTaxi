@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {BidService} from '../../providers/bid-service';
 import {OrderService} from '../../providers/order-service';
+import {Order} from '../order/order';
 
 @Component({
   selector: 'page-dashboard',
@@ -22,4 +23,10 @@ export class Dashboard {
     });
   }
 
+  openOrder(order) {
+    // That's right, we're pushing to ourselves!
+    this.navCtrl.push(Order, {
+      order: order
+    });
+  }
 }
