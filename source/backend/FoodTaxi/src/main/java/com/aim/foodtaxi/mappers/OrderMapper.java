@@ -9,6 +9,7 @@ import org.mapstruct.ReportingPolicy;
 
 import com.aim.foodtaxi.domain.OrderEntity;
 import com.aim.foodtaxi.dto.Order;
+import com.aim.foodtaxi.dto.UnknownOrder;
 
 @Mapper(componentModel = "spring", uses = {DriverMapper.class, BidMapper.class, }, unmappedTargetPolicy= ReportingPolicy.IGNORE)
 public interface OrderMapper {
@@ -26,4 +27,7 @@ public interface OrderMapper {
     
     @IterableMapping(qualifiedByName = "orderToOrderEntity")
     public List<OrderEntity> ordersToOrderEntities(List<Order> orders);
+
+    @Mapping(target = "driver", ignore = true)
+    public OrderEntity unknownOrderToOrderEntity(UnknownOrder unknownOrder);
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aim.foodtaxi.dto.Order;
+import com.aim.foodtaxi.dto.UnknownOrder;
 import com.aim.foodtaxi.services.OrderService;
 
 @RestController
@@ -27,6 +28,13 @@ public class OrderController {
         HttpStatus createOrderStatus = orderService.createOrder(order);
         return new ResponseEntity<>(null, createOrderStatus);
     }
+
+    @RequestMapping(value = "/unknownOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createUnknownOrder(@RequestBody UnknownOrder order) {
+        HttpStatus createOrderStatus = orderService.createUnknownOrder(order);
+        return new ResponseEntity<>(null, createOrderStatus);
+    }
+
 
     @RequestMapping(value = "/openOrders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getOpenOrders() {

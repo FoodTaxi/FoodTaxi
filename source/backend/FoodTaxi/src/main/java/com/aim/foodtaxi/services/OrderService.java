@@ -13,9 +13,11 @@ import com.aim.foodtaxi.domain.BrandEntity;
 import com.aim.foodtaxi.domain.OrderEntity;
 import com.aim.foodtaxi.domain.ShopEntity;
 import com.aim.foodtaxi.dto.Order;
+import com.aim.foodtaxi.dto.UnknownOrder;
 import com.aim.foodtaxi.mappers.OrderMapper;
 import com.aim.foodtaxi.repositories.BrandRepository;
 import com.aim.foodtaxi.repositories.OrderRepository;
+import com.aim.foodtaxi.repositories.ShopRepository;
 
 @Service
 @Transactional
@@ -28,6 +30,9 @@ public class OrderService {
 
     @Inject
     private BrandRepository brandRepository;
+
+    @Inject
+    private ShopRepository shopRepository;
 
     public HttpStatus createOrder(Order order) {
         OrderEntity orderEntity = orderMapper.orderToOrderEntity(order);
@@ -62,5 +67,24 @@ public class OrderService {
     public List<Order> getOrdersWithoutDrivers() {
         List<OrderEntity> orders = orderRepository.findAllByDriverIsNull();
         return orderMapper.orderEntitiesToOrders(orders);
+    }
+
+    public HttpStatus createUnknownOrder(UnknownOrder order) {
+        Optional<ShopEntity> fakeShop = shopRepository.findFirstByBrandIdAndLatitudeAndLongtitude((long) 0, order.getFromLatitude(), order.getFromLongtitude());
+        ShopEntity shopEntity = null;
+        if (!fakeShop.isPresent()) {
+           shopEntity = new ShopEntity();
+           shopEntity.setAddressText(order.getFromAddressText());
+           shopEntity.setLatitude(order.getFromLatitude());
+           shopEntity.setLongtitude(order.getFromLongtitude());
+           shopEntity.setName("Unknown");
+           shopRepository.save(shopEntity);
+        } else {
+            shopEntity = fakeShop.get();
+        }
+        OrderEntity orderEntity = orderMapper.unknownOrderToOrderEntity(order);
+        orderEntity.setShop(shopEntity);
+        orderRepository.save(orderEntity);
+        return HttpStatus.CREATED;
     }
 }
