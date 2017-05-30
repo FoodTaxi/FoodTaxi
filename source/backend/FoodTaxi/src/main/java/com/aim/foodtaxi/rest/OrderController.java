@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,20 +25,21 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createOrder(@RequestBody Order order) {
+    public ResponseEntity<?> createOrder(@RequestHeader(value = "authorization") String authString,
+            @RequestBody Order order) {
         HttpStatus createOrderStatus = orderService.createOrder(order);
         return new ResponseEntity<>(null, createOrderStatus);
     }
 
     @RequestMapping(value = "/unknownOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createUnknownOrder(@RequestBody UnknownOrder order) {
+    public ResponseEntity<?> createUnknownOrder(@RequestHeader(value = "authorization") String authString,
+            @RequestBody UnknownOrder order) {
         HttpStatus createOrderStatus = orderService.createUnknownOrder(order);
         return new ResponseEntity<>(null, createOrderStatus);
     }
 
-
     @RequestMapping(value = "/openOrders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getOpenOrders() {
+    public ResponseEntity<?> getOpenOrders(@RequestHeader(value = "authorization") String authString) {
         List<Order> ordersWithoutDrivers = orderService.getOrdersWithoutDrivers();
         return new ResponseEntity<>(ordersWithoutDrivers, HttpStatus.OK);
     }

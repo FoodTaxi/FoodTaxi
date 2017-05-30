@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +21,12 @@ import com.aim.foodtaxi.services.BidService;
 public class BidController {
     @Inject
     private BidService bidService;
-    
+
     @CrossOrigin
     @RequestMapping(value = "/bid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createBrand(@RequestParam Long orderId, @RequestParam Long driverId, @RequestBody Bid bid) {
-        if(bidService.createBid(bid,orderId, driverId)){
+    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
+            @RequestParam Long orderId, @RequestParam Long driverId, @RequestBody Bid bid) {
+        if (bidService.createBid(bid, orderId, driverId)) {
             return new ResponseEntity<>(null, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
