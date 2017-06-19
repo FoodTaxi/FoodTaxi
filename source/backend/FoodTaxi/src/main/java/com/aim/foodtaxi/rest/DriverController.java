@@ -23,9 +23,8 @@ public class DriverController {
     @Inject
     private DriverService driverService;
 
-    @RequestMapping(value = "/driver", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createDriver(@RequestHeader(value = "authorization") String authString,
-            @RequestBody Driver driver) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createDriver(@RequestBody Driver driver) {
         driverService.createDriver(driver);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
