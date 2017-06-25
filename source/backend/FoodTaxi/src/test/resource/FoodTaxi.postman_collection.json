@@ -1,0 +1,37 @@
+{
+	"variables": [],
+	"info": {
+		"name": "FoodTaxi",
+		"_postman_id": "c1467853-e7c5-0ba0-2216-db46584322b5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "driver",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/register",
+					"request": {
+						"url": "http://localhost:8080/api/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cabNumber\": \"1111\",\r\n  \"firstName\": \"Mitko\",\r\n  \"lastName\": \"Mitko\",\r\n  \"latitude\": 0,\r\n  \"longtitude\": 0,\r\n  \"password\": \"qwerty\",\r\n  \"plate\": \"CA9999AA\",\r\n  \"username\": \"petkoff\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
