@@ -7,9 +7,9 @@
 		relativeToChangelogFile="true" />
  	<include file="changelogs/1702142021_add_bid_changelog.xml" 
 		relativeToChangelogFile="true" />
-	<include file="changelogs/2017-02-14T20:37:31Z_changelog.xml" 
+	<include file="changelogs/1702142013_changelog.xml" 
 		relativeToChangelogFile="true" />
-	<include file="changelogs/2017-02-14T21:21:50Z_changelog.xml" 
+	<include file="changelogs/1702142121_changelog.xml" 
 		relativeToChangelogFile="true" />
 	<include file="changelogs/1702271957_add_description.xml" 
 		relativeToChangelogFile="true" />
