@@ -2,8 +2,8 @@
   <div *ngIf="!authenticated" id="loginForm">
 	<h3>Please login</h3>
 
-    <div><span>Username</span> <input type="text" name="username"/></div>
-    <div><span>Password</span> <input type="password" name="password"/></div>
-    <button ion-button (click)="login()">Login</button>
+    <div><span>Username</span> <input #username type="text" name="username"/></div>
+    <div><span>Password</span> <input #password type="password" name="password"/></div>
+    <button ion-button (click)='login(username.value, password.value)'>Login</button>
   </div>
 </ion-content>
