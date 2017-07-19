@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthHttp } from 'angular2-jwt';
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the OrderService provider.
@@ -13,7 +14,7 @@ import { AuthHttp } from 'angular2-jwt';
 export class OrderService {
   
   public data;
-  constructor(public http: Http, public authHttp: AuthHttp) {
+  constructor(public http: Http, public authHttp: AuthHttp, public storage: Storage) {
     console.log('Hello OrderService Provider');
   }
   load() {
@@ -24,7 +25,9 @@ export class OrderService {
 
   	// don't have the data yet
   	return new Promise(resolve => {
-
+       this.storage.get('token').then((data) => {
+         console.log(data);
+       });
     	// We're using Angular HTTP provider to request the data,
    		// then on the response, it'll map the JSON data to a parsed JS object.
     	// Next, we process the data and resolve the promise with the new data.

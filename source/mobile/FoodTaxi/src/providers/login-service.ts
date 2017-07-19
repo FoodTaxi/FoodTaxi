@@ -36,6 +36,7 @@ export class LoginService {
      	  .subscribe(data => {
       		//Store the token in the storage
           this.storage.set(data.headers.get('authorization'), 'token');
+          this.storage.set('token', data.headers.get('authorization'));
         	this.data = data;
         	resolve(this.data);
       	});

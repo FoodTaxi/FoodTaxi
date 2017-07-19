@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 import {BidService} from '../../providers/bid-service';
 import {OrderService} from '../../providers/order-service';
 import {Order} from '../order/order';
+import {Start} from '../start/start';
+
 
 @Component({
   selector: 'page-dashboard',
@@ -12,8 +14,17 @@ import {Order} from '../order/order';
 })
 export class Dashboard {
   public orders = [];
-  constructor(public navCtrl: NavController, public orderService: OrderService) {
-    this.loadOrders();
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public orderService: OrderService) {
+    this.presentLogineModal();
+  }
+
+  presentLogineModal() {
+    let lofinModal = this.modalCtrl.create(Start);
+
+    lofinModal.onDidDismiss(data => {
+      this.loadOrders();
+    });
+    lofinModal.present();
   }
 
   loadOrders(){
