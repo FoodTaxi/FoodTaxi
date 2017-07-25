@@ -12,8 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.aim.foodtaxi.enums.DriverStatus;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "T_DRIVER")
+@Getter
+@Setter
+@NoArgsConstructor
 public class DriverEntity {
 
 	@Id
@@ -36,14 +45,14 @@ public class DriverEntity {
 	@Column(name="PASSWORD")
 	private String password;
 	
-	@Column(name="ACCOUNT_STATUS")
-	private String accountStatus;
+	@Column(name="DRIVER_STATUS")
+	private DriverStatus status;
 	
 	@Column(name="CAB_NUMBER") 
 	private String cabNumber;
 	
-	@Column(name="PALTE")
-	private String plate;
+	@Column(name="REG_NO")
+	private String regNo;
 	
 	@Column(name="RATING")
 	private Integer rating;
@@ -51,125 +60,9 @@ public class DriverEntity {
 	@Column(name="CURRENT_STATUS")
 	private String currentStatus;
 	
-	@Column(name="LONGTITUDE")
-	private Double longtitude;
-
-	@Column(name="LATITUDE")
-	private Double latitude;
-	
 	@Column(name="IMAGE_PATH")
     private String imagePath;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="driver")
-	List<OrderEntity> orders;
-
-	@Override
-	public String toString() {
-		return String.format("User[id=%d, firstName='%s', lastName='%s']", getId(), getFirstName(), getLastName());
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCabNumber() {
-        return cabNumber;
-    }
-
-    public void setCabNumber(String cabNumber) {
-        this.cabNumber = cabNumber;
-    }
-
-    public String getPlate() {
-        return plate;
-    }
-
-    public void setPlate(String plate) {
-        this.plate = plate;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
-    public String getCurrentStatus() {
-        return currentStatus;
-    }
-
-    public void setCurrentStatus(String currentStatus) {
-        this.currentStatus = currentStatus;
-    }
-
-    public String getAccountStatus() {
-        return accountStatus;
-    }
-
-    public void setAccountStatus(String accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    public Double getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(Double longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
+	List<DeliveryEntity> deliveries;
 }
