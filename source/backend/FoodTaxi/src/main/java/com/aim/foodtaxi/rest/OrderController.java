@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +41,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/openOrders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getOpenOrders(@RequestHeader(value = "authorization") String authString) {
+    public ResponseEntity<?> getOpenOrders(@RequestHeader(value = "authorization") String authString, @AuthenticationPrincipal User user) {
         List<Order> ordersWithoutDrivers = orderService.getOrdersWithoutDrivers();
         return new ResponseEntity<>(ordersWithoutDrivers, HttpStatus.OK);
     }
