@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.aim.foodtaxi.enums.PaymentStatus;
+import com.aim.foodtaxi.enums.PaymentType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,18 +30,18 @@ public class DeliveryPaymentEntity {
     @Column
     private Long id;
 	
-	@Column(name = "DELIVERY_SERVICE_AMOUNT")
-	private BigDecimal deliveryServiceAmount;
+	@ManyToOne
+	@JoinColumn(name = "DELIVERY_ID")
+	private DeliveryEntity delivery;
 	
-	@Column(name = "DELIVERY_SERVICE_PAYMENT_STAT")
-	private PaymentStatus deliveryServicePaymentStatus;
+	@Column(name = "AMOUNT")
+	private BigDecimal amount;
 	
-	//cash on delivery
-	@Column(name = "COD_AMOUNT")
-	private BigDecimal codAmount;
+	@Column(name = "STATUS")
+	private PaymentStatus status;
 	
-	@Column(name = "COD_PAYMENT_STAT")
-	private PaymentStatus codPaymentStatus;
+	@Column(name = "TYPE")
+	private PaymentType type;
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "INVOICE_ID")

@@ -11,7 +11,9 @@ public interface DriverRepository extends JpaRepository<DriverEntity, Long> {
 
 	List<DriverEntity> findByLastName(String lastName);
 
-    Optional<DriverEntity> findOneById(Long driverId);
+	Optional<DriverEntity> findOneById(Long driverId);
 
-    Optional<DriverEntity> findOneByUsername(String username);
+	Optional<DriverEntity> findOneByUsername(String username);
+
+	boolean existsByUsernameAndPassword(String username, String password);
 }

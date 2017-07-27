@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.aim.foodtaxi.enums.DriverAccountStatus;
 import com.aim.foodtaxi.enums.DriverStatus;
 
 import lombok.Getter;
@@ -46,19 +47,19 @@ public class DriverEntity {
 	private String password;
 	
 	@Column(name="DRIVER_STATUS")
-	private DriverStatus status;
+	private DriverAccountStatus status;
 	
 	@Column(name="CAB_NUMBER") 
 	private String cabNumber;
 	
-	@Column(name="REG_NO")
-	private String regNo;
+	@Column(name="CAB_PLATE_NUMBER")
+	private String cabPlateNumber;
 	
 	@Column(name="RATING")
 	private Integer rating;
 	
 	@Column(name="CURRENT_STATUS")
-	private String currentStatus;
+	private DriverStatus currentStatus;
 	
 	@Column(name="IMAGE_PATH")
     private String imagePath;
