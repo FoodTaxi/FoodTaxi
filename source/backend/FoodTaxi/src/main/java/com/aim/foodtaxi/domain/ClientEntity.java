@@ -29,6 +29,9 @@ public class ClientEntity {
 	@Column(name="CODE")
 	private String code;
 	
+	@Column(name = "COMPANY_NUMBER")
+	private String companyNumber;
+	
 	@Column(name="EMAIl")
 	private String email;
 	

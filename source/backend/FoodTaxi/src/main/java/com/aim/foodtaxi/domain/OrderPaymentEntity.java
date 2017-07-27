@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.aim.foodtaxi.enums.PaymentStatus;
+import com.aim.foodtaxi.enums.PaymentType;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,12 +35,15 @@ public class OrderPaymentEntity {
 	@JoinColumn(name = "CLIENT_ID")
 	private ClientEntity client;
 	
-	@ManyToOne
-	@JoinColumn(name = "DRIVER_ID")
-	private DriverEntity driver;
-	
-	@OneToOne(mappedBy = "payment", fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "ORDER_ID")
 	private OrderEntity order;
+	
+	@Column(name = "TYPE", nullable = false)
+	private PaymentType type;
+	
+	@Column(name = "STATUS", nullable = false)
+	private PaymentStatus status;
 	
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;

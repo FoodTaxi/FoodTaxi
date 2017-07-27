@@ -2,12 +2,10 @@ package com.aim.foodtaxi.services;
 
 import java.util.Optional;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aim.foodtaxi.domain.DriverEntity;
 import com.aim.foodtaxi.dto.Driver;
@@ -15,18 +13,19 @@ import com.aim.foodtaxi.mappers.DriverMapper;
 import com.aim.foodtaxi.repositories.DriverRepository;
 
 @Service
-@Transactional
+@Transactional(readOnly=true)
 public class DriverService {
 
-    @Inject
+    @Autowired
     private DriverRepository driverRepository;
 
-    @Inject
+    @Autowired
     private DriverMapper userMapper;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Transactional(readOnly=false)
     public void createDriver(Driver driver) {
         DriverEntity driverEntity = userMapper.driverToDriverEntity(driver);
         driverEntity.setPassword(bCryptPasswordEncoder.encode(driverEntity.getPassword()));
@@ -39,5 +38,9 @@ public class DriverService {
             return userMapper.driverEntityToDriver(driverEntity.get());
         }
         return null;
+    }
+    
+    public boolean authenticate(String username, String password){
+    	return driverRepository.existsByUsernameAndPassword(username, password);
     }
 }

@@ -1,5 +1,7 @@
 package com.aim.foodtaxi.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,8 +37,7 @@ public class OrderEntity {
 	@JoinColumn(name = "CLIENT_ID")
 	private ClientEntity client;
 	
-	@OneToOne(optional = true)
-	@JoinColumn(name = "DELIVERY_ID")
+	@OneToOne(optional = true, mappedBy="order")
 	private DeliveryEntity delivery;
 	
 	@OneToOne(optional = true)
@@ -51,6 +52,9 @@ public class OrderEntity {
 	@JoinColumn(name = "SHOP_ID")
 	private ShopEntity shop;
 	
-	@Column(name = "ITEM_DESCRIPTION")
+	@Column(name = "ITEM_DESCRIPTION", nullable=false)
 	private String itemDescription;
+	
+	@Column(name = "ORDER_DATE", nullable=false)
+	private Date orderDate;
 }
