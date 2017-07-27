@@ -10,7 +10,7 @@ import { LoginService } from '../../providers/login-service';
 })
 export class Start {
   public authenticated = false;
-  constructor(public viewCtrl: ViewController, public loadingCtrl: LoadingController, public loginService: LoginService) {
+  	constructor(public viewCtrl: ViewController, public loadingCtrl: LoadingController, public loginService: LoginService) {
   }
 
   login(username, password) {
