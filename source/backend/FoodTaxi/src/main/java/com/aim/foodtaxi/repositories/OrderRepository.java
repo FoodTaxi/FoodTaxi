@@ -9,7 +9,7 @@ import com.aim.foodtaxi.domain.OrderEntity;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
-    Optional<OrderEntity> findOneById(Long orderId);
-
-    List<OrderEntity> findAllByDriverIsNull();
+//    Optional<OrderEntity> findOneById(Long orderId);
+//
+//    List<OrderEntity> findAllByDriverIsNull();
 }

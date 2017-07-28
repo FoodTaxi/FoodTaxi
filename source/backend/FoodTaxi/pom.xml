@@ -117,7 +117,7 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<configuration>
 					<changeLogFile>src/main/resources/liquibase/master.xml</changeLogFile>
-					<diffChangeLogFile>src/main/resources/liquibase/changelogs/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+					<diffChangeLogFile>src/main/resources/liquibase/changelogs/liquibase_changelog_last.xml</diffChangeLogFile>
 					<driver>com.mysql.jdbc.Driver</driver>
 					<url>jdbc:mysql://us-cdbr-iron-east-04.cleardb.net:3306/heroku_17b99e2d36d1205</url>
 					<referenceUrl>hibernate:spring:com.aim.foodtaxi.domain?dialect=org.hibernate.dialect.MySQLInnoDBDialect</referenceUrl>

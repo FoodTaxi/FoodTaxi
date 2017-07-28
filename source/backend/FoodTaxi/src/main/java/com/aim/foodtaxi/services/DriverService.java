@@ -41,6 +41,6 @@ public class DriverService {
 //    }
     
     public boolean authenticate(String username, String password){
-    	return driverRepository.existsByUsernameAndPassword(username, password);
+    	return driverRepository.findOneByUsernameAndPassword(username, password).isPresent();
     }
 }

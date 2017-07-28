@@ -14,20 +14,20 @@ import com.aim.foodtaxi.dto.UnknownOrder;
 @Mapper(componentModel = "spring", uses = {DriverMapper.class, BidMapper.class, }, unmappedTargetPolicy= ReportingPolicy.IGNORE)
 public interface OrderMapper {
    
-    @Mapping(source = "brand.id", target = "brandId")
-    @Mapping(source = "brand.logoPath", target = "brandLogoPath")
-    @Mapping(source = "shop.addressText", target = "shopAddressText")
-    public Order orderEntityToOrder(OrderEntity orderEntity);
-    
-    @Mapping(target = "driver", ignore = true)
-    public OrderEntity orderToOrderEntity(Order order);
-    
-    @IterableMapping(qualifiedByName = "orderEntityToOrder")
-    public List<Order> orderEntitiesToOrders(List<OrderEntity> orderEntities);
-    
-    @IterableMapping(qualifiedByName = "orderToOrderEntity")
-    public List<OrderEntity> ordersToOrderEntities(List<Order> orders);
-
-    @Mapping(target = "driver", ignore = true)
-    public OrderEntity unknownOrderToOrderEntity(UnknownOrder unknownOrder);
+//    @Mapping(source = "brand.id", target = "brandId")
+//    @Mapping(source = "brand.logoPath", target = "brandLogoPath")
+//    @Mapping(source = "shop.addressText", target = "shopAddressText")
+//    public Order orderEntityToOrder(OrderEntity orderEntity);
+//    
+//    @Mapping(target = "driver", ignore = true)
+//    public OrderEntity orderToOrderEntity(Order order);
+//    
+//    @IterableMapping(qualifiedByName = "orderEntityToOrder")
+//    public List<Order> orderEntitiesToOrders(List<OrderEntity> orderEntities);
+//    
+//    @IterableMapping(qualifiedByName = "orderToOrderEntity")
+//    public List<OrderEntity> ordersToOrderEntities(List<Order> orders);
+//
+//    @Mapping(target = "driver", ignore = true)
+//    public OrderEntity unknownOrderToOrderEntity(UnknownOrder unknownOrder);
 }

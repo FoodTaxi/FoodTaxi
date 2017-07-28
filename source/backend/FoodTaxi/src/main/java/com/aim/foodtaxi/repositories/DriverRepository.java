@@ -9,11 +9,11 @@ import com.aim.foodtaxi.domain.DriverEntity;
 
 public interface DriverRepository extends JpaRepository<DriverEntity, Long> {
 
-	List<DriverEntity> findByLastName(String lastName);
-
-	Optional<DriverEntity> findOneById(Long driverId);
+//	List<DriverEntity> findByLastName(String lastName);
+//
+//	Optional<DriverEntity> findOneById(Long driverId);
 
 	Optional<DriverEntity> findOneByUsername(String username);
 
-	boolean existsByUsernameAndPassword(String username, String password);
+	Optional<DriverEntity> findOneByUsernameAndPassword(String username, String password);
 }

@@ -1,18 +1,8 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"  logicalFilePath="src\main\resources\liquibase\changelogs\liqui_diff_latest.xml">
+
+	<include file="changelogs/20170728_init.xml" relativeToChangelogFile="true"/>	
 	
-  	<include file="changelogs/1702062156_init_changelog.xml" 
-		relativeToChangelogFile="true" />
- 	<include file="changelogs/1702142021_add_bid_changelog.xml" 
-		relativeToChangelogFile="true" />
-	<include file="changelogs/1702142013_changelog.xml" 
-		relativeToChangelogFile="true" />
-	<include file="changelogs/1702142121_changelog.xml" 
-		relativeToChangelogFile="true" />
-	<include file="changelogs/1702271957_add_description.xml" 
-		relativeToChangelogFile="true" />
-	<include file="changelogs/1703072138_add_address_text_changelog.xml" 
-		relativeToChangelogFile="true" />
 </databaseChangeLog>

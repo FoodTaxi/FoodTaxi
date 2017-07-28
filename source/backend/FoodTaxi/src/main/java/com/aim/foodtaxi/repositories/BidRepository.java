@@ -8,5 +8,5 @@ import com.aim.foodtaxi.domain.BidEntity;
 
 public interface BidRepository extends JpaRepository<BidEntity, Long> {
 
-    Optional<BidEntity> findOneById(Long bidId);
+//    Optional<BidEntity> findOneById(Long bidId);
 }
