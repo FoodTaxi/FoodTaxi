@@ -19,36 +19,36 @@ import com.aim.foodtaxi.repositories.OrderRepository;
 @Service
 @Transactional
 public class BidService {
-    @Inject
-    private BidRepository bidRepository;
-    
-    @Inject
-    private OrderRepository orderRepository;
-
-    @Inject
-    private DriverRepository driverRepository;
-    
-    @Inject
-    private BidMapper bidMapper;
-
-    public boolean createBid(Bid bid, Long orderId, Long driverId) {
-        BidEntity bidEntity = bidMapper.bidToBidEntity(bid);
-        Optional<OrderEntity> orderEntity = orderRepository.findOneById(orderId);
-        Optional<DriverEntity> driverEntity = driverRepository.findOneById(driverId);
-        if (!driverEntity.isPresent() || !orderEntity.isPresent()) {
-            return false;
-        }
-        bidEntity.setDriver(driverEntity.get());
-        bidEntity.setOrder(orderEntity.get());
-
-
-        BidEntity savedEntity = bidRepository.save(bidEntity);
-        if (orderEntity.get().getBestBid() == null || 
-                orderEntity.get().getBestBid().getPrice() > bidEntity.getPrice()) {
-            orderEntity.get().setBestBid(savedEntity);
-            orderRepository.save(orderEntity.get());
-        }
-        return true;
-    }
+//    @Inject
+//    private BidRepository bidRepository;
+//    
+//    @Inject
+//    private OrderRepository orderRepository;
+//
+//    @Inject
+//    private DriverRepository driverRepository;
+//    
+//    @Inject
+//    private BidMapper bidMapper;
+//
+//    public boolean createBid(Bid bid, Long orderId, Long driverId) {
+//        BidEntity bidEntity = bidMapper.bidToBidEntity(bid);
+//        Optional<OrderEntity> orderEntity = orderRepository.findOneById(orderId);
+//        Optional<DriverEntity> driverEntity = driverRepository.findOneById(driverId);
+//        if (!driverEntity.isPresent() || !orderEntity.isPresent()) {
+//            return false;
+//        }
+//        bidEntity.setDriver(driverEntity.get());
+//        bidEntity.setOrder(orderEntity.get());
+//
+//
+//        BidEntity savedEntity = bidRepository.save(bidEntity);
+//        if (orderEntity.get().getBestBid() == null || 
+//                orderEntity.get().getBestBid().getPrice() > bidEntity.getPrice()) {
+//            orderEntity.get().setBestBid(savedEntity);
+//            orderRepository.save(orderEntity.get());
+//        }
+//        return true;
+//    }
 
 }

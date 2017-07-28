@@ -19,26 +19,26 @@ public class DriverService {
     @Autowired
     private DriverRepository driverRepository;
 
-    @Autowired
-    private DriverMapper userMapper;
+//    @Autowired
+//    private DriverMapper userMapper;
+//
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Transactional(readOnly=false)
-    public void createDriver(Driver driver) {
-        DriverEntity driverEntity = userMapper.driverToDriverEntity(driver);
-        driverEntity.setPassword(bCryptPasswordEncoder.encode(driverEntity.getPassword()));
-        driverRepository.save(driverEntity);
-    }
-
-    public Driver getDriverById(Long dirverId) {
-        Optional<DriverEntity> driverEntity = driverRepository.findOneById(dirverId);
-        if (driverEntity.isPresent()) {
-            return userMapper.driverEntityToDriver(driverEntity.get());
-        }
-        return null;
-    }
+//    @Transactional(readOnly=false)
+//    public void createDriver(Driver driver) {
+//        DriverEntity driverEntity = userMapper.driverToDriverEntity(driver);
+//        driverEntity.setPassword(bCryptPasswordEncoder.encode(driverEntity.getPassword()));
+//        driverRepository.save(driverEntity);
+//    }
+//
+//    public Driver getDriverById(Long dirverId) {
+//        Optional<DriverEntity> driverEntity = driverRepository.findOneById(dirverId);
+//        if (driverEntity.isPresent()) {
+//            return userMapper.driverEntityToDriver(driverEntity.get());
+//        }
+//        return null;
+//    }
     
     public boolean authenticate(String username, String password){
     	return driverRepository.existsByUsernameAndPassword(username, password);

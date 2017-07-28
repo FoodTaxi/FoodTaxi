@@ -19,20 +19,20 @@ import com.aim.foodtaxi.services.ShopService;
 @RequestMapping("/api")
 public class ShopController {
 
-    @Inject
-    private ShopService shopService;
-
-    @RequestMapping(value = "/shop", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createShop(@RequestHeader(value = "authorization") String authString,
-            @RequestParam Long brandId, @RequestBody Shop shop) {
-        shopService.createShop(brandId, shop);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
-    }
-
-    @RequestMapping(value = "/shop", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getShop(@RequestHeader(value = "authorization") String authString,
-            @RequestParam Long shopId) {
-        Shop shop = shopService.getShopById(shopId);
-        return new ResponseEntity<>(shop, HttpStatus.OK);
-    }
+//    @Inject
+//    private ShopService shopService;
+//
+//    @RequestMapping(value = "/shop", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> createShop(@RequestHeader(value = "authorization") String authString,
+//            @RequestParam Long brandId, @RequestBody Shop shop) {
+//        shopService.createShop(brandId, shop);
+//        return new ResponseEntity<>(null, HttpStatus.CREATED);
+//    }
+//
+//    @RequestMapping(value = "/shop", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> getShop(@RequestHeader(value = "authorization") String authString,
+//            @RequestParam Long shopId) {
+//        Shop shop = shopService.getShopById(shopId);
+//        return new ResponseEntity<>(shop, HttpStatus.OK);
+//    }
 }

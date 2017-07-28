@@ -18,19 +18,19 @@ import com.aim.foodtaxi.services.DriverService;
 @RequestMapping("/api/driver")
 public class DriverController {
 
-    @Autowired
-    private DriverService driverService;
-
-    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createDriver(@RequestBody Driver driver) {
-        driverService.createDriver(driver);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
-    }
-
-    @RequestMapping(value = "/me", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getDriver(@RequestHeader(value = "authorization") String authString,
-            @RequestParam Long driverId) {
-        Driver driver = driverService.getDriverById(driverId);
-        return new ResponseEntity<>(driver, HttpStatus.OK);
-    }
+//    @Autowired
+//    private DriverService driverService;
+//
+//    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> createDriver(@RequestBody Driver driver) {
+//        driverService.createDriver(driver);
+//        return new ResponseEntity<>(null, HttpStatus.CREATED);
+//    }
+//
+//    @RequestMapping(value = "/me", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> getDriver(@RequestHeader(value = "authorization") String authString,
+//            @RequestParam Long driverId) {
+//        Driver driver = driverService.getDriverById(driverId);
+//        return new ResponseEntity<>(driver, HttpStatus.OK);
+//    }
 }

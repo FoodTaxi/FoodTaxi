@@ -19,17 +19,17 @@ import com.aim.foodtaxi.services.BidService;
 @RestController
 @RequestMapping("/api")
 public class BidController {
-    @Inject
-    private BidService bidService;
-
-    @CrossOrigin
-    @RequestMapping(value = "/bid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
-            @RequestParam Long orderId, @RequestParam Long driverId, @RequestBody Bid bid) {
-        if (bidService.createBid(bid, orderId, driverId)) {
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-    }
+//    @Inject
+//    private BidService bidService;
+//
+//    @CrossOrigin
+//    @RequestMapping(value = "/bid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
+//            @RequestParam Long orderId, @RequestParam Long driverId, @RequestBody Bid bid) {
+//        if (bidService.createBid(bid, orderId, driverId)) {
+//            return new ResponseEntity<>(null, HttpStatus.CREATED);
+//        }
+//        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+//    }
 
 }

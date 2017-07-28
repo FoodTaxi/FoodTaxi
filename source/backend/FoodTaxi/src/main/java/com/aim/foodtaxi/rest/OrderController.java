@@ -23,26 +23,26 @@ import com.aim.foodtaxi.services.OrderService;
 @RequestMapping("/api")
 public class OrderController {
 
-    @Inject
-    private OrderService orderService;
-
-    @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createOrder(@RequestHeader(value = "authorization") String authString,
-            @RequestBody Order order) {
-        HttpStatus createOrderStatus = orderService.createOrder(order);
-        return new ResponseEntity<>(null, createOrderStatus);
-    }
-
-    @RequestMapping(value = "/unknownOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createUnknownOrder(@RequestHeader(value = "authorization") String authString,
-            @RequestBody UnknownOrder order) {
-        HttpStatus createOrderStatus = orderService.createUnknownOrder(order);
-        return new ResponseEntity<>(null, createOrderStatus);
-    }
-
-    @RequestMapping(value = "/openOrders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getOpenOrders(@RequestHeader(value = "authorization") String authString, @AuthenticationPrincipal User user) {
-        List<Order> ordersWithoutDrivers = orderService.getOrdersWithoutDrivers();
-        return new ResponseEntity<>(ordersWithoutDrivers, HttpStatus.OK);
-    }
+//    @Inject
+//    private OrderService orderService;
+//
+//    @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> createOrder(@RequestHeader(value = "authorization") String authString,
+//            @RequestBody Order order) {
+//        HttpStatus createOrderStatus = orderService.createOrder(order);
+//        return new ResponseEntity<>(null, createOrderStatus);
+//    }
+//
+//    @RequestMapping(value = "/unknownOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> createUnknownOrder(@RequestHeader(value = "authorization") String authString,
+//            @RequestBody UnknownOrder order) {
+//        HttpStatus createOrderStatus = orderService.createUnknownOrder(order);
+//        return new ResponseEntity<>(null, createOrderStatus);
+//    }
+//
+//    @RequestMapping(value = "/openOrders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> getOpenOrders(@RequestHeader(value = "authorization") String authString, @AuthenticationPrincipal User user) {
+//        List<Order> ordersWithoutDrivers = orderService.getOrdersWithoutDrivers();
+//        return new ResponseEntity<>(ordersWithoutDrivers, HttpStatus.OK);
+//    }
 }

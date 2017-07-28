@@ -16,24 +16,24 @@ import com.aim.foodtaxi.repositories.BrandRepository;
 @Transactional
 public class BrandService {
 
-    @Inject
-    private BrandRepository brandRepository;
-
-    @Inject
-    private BrandMapper brandMapper;
-
-    public void createBrand(Brand brand) {
-        BrandEntity brandEntity = brandMapper.brandToBrandEntity(brand);
-        brandEntity.getShops().stream().forEach(shop -> shop.setBrand(brandEntity));
-        brandRepository.save(brandEntity);
-    }
-
-    public Brand getBrandById(Long brandId) {
-        Optional<BrandEntity> brandEntity = brandRepository.findOneById(brandId);
-        if (brandEntity.isPresent()) {
-            return brandMapper.brandEntityToBrand(brandEntity.get());
-        }
-        return null;
-    }
+//    @Inject
+//    private BrandRepository brandRepository;
+//
+//    @Inject
+//    private BrandMapper brandMapper;
+//
+//    public void createBrand(Brand brand) {
+//        BrandEntity brandEntity = brandMapper.brandToBrandEntity(brand);
+//        brandEntity.getShops().stream().forEach(shop -> shop.setBrand(brandEntity));
+//        brandRepository.save(brandEntity);
+//    }
+//
+//    public Brand getBrandById(Long brandId) {
+//        Optional<BrandEntity> brandEntity = brandRepository.findOneById(brandId);
+//        if (brandEntity.isPresent()) {
+//            return brandMapper.brandEntityToBrand(brandEntity.get());
+//        }
+//        return null;
+//    }
 
 }

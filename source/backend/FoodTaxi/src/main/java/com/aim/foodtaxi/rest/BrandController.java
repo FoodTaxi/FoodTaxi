@@ -19,21 +19,21 @@ import com.aim.foodtaxi.services.BrandService;
 @RequestMapping("/api")
 public class BrandController {
 
-    @Inject
-    private BrandService brandService;
-
-    @RequestMapping(value = "/brand", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
-            @RequestBody Brand brand) {
-        brandService.createBrand(brand);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
-    }
-
-    @RequestMapping(value = "/brand", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getBrand(@RequestHeader(value = "authorization") String authString,
-            @RequestParam Long brandId) {
-        Brand brand = brandService.getBrandById(brandId);
-        return new ResponseEntity<>(brand, HttpStatus.OK);
-    }
+//    @Inject
+//    private BrandService brandService;
+//
+//    @RequestMapping(value = "/brand", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
+//            @RequestBody Brand brand) {
+//        brandService.createBrand(brand);
+//        return new ResponseEntity<>(null, HttpStatus.CREATED);
+//    }
+//
+//    @RequestMapping(value = "/brand", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<?> getBrand(@RequestHeader(value = "authorization") String authString,
+//            @RequestParam Long brandId) {
+//        Brand brand = brandService.getBrandById(brandId);
+//        return new ResponseEntity<>(brand, HttpStatus.OK);
+//    }
 
 }
