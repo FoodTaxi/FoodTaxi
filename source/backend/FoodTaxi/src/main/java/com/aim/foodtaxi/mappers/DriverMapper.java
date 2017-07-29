@@ -9,7 +9,8 @@ import com.aim.foodtaxi.dto.Driver;
 @Mapper(componentModel = "spring", uses = {})
 public interface DriverMapper {
     
-    @Mapping(target = "password", ignore = true)
+ 
+//       @Mapping(target = "password", ignore = true)
     public Driver driverEntityToDriver(DriverEntity diverEntity);
     
     
