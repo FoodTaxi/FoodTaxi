@@ -10,7 +10,7 @@ import com.aim.foodtaxi.dto.Driver;
 public interface DriverMapper {
     
  
-//       @Mapping(target = "password", ignore = true)
+    @Mapping(target = "password", ignore = true)
     public Driver driverEntityToDriver(DriverEntity diverEntity);
     
     
