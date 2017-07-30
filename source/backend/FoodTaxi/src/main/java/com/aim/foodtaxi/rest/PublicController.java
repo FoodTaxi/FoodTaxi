@@ -32,7 +32,7 @@ public class PublicController {
 
     @RequestMapping(value = "/driver/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> loginDriver(@RequestBody(required = true) Driver driver) {
-        driverService.createDriver(driver);
-        return new ResponseEntity<>(HttpStatus.OK);
+        HttpStatus status = driverService.createDriver(driver);
+        return new ResponseEntity<>(status);
     }
 }
