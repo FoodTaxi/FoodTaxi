@@ -31,22 +31,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().and().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/public/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger-ui.html#/").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger-ui.html#").permitAll()
                 .antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
-                .antMatchers("/api/**").authenticated().and()
+                .antMatchers("/api/private/**").authenticated()
+                .and()
                 // We filter the api/login requests
-                .addFilterBefore(new JWTLoginFilter("/api/login", authenticationManager()),
+                .addFilterBefore(new JWTLoginFilter("/api/public/login", authenticationManager()),
                         UsernamePasswordAuthenticationFilter.class)
                 // And filter other requests to check the presence of JWT in
                 // header
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    // Create a default account
-     auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-  }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // Create a default account
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+    }
 }

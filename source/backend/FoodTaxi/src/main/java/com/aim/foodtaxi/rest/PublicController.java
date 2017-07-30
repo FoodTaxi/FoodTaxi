@@ -29,10 +29,10 @@ public class PublicController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
-    
+
     @RequestMapping(value = "/driver/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> loginDriver(@RequestBody(required = true) Driver driver) {
         driverService.createDriver(driver);
-            return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
