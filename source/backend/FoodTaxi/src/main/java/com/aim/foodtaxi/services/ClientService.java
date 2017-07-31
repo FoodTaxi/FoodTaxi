@@ -19,6 +19,7 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepositry;
 
+    @Transactional(readOnly=false)
     public void createClient(Client client) {
         ClientEntity clientEntity = clientMapper.clientToClientEntity(client);
         //TODO: think about app key generation

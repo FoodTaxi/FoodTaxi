@@ -1,8 +1,10 @@
 package com.aim.foodtaxi.services;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,15 +29,20 @@ public class DriverService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(readOnly=false)
-    public void createDriver(Driver driver) {
+    public HttpStatus createDriver(Driver driver) {
+        Optional<DriverEntity> existingUser = driverRepository.findOneByUsername(driver.getUsername());
+        if (existingUser.isPresent()) {
+            return HttpStatus.CONFLICT;
+        }
         DriverEntity driverEntity = driverMapper.driverToDriverEntity(driver);
         driverEntity.setRegisterDate(new Date());
         driverEntity.setRating(5);
         //TODO: Maybe first driver account status will be awaiting
         driverEntity.setStatus(DriverAccountStatus.ACTIVE);
         //TODO: Add password encryption at some point
-//        driverEntity.setPassword(bCryptPasswordEncoder.encode(driverEntity.getPassword()));
+        driverEntity.setPassword(bCryptPasswordEncoder.encode(driverEntity.getPassword()));
         driverRepository.save(driverEntity);
+        return HttpStatus.CREATED;
     }
     
     public boolean authenticate(String username, String password){
