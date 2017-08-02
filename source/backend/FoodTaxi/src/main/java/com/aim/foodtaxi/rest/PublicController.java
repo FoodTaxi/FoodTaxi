@@ -21,7 +21,7 @@ public class PublicController {
     private DriverService driverService;
 
     @RequestMapping(value = "/driver/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> loginDriver(@RequestBody(required = true) AccountCredentials credentials) {
+    public ResponseEntity<?> driverLogin(@RequestBody(required = true) AccountCredentials credentials) {
 
         if (driverService.authenticate(credentials.getUsername(), credentials.getPassword())) {
             return new ResponseEntity<>(HttpStatus.OK);
@@ -31,7 +31,7 @@ public class PublicController {
     }
 
     @RequestMapping(value = "/driver/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> loginDriver(@RequestBody(required = true) Driver driver) {
+    public ResponseEntity<?> driverRegister(@RequestBody(required = true) Driver driver) {
         HttpStatus status = driverService.createDriver(driver);
         return new ResponseEntity<>(status);
     }
