@@ -1,7 +1,5 @@
 package com.aim.foodtaxi.rest;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aim.foodtaxi.dto.Shop;
@@ -23,7 +20,7 @@ public class ShopController {
     @Autowired
     private ShopService shopService;
 
-    @RequestMapping(value = "/shop", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createShop(@RequestHeader(value = "authorization") String authString, @RequestBody Shop shop) {
         shopService.createShop(shop);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
