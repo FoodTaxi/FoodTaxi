@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,10 @@ public class DriverService {
     }
 
 	public Driver getDriver(Long driverId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		DriverEntity entity = driverRepository.findOne(driverId);
+		Driver driver = driverMapper.driverEntityToDriver(entity);
+		return driver;
 	}
 }

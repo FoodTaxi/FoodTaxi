@@ -24,7 +24,7 @@ public class DriverController {
     @RequestMapping(value = "/me", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Driver getDriver(@RequestHeader(value = "authorization") String authString,
-            @RequestParam Long driverId) {
+            @RequestParam(name="dId", required=true) Long driverId) {
         Driver driver = driverService.getDriver(driverId);
         return driver;
     }
