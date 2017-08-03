@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,9 +40,11 @@ public class DeliveryPaymentEntity {
 	private BigDecimal amount;
 	
 	@Column(name = "STATUS")
+	@Enumerated(EnumType.STRING)
 	private PaymentStatus status;
 	
 	@Column(name = "TYPE")
+	@Enumerated(EnumType.STRING)
 	private PaymentType type;
 	
 	@ManyToOne(optional = true)
