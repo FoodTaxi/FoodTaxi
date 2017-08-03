@@ -11,7 +11,7 @@ import com.aim.foodtaxi.domain.ShopEntity;
 import com.aim.foodtaxi.dto.Brand;
 import com.aim.foodtaxi.dto.Shop;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {ShopMapper.class})
 public interface BrandMapper {
     
     @Named("brandEntityToBrand")
@@ -25,8 +25,5 @@ public interface BrandMapper {
     
     @IterableMapping(qualifiedByName = "brandToBrandEntity")
     public List<ShopEntity> shopsToShopEntities(List<Shop> shops);
-    
-    public Shop shopEntityToShop(ShopEntity shopEntity);
 
-    public ShopEntity shopToShopEntity(Shop shop);
 }

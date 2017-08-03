@@ -9,8 +9,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "T_SHOP")
+@Getter
+@Setter
+@NoArgsConstructor
 public class ShopEntity {
 
     @Id
@@ -42,76 +49,5 @@ public class ShopEntity {
     @ManyToOne
     @JoinColumn(name = "BRAND_ID")
     private BrandEntity brand;
-
-    public String getOrdersPhone() {
-        return ordersPhone;
-    }
-
-    public void setOrdersPhone(String ordersPhone) {
-        this.ordersPhone = ordersPhone;
-    }
-
-    public String getOrdersEmail() {
-        return ordersEmail;
-    }
-
-    public void setOrdersEmail(String ordersEmail) {
-        this.ordersEmail = ordersEmail;
-    }
-
-    public String getOrdersSMS() {
-        return ordersSMS;
-    }
-
-    public void setOrdersSMS(String ordersSMS) {
-        this.ordersSMS = ordersSMS;
-    }
-
-    public BrandEntity getBrand() {
-        return brand;
-    }
-
-    public void setBrand(BrandEntity brand) {
-        this.brand = brand;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getLongtitude() {
-        return longtitude;
-    }
-
-    public void setLongtitude(Double longtitude) {
-        this.longtitude = longtitude;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getAddressText() {
-        return addressText;
-    }
-
-    public void setAddressText(String addressText) {
-        this.addressText = addressText;
-    }
+    
 }

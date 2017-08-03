@@ -16,18 +16,18 @@ import com.aim.foodtaxi.dto.Brand;
 import com.aim.foodtaxi.services.BrandService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/private/brand")
 public class BrandController {
 
-//    @Inject
-//    private BrandService brandService;
-//
-//    @RequestMapping(value = "/brand", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
-//            @RequestBody Brand brand) {
-//        brandService.createBrand(brand);
-//        return new ResponseEntity<>(null, HttpStatus.CREATED);
-//    }
+    @Inject
+    private BrandService brandService;
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
+            @RequestBody Brand brand) {
+        brandService.createBrand(brand);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
 //
 //    @RequestMapping(value = "/brand", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<?> getBrand(@RequestHeader(value = "authorization") String authString,
