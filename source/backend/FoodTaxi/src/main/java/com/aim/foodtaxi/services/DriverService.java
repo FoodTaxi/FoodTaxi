@@ -44,8 +44,9 @@ public class DriverService {
         driverRepository.save(driverEntity);
         return HttpStatus.CREATED;
     }
-    
-    public boolean authenticate(String username, String password){
-    	return driverRepository.findOneByUsernameAndPassword(username, password).isPresent();
-    }
+
+	public Driver getDriver(Long driverId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
