@@ -1,0 +1,269 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-1">
+        <createTable tableName="TH_BID">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BID_TIME" type="datetime"/>
+            <column name="IS_ACTIVE" type="BIT"/>
+            <column name="PRICE" type="DOUBLE"/>
+            <column name="TH_DELIVERY_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DRIVER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-2">
+        <createTable tableName="TH_DELIVERY">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ADDRESS_TEXT" type="VARCHAR(255)"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="DUE_DATE" type="datetime"/>
+            <column name="LATITUDE" type="DOUBLE"/>
+            <column name="LONGTITUDE" type="DOUBLE"/>
+            <column name="PIN" type="VARCHAR(255)"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+            <column name="BEST_BID_FK" type="BIGINT"/>
+            <column name="DELIVERY_PAYMENT_ID" type="BIGINT"/>
+            <column name="driver_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-3">
+        <createTable tableName="T_BID">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_BIDPK"/>
+            </column>
+            <column name="BID_TIME" type="datetime"/>
+            <column name="IS_ACTIVE" type="BIT"/>
+            <column name="PRICE" type="DOUBLE"/>
+            <column name="DELIVERY_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DRIVER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-4">
+        <createTable tableName="T_BRAND">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_BRANDPK"/>
+            </column>
+            <column name="LOGO_PATH" type="VARCHAR(255)"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="CLIENT_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-5">
+        <createTable tableName="T_CLIENT">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_CLIENTPK"/>
+            </column>
+            <column name="ADDRESS" type="VARCHAR(255)"/>
+            <column name="APP_KEY" type="VARCHAR(255)"/>
+            <column name="CODE" type="VARCHAR(255)"/>
+            <column name="COMPANY_NUMBER" type="VARCHAR(255)"/>
+            <column name="EMAIl" type="VARCHAR(255)"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-6">
+        <createTable tableName="T_DELIVERY">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_DELIVERYPK"/>
+            </column>
+            <column name="COD_AMOUNT" type="DECIMAL(19, 2)"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="DUE_DATE" type="datetime"/>
+            <column name="END_ADDRESS_TEXT" type="VARCHAR(255)"/>
+            <column name="END_DATE" type="datetime"/>
+            <column name="END_LATITUDE" type="DOUBLE"/>
+            <column name="END_LONGTITUDE" type="DOUBLE"/>
+            <column name="HAS_COD" type="BIT"/>
+            <column name="PIN" type="VARCHAR(255)"/>
+            <column name="START_ADDRESS_TEXT" type="VARCHAR(255)"/>
+            <column name="START_DATE" type="datetime"/>
+            <column name="START_LATITUDE" type="DOUBLE"/>
+            <column name="START_LONGTITUDE" type="DOUBLE"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+            <column name="BEST_BID_ID" type="BIGINT"/>
+            <column name="DRIVER_ID" type="BIGINT"/>
+            <column name="ORDER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-7">
+        <createTable tableName="T_DELIVERY_PAYMENT">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_DELIVERY_PAYMENTPK"/>
+            </column>
+            <column name="AMOUNT" type="DECIMAL(19, 2)"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+            <column name="TYPE" type="VARCHAR(255)"/>
+            <column name="DELIVERY_ID" type="BIGINT"/>
+            <column name="INVOICE_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-8">
+        <createTable tableName="T_DRIVER">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_DRIVERPK"/>
+            </column>
+            <column name="CAB_NUMBER" type="VARCHAR(255)"/>
+            <column name="CAB_PLATE_NUMBER" type="VARCHAR(255)"/>
+            <column name="CURRENT_STATUS" type="VARCHAR(255)"/>
+            <column name="FIRST_NAME" type="VARCHAR(255)"/>
+            <column name="IMAGE_PATH" type="VARCHAR(255)"/>
+            <column name="LAST_NAME" type="VARCHAR(255)"/>
+            <column name="PASSWORD" type="VARCHAR(255)"/>
+            <column name="RATING" type="INT"/>
+            <column name="REGISTER_DATE" type="datetime"/>
+            <column name="DRIVER_STATUS" type="VARCHAR(255)"/>
+            <column name="USERNAME" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-9">
+        <createTable tableName="T_INVOICE">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_INVOICEPK"/>
+            </column>
+            <column name="COD_PAYMENT_CODE" type="VARCHAR(255)"/>
+            <column name="COD_PAYMENT_PROVIDER" type="INT"/>
+            <column name="TOTAL_AMOUNT" type="DECIMAL(19, 2)"/>
+            <column name="DRIVER_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-10">
+        <createTable tableName="T_ORDER">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_ORDERPK"/>
+            </column>
+            <column name="ITEM_DESCRIPTION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORDER_DATE" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORDER_STATUS" type="VARCHAR(255)"/>
+            <column name="BRAND_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLIENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORDER_PAYMENT_ID" type="BIGINT"/>
+            <column name="SHOP_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-11">
+        <createTable tableName="T_ORDER_PAYMENT">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_ORDER_PAYMENTPK"/>
+            </column>
+            <column name="AMOUNT" type="DECIMAL(19, 2)"/>
+            <column name="STATUS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLIENT_ID" type="BIGINT"/>
+            <column name="ORDER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-12">
+        <createTable tableName="T_SHOP">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="T_SHOPPK"/>
+            </column>
+            <column name="ADDRESS_TEXT" type="VARCHAR(255)"/>
+            <column name="LATITUDE" type="DOUBLE"/>
+            <column name="LONGTITUDE" type="DOUBLE"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="ORDERS_EMAIL" type="VARCHAR(255)"/>
+            <column name="ORDERS_PHONE" type="VARCHAR(255)"/>
+            <column name="ORDERS_SMS" type="VARCHAR(255)"/>
+            <column name="BRAND_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-13">
+        <addPrimaryKey columnNames="id" constraintName="TH_BIDPK" tableName="TH_BID"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-14">
+        <addPrimaryKey columnNames="id" constraintName="TH_DELIVERYPK" tableName="TH_DELIVERY"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-15">
+        <addUniqueConstraint columnNames="ORDER_ID" constraintName="UK_7rv38qfu0oq6l4dw9pdqg8q01" tableName="T_DELIVERY"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-16">
+        <addForeignKeyConstraint baseColumnNames="driver_id" baseTableName="TH_DELIVERY" constraintName="FK_22u3rag8ta31vjcnimtt2boog" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-17">
+        <addForeignKeyConstraint baseColumnNames="DELIVERY_PAYMENT_ID" baseTableName="TH_DELIVERY" constraintName="FK_2tl3e63bpcqyn1rh0182om99" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DELIVERY_PAYMENT"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-18">
+        <addForeignKeyConstraint baseColumnNames="BRAND_ID" baseTableName="T_SHOP" constraintName="FK_4m0t3bduklx0gp9k6c12q624y" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_BRAND"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-19">
+        <addForeignKeyConstraint baseColumnNames="DRIVER_ID" baseTableName="T_BID" constraintName="FK_4oqntpbfpa8ultp1du2ko58qc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-20">
+        <addForeignKeyConstraint baseColumnNames="BEST_BID_ID" baseTableName="T_DELIVERY" constraintName="FK_6idbeii4ia9b1erdkw5yk39d8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_BID"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-21">
+        <addForeignKeyConstraint baseColumnNames="ORDER_ID" baseTableName="T_DELIVERY" constraintName="FK_7rv38qfu0oq6l4dw9pdqg8q01" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_ORDER"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-22">
+        <addForeignKeyConstraint baseColumnNames="BEST_BID_FK" baseTableName="TH_DELIVERY" constraintName="FK_8gnk7awvfu3bmw6llhl5vquvh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_BID"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-23">
+        <addForeignKeyConstraint baseColumnNames="DELIVERY_ID" baseTableName="T_BID" constraintName="FK_8o64pqgvssd406aohxt26jbd3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DELIVERY"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-24">
+        <addForeignKeyConstraint baseColumnNames="DRIVER_ID" baseTableName="TH_BID" constraintName="FK_ajbqk0apfim29sbtxpcse4srt" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-25">
+        <addForeignKeyConstraint baseColumnNames="BRAND_ID" baseTableName="T_ORDER" constraintName="FK_cqjveyqn7pcs3jsp0q3i1tsl3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_BRAND"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-26">
+        <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="T_ORDER" constraintName="FK_dbuferqiyo0tyruj855dp0uu0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_CLIENT"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-27">
+        <addForeignKeyConstraint baseColumnNames="DRIVER_ID" baseTableName="T_INVOICE" constraintName="FK_dwukxq7gl07qvmn8qbisk3o10" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-28">
+        <addForeignKeyConstraint baseColumnNames="DRIVER_ID" baseTableName="T_DELIVERY" constraintName="FK_kdarjqbvh2k9a1sucvd0cwv9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DRIVER"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-29">
+        <addForeignKeyConstraint baseColumnNames="ORDER_ID" baseTableName="T_ORDER_PAYMENT" constraintName="FK_krwkug5nxyarai54vfsk9b6c9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_ORDER"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-30">
+        <addForeignKeyConstraint baseColumnNames="INVOICE_ID" baseTableName="T_DELIVERY_PAYMENT" constraintName="FK_l4h3m7ymaq5o8ygroxg30p9u6" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_INVOICE"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-31">
+        <addForeignKeyConstraint baseColumnNames="TH_DELIVERY_ID" baseTableName="TH_BID" constraintName="FK_oc5i5kkrmu118xaw85ovdxieq" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="TH_DELIVERY"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-32">
+        <addForeignKeyConstraint baseColumnNames="DELIVERY_ID" baseTableName="T_DELIVERY_PAYMENT" constraintName="FK_ow4bxgn1ab3tf4l2q74yuxagb" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_DELIVERY"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-33">
+        <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="T_ORDER_PAYMENT" constraintName="FK_r3di6dd8o1rt99errwq2bg38b" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_CLIENT"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-34">
+        <addForeignKeyConstraint baseColumnNames="ORDER_PAYMENT_ID" baseTableName="T_ORDER" constraintName="FK_rijwgehry4w4fwa8b12nvbikk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_ORDER_PAYMENT"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-35">
+        <addForeignKeyConstraint baseColumnNames="SHOP_ID" baseTableName="T_ORDER" constraintName="FK_rloeg2hjm7klip1eubsunp94f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_SHOP"/>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1502012351761-36">
+        <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="T_BRAND" constraintName="FK_yp9e2n7qeoofime5yvi3kkwv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_CLIENT"/>
+    </changeSet>
+</databaseChangeLog>
