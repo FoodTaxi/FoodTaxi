@@ -2,13 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
+import {AppSettings} from '../common/appSettings';
 
-/*
-  Generated class for the LoginService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class LoginService {
   
@@ -32,7 +27,7 @@ export class LoginService {
     	// We're using Angular HTTP provider to request the data,
    		// then on the response, it'll map the JSON data to a parsed JS object.
     	// Next, we process the data and resolve the promise with the new data.
-    	this.authHttp.post('http://localhost:8080/api/login', credenials)
+    	this.authHttp.post(AppSettings.API_ENDPOINT + '/public/login', credenials)
      	  .subscribe(data => {
       		//Store the token in the storage
           this.storage.set(data.headers.get('authorization'), 'token');
