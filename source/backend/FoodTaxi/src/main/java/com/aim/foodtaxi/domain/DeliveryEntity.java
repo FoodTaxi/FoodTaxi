@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -79,6 +81,7 @@ public class DeliveryEntity {
     private BidEntity bestBid;
     
     @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
     
     @Column(name = "HAS_COD")

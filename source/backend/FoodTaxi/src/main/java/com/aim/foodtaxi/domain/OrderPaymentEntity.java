@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,9 +42,11 @@ public class OrderPaymentEntity {
 	private OrderEntity order;
 	
 	@Column(name = "TYPE", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private PaymentType type;
 	
 	@Column(name = "STATUS", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private PaymentStatus status;
 	
 	@Column(name = "AMOUNT")

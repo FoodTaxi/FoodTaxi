@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,6 +49,7 @@ public class DriverEntity {
 	private String password;
 	
 	@Column(name="DRIVER_STATUS")
+	@Enumerated(EnumType.STRING)
 	private DriverAccountStatus status;
 	
 	@Column(name="CAB_NUMBER") 
@@ -59,6 +62,7 @@ public class DriverEntity {
 	private Integer rating;
 	
 	@Column(name="CURRENT_STATUS")
+	@Enumerated(EnumType.STRING)
 	private DriverStatus currentStatus;
 	
 	@Column(name="IMAGE_PATH")
