@@ -47,8 +47,6 @@ public class DriverService {
     }
 
 	public Driver getDriver(Long driverId) {
-		
-		
 		DriverEntity entity = driverRepository.findOne(driverId);
 		Driver driver = driverMapper.driverEntityToDriver(entity);
 		return driver;
