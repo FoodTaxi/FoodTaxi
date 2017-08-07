@@ -25,7 +25,7 @@ public class DriverController {
     @ResponseBody
     public Driver getDriver(@RequestHeader(value = "authorization") String authString,
             @RequestParam(name="dId", required=true) Long driverId) {
-        Driver driver = driverService.getDriver(driverId);
+    	Driver driver = driverService.getDriver(driverId);
         return driver;
     }
 }
