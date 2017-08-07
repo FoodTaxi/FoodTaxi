@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,4 +50,13 @@ public class DriverService {
 		Driver driver = driverMapper.driverEntityToDriver(entity);
 		return driver;
 	}
+
+    public Driver getDriverByUsername(String username) {
+        Optional<DriverEntity> entity = driverRepository.findOneByUsername(username);
+        if (entity.isPresent()) {
+            Driver driver = driverMapper.driverEntityToDriver(entity.get());
+            return driver;
+        }
+        return null;
+    }
 }

@@ -1,11 +1,14 @@
 package com.aim.foodtaxi.rest;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +26,16 @@ public class DriverController {
 
     @RequestMapping(value = "/me", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Driver getDriver(@RequestHeader(value = "authorization") String authString,
-            @RequestParam(name="dId", required=true) Long driverId) {
-    	Driver driver = driverService.getDriver(driverId);
-        return driver;
+    public ResponseEntity<?> getDriver(@RequestHeader(value = "authorization") String authString,
+             Principal principal) {
+        String username = principal.getName();
+        if (username == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        Driver driver = driverService.getDriverByUsername(username);
+        if (driver != null) {
+            return new ResponseEntity<Driver>(driver, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }
