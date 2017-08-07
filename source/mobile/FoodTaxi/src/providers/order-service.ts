@@ -3,13 +3,8 @@ import { Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthHttp } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
+import {AppSettings} from '../common/appSettings';
 
-/*
-  Generated class for the OrderService provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class OrderService {
   
@@ -31,7 +26,7 @@ export class OrderService {
     	// We're using Angular HTTP provider to request the data,
    		// then on the response, it'll map the JSON data to a parsed JS object.
     	// Next, we process the data and resolve the promise with the new data.
-    	this.authHttp.get('http://localhost:8080/api/openOrders')
+    	this.authHttp.get(AppSettings.API_ENDPOINT + 'public/openOrders')
       	.map(res => res.json())
      	.subscribe(data => {
       		console.log('Data --- > ');
