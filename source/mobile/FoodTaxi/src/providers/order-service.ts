@@ -20,9 +20,6 @@ export class OrderService {
 
   	// don't have the data yet
   	return new Promise(resolve => {
-       this.storage.get('token').then((data) => {
-         console.log(data);
-       });
     	// We're using Angular HTTP provider to request the data,
    		// then on the response, it'll map the JSON data to a parsed JS object.
     	// Next, we process the data and resolve the promise with the new data.

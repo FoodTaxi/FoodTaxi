@@ -92,4 +92,7 @@ public class DeliveryEntity {
     
     @Column(name = "PIN")
     private String pin;
+    
+    @Column(name = "ORDER_VALUE", nullable=false)
+    private BigDecimal orderValue;
 }

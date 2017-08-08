@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import com.aim.foodtaxi.domain.OrderEntity;
+import com.aim.foodtaxi.dto.CreateOrder;
 import com.aim.foodtaxi.dto.Order;
 import com.aim.foodtaxi.dto.UnknownOrder;
 
@@ -19,8 +20,7 @@ public interface OrderMapper {
 //    @Mapping(source = "shop.addressText", target = "shopAddressText")
 //    public Order orderEntityToOrder(OrderEntity orderEntity);
 //    
-//    @Mapping(target = "driver", ignore = true)
-//    public OrderEntity orderToOrderEntity(Order order);
+
 //    
 //    @IterableMapping(qualifiedByName = "orderEntityToOrder")
 //    public List<Order> orderEntitiesToOrders(List<OrderEntity> orderEntities);

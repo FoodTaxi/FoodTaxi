@@ -4,5 +4,6 @@
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"  logicalFilePath="src\main\resources\liquibase\master.xml">
 
 	<include file="changelogs/20170806_recreate.xml" relativeToChangelogFile="true"/>
-	
+	<include file="changelogs/20170808_add_order_value.xml" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
