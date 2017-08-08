@@ -1,11 +1,11 @@
 package com.aim.foodtaxi.rest;
 
-import javax.inject.Inject;
+import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,20 +16,29 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aim.foodtaxi.dto.Bid;
 import com.aim.foodtaxi.services.BidService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 @RestController
 @RequestMapping("/api")
 public class BidController {
-//    @Inject
-//    private BidService bidService;
-//
-//    @CrossOrigin
-//    @RequestMapping(value = "/bid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> createBrand(@RequestHeader(value = "authorization") String authString,
-//            @RequestParam Long orderId, @RequestParam Long driverId, @RequestBody Bid bid) {
-//        if (bidService.createBid(bid, orderId, driverId)) {
-//            return new ResponseEntity<>(null, HttpStatus.CREATED);
-//        }
-//        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-//    }
+    
+	@Autowired
+    private BidService bidService;
+
+    @RequestMapping(value = "/bid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createBid(@RequestHeader(value = "authorization") String authString,
+            @RequestParam Long orderId, @RequestBody Bid bid, @ApiIgnore Principal principal) {
+    	
+    	try{
+    		if (bidService.createBid(bid, orderId, principal.getName())) {
+    			return new ResponseEntity<>(null, HttpStatus.CREATED);
+    		} else{
+    			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
+    }
 
 }
