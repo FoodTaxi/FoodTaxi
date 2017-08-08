@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aim.foodtaxi.dto.Driver;
 import com.aim.foodtaxi.services.DriverService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 @RestController
 @RequestMapping("/api/private/driver")
 public class DriverController {
@@ -27,7 +29,7 @@ public class DriverController {
     @RequestMapping(value = "/me", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> getDriver(@RequestHeader(value = "authorization") String authString,
-             Principal principal) {
+             @ApiIgnore Principal principal) {
         String username = principal.getName();
         if (username == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
