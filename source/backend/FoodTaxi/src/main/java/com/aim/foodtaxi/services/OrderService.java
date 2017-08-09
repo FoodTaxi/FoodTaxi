@@ -3,10 +3,10 @@ package com.aim.foodtaxi.services;
 import java.util.Date;
 import java.util.Random;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.aim.foodtaxi.domain.BrandEntity;
@@ -41,21 +41,20 @@ public class OrderService {
     @Autowired
     private DelivaryRepository delivaryRepository;
     
-    public HttpStatus createOrder(CreateOrder order) {
+    public void createOrder(CreateOrder order) throws EntityNotFoundException {
         
         ClientEntity clientEntity = clientRepository.getOne(order.getClientId());
         if (clientEntity == null) {
-            return HttpStatus.BAD_REQUEST;
+            throw new EntityNotFoundException();
         }
         BrandEntity brandEntity = brandRepository.getOne(order.getBrandId());
         if (brandEntity == null) {
-            return HttpStatus.BAD_REQUEST;
+            throw new EntityNotFoundException();
         }
         OrderEntity orderEntity = generateOrder(order, clientEntity, brandEntity);
         orderEntity = orderRepository.save(orderEntity);
         DeliveryEntity delivaryEntity = generateDelivary(order, orderEntity);
         delivaryEntity = delivaryRepository.save(delivaryEntity);
-        return HttpStatus.CREATED;
     }
     
     private OrderEntity generateOrder (CreateOrder order, ClientEntity clientEntity, BrandEntity brandEntity) {

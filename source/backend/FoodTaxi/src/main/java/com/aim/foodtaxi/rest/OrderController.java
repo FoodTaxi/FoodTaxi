@@ -1,5 +1,7 @@
 package com.aim.foodtaxi.rest;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,8 +25,12 @@ public class OrderController {
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createOrder(@RequestHeader(value = "authorization") String authString,
             @RequestBody CreateOrder createOrder) {
-        HttpStatus createOrderStatus = orderService.createOrder(createOrder);
-        return new ResponseEntity<>(null, createOrderStatus);
+        try {
+            orderService.createOrder(createOrder);
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT); 
+        }
     }
 //
 //    @RequestMapping(value = "/unknownOrder", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
