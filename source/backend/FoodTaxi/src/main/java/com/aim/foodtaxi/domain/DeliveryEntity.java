@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,18 +66,18 @@ public class DeliveryEntity {
     @Column(name = "DUE_DATE")
     private Date dueDate;
     
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, fetch=FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private OrderEntity order;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery", fetch=FetchType.LAZY)
     private List<DeliveryPaymentEntity> deliveryPayments;
     
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch=FetchType.LAZY)
     @JoinColumn(name = "DRIVER_ID")
     private DriverEntity driver;
 
-    @OneToOne(optional = true)
+    @OneToOne(optional = true, fetch=FetchType.LAZY)
     @JoinColumn(name="BEST_BID_ID") 
     private BidEntity bestBid;
     

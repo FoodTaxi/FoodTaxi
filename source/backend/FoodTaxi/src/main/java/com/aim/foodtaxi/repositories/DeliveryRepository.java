@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.aim.foodtaxi.domain.DeliveryEntity;
 
-public interface DelivaryRepository extends JpaRepository<DeliveryEntity, Long> {
+public interface DeliveryRepository extends JpaRepository<DeliveryEntity, Long> {
 
 }

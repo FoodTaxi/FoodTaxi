@@ -16,13 +16,13 @@ import com.aim.foodtaxi.dto.CreateOrder;
 import com.aim.foodtaxi.services.OrderService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/private/order")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createOrder(@RequestHeader(value = "authorization") String authString,
             @RequestBody CreateOrder createOrder) {
         try {

@@ -1,13 +1,14 @@
 package com.aim.foodtaxi.services;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aim.foodtaxi.domain.BrandEntity;
 import com.aim.foodtaxi.domain.ClientEntity;
@@ -19,7 +20,7 @@ import com.aim.foodtaxi.enums.DeliveryStatus;
 import com.aim.foodtaxi.enums.OrderStatus;
 import com.aim.foodtaxi.repositories.BrandRepository;
 import com.aim.foodtaxi.repositories.ClientRepository;
-import com.aim.foodtaxi.repositories.DelivaryRepository;
+import com.aim.foodtaxi.repositories.DeliveryRepository;
 import com.aim.foodtaxi.repositories.OrderRepository;
 
 @Service
@@ -39,22 +40,22 @@ public class OrderService {
     private ClientRepository clientRepository;
     
     @Autowired
-    private DelivaryRepository delivaryRepository;
+    private DeliveryRepository delivaryRepository;
     
     public void createOrder(CreateOrder order) throws EntityNotFoundException {
         
-        ClientEntity clientEntity = clientRepository.getOne(order.getClientId());
-        if (clientEntity == null) {
+        Optional<ClientEntity> clientEntity = clientRepository.findOneById(order.getClientId());
+        if (!clientEntity.isPresent()) {
             throw new EntityNotFoundException();
         }
-        BrandEntity brandEntity = brandRepository.getOne(order.getBrandId());
-        if (brandEntity == null) {
+        Optional<BrandEntity> brandEntity = brandRepository.findOneById(order.getBrandId());
+        if (!brandEntity.isPresent()) {
             throw new EntityNotFoundException();
         }
-        OrderEntity orderEntity = generateOrder(order, clientEntity, brandEntity);
+        OrderEntity orderEntity = generateOrder(order, clientEntity.get(), brandEntity.get());
         orderEntity = orderRepository.save(orderEntity);
-        DeliveryEntity delivaryEntity = generateDelivary(order, orderEntity);
-        delivaryEntity = delivaryRepository.save(delivaryEntity);
+        DeliveryEntity deliveryEntity = generateDelivery(order, orderEntity);
+        deliveryEntity = delivaryRepository.save(deliveryEntity);
     }
     
     private OrderEntity generateOrder (CreateOrder order, ClientEntity clientEntity, BrandEntity brandEntity) {
@@ -68,23 +69,23 @@ public class OrderService {
         orderEntity.setShop(findBestShop(order, brandEntity));
         return orderEntity;
     }
-    private DeliveryEntity generateDelivary(CreateOrder order, OrderEntity orderEntity) {
-        DeliveryEntity delivary = new DeliveryEntity();
-        delivary.setCodAmount(order.getCodAmount());
-        delivary.setDescription(order.getItemDescription());
-        delivary.setDueDate(order.getDueDate());
-        delivary.setEndAddressText(order.getAddress());
-        delivary.setEndLatitude(order.getLatitude());
-        delivary.setEndLongtitude(order.getLongtitude());
-        delivary.setHasCod(order.isHasCod());
-        delivary.setOrder(orderEntity);
-        delivary.setOrderValue(order.getOrderValue());
-        delivary.setPin(generatePin());
-        delivary.setStartAddressText(orderEntity.getShop().getAddressText());
-        delivary.setStartLatitude(orderEntity.getShop().getLatitude());
-        delivary.setStartLongtitude(orderEntity.getShop().getLongtitude());
-        delivary.setStatus(DeliveryStatus.NEW);
-        return delivary;
+    private DeliveryEntity generateDelivery(CreateOrder order, OrderEntity orderEntity) {
+        DeliveryEntity delivery = new DeliveryEntity();
+        delivery.setCodAmount(order.getCodAmount());
+        delivery.setDescription(order.getItemDescription());
+        delivery.setDueDate(order.getDueDate());
+        delivery.setEndAddressText(order.getAddress());
+        delivery.setEndLatitude(order.getLatitude());
+        delivery.setEndLongtitude(order.getLongtitude());
+        delivery.setHasCod(order.isHasCod());
+        delivery.setOrder(orderEntity);
+        delivery.setOrderValue(order.getOrderValue());
+        delivery.setPin(generatePin());
+        delivery.setStartAddressText(orderEntity.getShop().getAddressText());
+        delivery.setStartLatitude(orderEntity.getShop().getLatitude());
+        delivery.setStartLongtitude(orderEntity.getShop().getLongtitude());
+        delivery.setStatus(DeliveryStatus.NEW);
+        return delivery;
     }
     
     private String generatePin() {
