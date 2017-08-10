@@ -2,10 +2,9 @@ package com.aim.foodtaxi.services;
 
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aim.foodtaxi.domain.BidEntity;
 import com.aim.foodtaxi.domain.DeliveryEntity;
@@ -17,7 +16,7 @@ import com.aim.foodtaxi.repositories.DeliveryRepository;
 import com.aim.foodtaxi.repositories.DriverRepository;
 
 @Service
-@Transactional
+@Transactional(readOnly=true)
 public class BidService {
 	
     @Autowired
@@ -32,9 +31,10 @@ public class BidService {
     @Autowired
     private BidMapper bidMapper;
 
-    public boolean createBid(Bid bid, Long deliveryId, String driverUsername) {
+    @Transactional(readOnly=false)
+    public boolean createBid(Bid bid, String driverUsername) {
         BidEntity bidEntity = bidMapper.bidToBidEntity(bid);
-        Optional<DeliveryEntity> deliveryEntity = deliveryRepository.findOneById(deliveryId);
+        Optional<DeliveryEntity> deliveryEntity = deliveryRepository.findOneById(bid.getDeliveryId());
         Optional<DriverEntity> driverEntity = driverRepository.findOneByUsername(driverUsername);
         if (!driverEntity.isPresent() || !deliveryEntity.isPresent()) {
             return false;
