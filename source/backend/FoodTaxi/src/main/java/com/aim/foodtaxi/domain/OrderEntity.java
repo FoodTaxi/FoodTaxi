@@ -1,5 +1,6 @@
 package com.aim.foodtaxi.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -60,4 +61,7 @@ public class OrderEntity {
 	
 	@Column(name = "ORDER_DATE", nullable=false)
 	private Date orderDate;
+	
+	@Column(name = "ORDER_VALUE", nullable=false)
+    private BigDecimal orderValue;
 }

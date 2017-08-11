@@ -8,5 +8,5 @@ import com.aim.foodtaxi.domain.BrandEntity;
 
 public interface BrandRepository extends JpaRepository<BrandEntity, Long> {
 
-//    Optional<BrandEntity> findOneById(Long brandId);
+    Optional<BrandEntity> findOneById(Long brandId);
 }
