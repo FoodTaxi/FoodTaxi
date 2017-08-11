@@ -2,6 +2,8 @@ package com.aim.foodtaxi.rest;
 
 import java.security.Principal;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,24 +22,24 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 @RequestMapping("/api/private/bid")
 public class BidController {
-    
-	@Autowired
-    private BidService bidService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createBid(@RequestHeader(value = "authorization") String authString,
-           @RequestBody Bid bid, @ApiIgnore Principal principal) {
-    	
-    	try{
-    		if (bidService.createBid(bid, principal.getName())) {
-    			return new ResponseEntity<>(null, HttpStatus.CREATED);
-    		} else{
-    			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-    		}
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    	}
-    }
+	@Autowired
+	private BidService bidService;
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> createBid(@RequestHeader(value = "authorization") String authString, @RequestBody Bid bid,
+			@ApiIgnore Principal principal) {
+
+		try {
+			bidService.createBid(bid, principal.getName());
+			return new ResponseEntity<>(null, HttpStatus.CREATED);
+
+		} catch(EntityNotFoundException e){
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 }

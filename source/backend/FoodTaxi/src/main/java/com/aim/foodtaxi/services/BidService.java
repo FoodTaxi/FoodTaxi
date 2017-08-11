@@ -2,6 +2,8 @@ package com.aim.foodtaxi.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,12 +34,12 @@ public class BidService {
     private BidMapper bidMapper;
 
     @Transactional(readOnly=false)
-    public boolean createBid(Bid bid, String driverUsername) {
+    public void createBid(Bid bid, String driverUsername) {
         BidEntity bidEntity = bidMapper.bidToBidEntity(bid);
         Optional<DeliveryEntity> deliveryEntity = deliveryRepository.findOneById(bid.getDeliveryId());
         Optional<DriverEntity> driverEntity = driverRepository.findOneByUsername(driverUsername);
         if (!driverEntity.isPresent() || !deliveryEntity.isPresent()) {
-            return false;
+        	throw new EntityNotFoundException("Driver and/or delivery do not exists!");
         }
         
         bidEntity.setDriver(driverEntity.get());
@@ -50,6 +52,5 @@ public class BidService {
             deliveryEntity.get().setBestBid(savedEntity);
             deliveryRepository.save(deliveryEntity.get());
         }
-        return true;
     }
 }
