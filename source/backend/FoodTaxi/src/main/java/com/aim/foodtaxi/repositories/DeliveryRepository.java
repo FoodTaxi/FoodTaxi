@@ -14,7 +14,7 @@ public interface DeliveryRepository extends JpaRepository<DeliveryEntity, Long> 
 
 	public Optional<DeliveryEntity> findOneById(Long id);
 	
-	@Query("select * from T_DELIVERY dl join T_BID b on  dl.BEST_BID_ID = b.ID where b.DRIVER_ID = :driverId")
+	@Query(value = "select dl from DeliveryEntity dl inner join dl.bestBid b inner join b.driver d where d.id = :driverId")
 	public List<DeliveryEntity> getOpenDeliveriesByDriverWinningBids(@Param("driverId")Long driverId);
 	
 	public List<DeliveryEntity> getAllDeliveryByStatus(DeliveryStatus status);

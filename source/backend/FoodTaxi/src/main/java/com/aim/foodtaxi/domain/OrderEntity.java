@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,22 +38,22 @@ public class OrderEntity {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch=FetchType.LAZY)
 	@JoinColumn(name = "CLIENT_ID")
 	private ClientEntity client;
 	
-	@OneToOne(optional = true, mappedBy="order")
+	@OneToOne(optional = true, mappedBy="order", fetch=FetchType.LAZY)
 	private DeliveryEntity delivery;
 	
-	@OneToOne(optional = true)
+	@OneToOne(optional = true, fetch=FetchType.LAZY)
 	@JoinColumn(name = "ORDER_PAYMENT_ID")
 	private OrderPaymentEntity payment;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch=FetchType.LAZY)
 	@JoinColumn(name = "BRAND_ID")
 	private BrandEntity brand;
 	
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = true, fetch=FetchType.LAZY)
 	@JoinColumn(name = "SHOP_ID")
 	private ShopEntity shop;
 	
