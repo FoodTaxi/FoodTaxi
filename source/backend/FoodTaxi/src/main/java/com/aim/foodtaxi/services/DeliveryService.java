@@ -1,7 +1,7 @@
 package com.aim.foodtaxi.services;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,20 +24,17 @@ public class DeliveryService {
 	private DeliveryMapper deliveryMapper;
 	
 	public List<Delivery> getOpenDeliveriesByDriver(Long driverId){
-		List<Delivery> resp = null;
+		List<Delivery> resp = new ArrayList<>();
 		
 		List<DeliveryEntity> winningDelivery = deliveryRepo.getOpenDeliveriesByDriverWinningBids(driverId);
 		if(winningDelivery != null && !winningDelivery.isEmpty()){
-			//initialize best bid
-			winningDelivery.forEach(x -> x.getBestBid().getId());
-//			resp = winningDelivery.stream().map(x -> deliveryMapper.deliveryEntityToDelivery(x)).collect(Collectors.toList());
+			resp = deliveryMapper.deliveryEntitiesToDeliveries(winningDelivery);
 		}else{
-			List<DeliveryEntity> deliveries = deliveryRepo.getAllDeliveryByStatus(DeliveryStatus.BIDDING);
-			//initialize best bid
-			deliveries.forEach(x -> x.getBestBid().getId());
-//			resp = deliveries.stream().map(x -> deliveryMapper.deliveryEntityToDelivery(x)).collect(Collectors.toList());
+			List<DeliveryEntity> deliveries = deliveryRepo.getAllByStatus(DeliveryStatus.BIDDING);
+			if(deliveries != null && !deliveries.isEmpty()){
+				resp = deliveryMapper.deliveryEntitiesToDeliveries(deliveries);
+			}
 		}
-		
 		return resp;
 	}
 }

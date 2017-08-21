@@ -17,5 +17,5 @@ public interface DeliveryRepository extends JpaRepository<DeliveryEntity, Long> 
 	@Query(value = "select dl from DeliveryEntity dl inner join dl.bestBid b inner join b.driver d where d.id = :driverId")
 	public List<DeliveryEntity> getOpenDeliveriesByDriverWinningBids(@Param("driverId")Long driverId);
 	
-	public List<DeliveryEntity> getAllDeliveryByStatus(DeliveryStatus status);
+	public List<DeliveryEntity> getAllByStatus(DeliveryStatus status);
 }

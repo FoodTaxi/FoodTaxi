@@ -3,7 +3,6 @@ package com.aim.foodtaxi.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.aim.foodtaxi.domain.BidEntity;
 import com.aim.foodtaxi.enums.DeliveryStatus;
 
 import lombok.Getter;
@@ -26,7 +25,8 @@ public class Delivery {
 	private Date startDate;
 	private Date endDate;
 	private Date dueDate;
-	private BidEntity bestBid;
+	private Double bestBidAmount;
+	private Long bestBidDriverId;
 	private DeliveryStatus status;
 	private boolean hasCod;
 	private BigDecimal codAmount;
