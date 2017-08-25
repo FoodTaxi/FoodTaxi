@@ -43,7 +43,7 @@ public class OrderService {
 	private ClientRepository clientRepository;
 
 	@Autowired
-	private DeliveryRepository delivaryRepository;
+	private DeliveryRepository deliveryRepository;
 
 	@Autowired
 	private ShopRepository shopRepository;
@@ -64,7 +64,7 @@ public class OrderService {
 		OrderEntity orderEntity = generateOrder(order, clientEntity.get(), brandEntity.get());
 		orderEntity = orderRepository.save(orderEntity);
 		DeliveryEntity deliveryEntity = generateDelivery(order, orderEntity);
-		deliveryEntity = delivaryRepository.save(deliveryEntity);
+		deliveryEntity = deliveryRepository.save(deliveryEntity);
 	}
 
 	private OrderEntity generateOrder(CreateOrder order, ClientEntity clientEntity, BrandEntity brandEntity) {
@@ -137,6 +137,21 @@ public class OrderService {
 		}
 
 		return resp;
+	}
 
+	public void confirmOrder(Long orderId, boolean confirmed, Integer completionMinutes) {
+		OrderEntity order = orderRepository.getOne(orderId);
+		if(confirmed){
+			order.setStatus(OrderStatus.CONFIRMED);
+			DeliveryEntity delivery = order.getDelivery();
+			if(completionMinutes != null && completionMinutes > 0){
+				//TODO schedule to open bidding of delivery in "n" minutes
+			}
+			delivery.setStatus(DeliveryStatus.BIDDING);
+			deliveryRepository.save(delivery);
+			orderRepository.save(order);
+		} else {
+			//TODO find new shop
+		}
 	}
 }

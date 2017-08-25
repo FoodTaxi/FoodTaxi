@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aim.foodtaxi.dto.ConfirmOrder;
 import com.aim.foodtaxi.dto.CreateOrder;
 import com.aim.foodtaxi.dto.Order;
 import com.aim.foodtaxi.services.OrderService;
@@ -45,6 +46,18 @@ public class OrderController {
 			respList = orderService.getOrdersForConfirmation(shopId);
 			return new ResponseEntity<List<Order>>(respList, HttpStatus.OK);
 		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value = "/confirm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> confirmOrder(@RequestBody ConfirmOrder confirmOrderInput) {
+		
+		try {
+			orderService.confirmOrder(confirmOrderInput.getOrderId(), confirmOrderInput.isConfirmed(), confirmOrderInput.getCompletionMinutes());
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch(Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
