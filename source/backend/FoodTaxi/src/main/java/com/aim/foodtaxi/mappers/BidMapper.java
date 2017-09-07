@@ -1,22 +1,24 @@
 package com.aim.foodtaxi.mappers;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import com.aim.foodtaxi.domain.BidEntity;
+import com.aim.foodtaxi.domain.HistoryBidEntity;
 import com.aim.foodtaxi.dto.Bid;
 
 @Mapper(componentModel = "spring", uses = {})
-public abstract class BidMapper {
+public interface BidMapper {
 
-//    @Mapping(source = "driver.id", target = "driverId")
-//    @Mapping(source = "order.id", target = "orderId")
-//    public abstract Bid bidEntityToBid(BidEntity bidEntity);
-//
-    public abstract BidEntity bidToBidEntity(Bid bid);
-//
-//    @AfterMapping
-//    public void calledWithSourceAndTargetType(BidEntity bidEntity, @MappingTarget Bid targetBid) {
-//        targetBid.setDriverFullName(bidEntity.getDriver().getFirstName() + " " + bidEntity.getDriver().getLastName());
-//    }
+    public BidEntity bidToBidEntity(Bid bid);
+    
+    @Mappings({
+    	@Mapping(target = "isWinning", ignore = true),
+    	@Mapping(target = "delivery", ignore = true)
+    })
+    public HistoryBidEntity bidEntityToHistoryBidEntity(BidEntity entity);
+    
+    
 
 }
