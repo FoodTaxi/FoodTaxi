@@ -32,6 +32,9 @@ public class HistoryBidEntity {
 
 	@Column(name = "IS_ACTIVE")
 	private boolean isActive;
+	
+	@Column(name = "IS_WINNING")
+	private boolean isWinning;
 
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "DRIVER_ID")

@@ -6,12 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Check;
 
 import com.aim.foodtaxi.enums.PaymentStatus;
 import com.aim.foodtaxi.enums.PaymentType;
@@ -25,6 +28,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Check(constraints="DELIVERY_ID IS NOT NULL OR TH_DELIVERY_ID IS NOT NULL")
 public class DeliveryPaymentEntity {
 
 	@Id
@@ -32,9 +36,13 @@ public class DeliveryPaymentEntity {
     @Column
     private Long id;
 	
-	@ManyToOne
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
 	@JoinColumn(name = "DELIVERY_ID")
 	private DeliveryEntity delivery;
+	
+	@ManyToOne(optional=true, fetch=FetchType.LAZY)
+	@JoinColumn(name = "TH_DELIVERY_ID")
+	private HistoryDeliveryEntity historyDelivery;
 	
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;
@@ -47,7 +55,7 @@ public class DeliveryPaymentEntity {
 	@Enumerated(EnumType.STRING)
 	private PaymentType type;
 	
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = true, fetch=FetchType.LAZY)
 	@JoinColumn(name = "INVOICE_ID")
 	private InvoiceEntity invoice;
 }

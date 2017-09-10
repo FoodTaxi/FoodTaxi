@@ -10,6 +10,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 import com.aim.foodtaxi.domain.DeliveryEntity;
+import com.aim.foodtaxi.domain.HistoryDeliveryEntity;
 import com.aim.foodtaxi.dto.Delivery;
 
 @Mapper(componentModel = "spring", uses = {})
@@ -24,4 +25,9 @@ public interface DeliveryMapper {
 
 	@IterableMapping(qualifiedByName = "deliveryEntityToDelivery")
 	public List<Delivery> deliveryEntitiesToDeliveries(List<DeliveryEntity> entities);
+	
+	@Mappings({
+		@Mapping(target = "deliveryPayments", ignore=true)
+	})
+	public HistoryDeliveryEntity deliveryEntityToHistoryDeliveryEntity(DeliveryEntity entity);
 }
