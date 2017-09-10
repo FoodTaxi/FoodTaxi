@@ -5,29 +5,31 @@ import java.util.List;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 import com.aim.foodtaxi.domain.OrderEntity;
-import com.aim.foodtaxi.dto.CreateOrder;
 import com.aim.foodtaxi.dto.Order;
-import com.aim.foodtaxi.dto.UnknownOrder;
 
-@Mapper(componentModel = "spring", uses = {DriverMapper.class, BidMapper.class, }, unmappedTargetPolicy= ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", uses = {}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderMapper {
-   
-//    @Mapping(source = "brand.id", target = "brandId")
-//    @Mapping(source = "brand.logoPath", target = "brandLogoPath")
-//    @Mapping(source = "shop.addressText", target = "shopAddressText")
-//    public Order orderEntityToOrder(OrderEntity orderEntity);
-//    
+	
+	@Named("orderEntityToOrder")
+	@Mappings({ 
+		@Mapping(source = "brand.id", target = "brandId"),
+		@Mapping(source = "client.id", target = "clientId"),
+		@Mapping(source = "shop.id", target = "shopId"),
+		@Mapping(source = "shop.addressText", target = "shopAddressText") })
+	public Order orderEntityToOrder(OrderEntity orderEntity);
 
-//    
-//    @IterableMapping(qualifiedByName = "orderEntityToOrder")
-//    public List<Order> orderEntitiesToOrders(List<OrderEntity> orderEntities);
-//    
-//    @IterableMapping(qualifiedByName = "orderToOrderEntity")
-//    public List<OrderEntity> ordersToOrderEntities(List<Order> orders);
-//
-//    @Mapping(target = "driver", ignore = true)
-//    public OrderEntity unknownOrderToOrderEntity(UnknownOrder unknownOrder);
+	
+	@IterableMapping(qualifiedByName = "orderEntityToOrder")
+	public List<Order> orderEntitiesToOrders(List<OrderEntity> orderEntities);
+
+	// @IterableMapping(qualifiedByName = "orderToOrderEntity")
+	// public List<OrderEntity> ordersToOrderEntities(List<Order> orders);
+	//
+	// @Mapping(target = "driver", ignore = true)
+	// public OrderEntity unknownOrderToOrderEntity(UnknownOrder unknownOrder);
 }
