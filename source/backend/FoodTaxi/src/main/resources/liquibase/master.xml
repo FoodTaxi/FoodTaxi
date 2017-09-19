@@ -6,4 +6,5 @@
 	<include file="changelogs/20170806_recreate.xml" relativeToChangelogFile="true"/>
 	<include file="changelogs/20170808_add_order_value.xml" relativeToChangelogFile="true"/>
 	<include file="changelogs/20170917_history_service.xml" relativeToChangelogFile="true"/>
+	<include file="changelogs/20170919_drop_NN_thdelivery_to_driver.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
