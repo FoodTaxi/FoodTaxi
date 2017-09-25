@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -21,9 +22,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(name="bid_seq", initialValue=50, allocationSize=1)
 public class BidEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="bid_seq")
 	@Column
 	private Long id;
 

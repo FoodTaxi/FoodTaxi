@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.aim.foodtaxi.enums.PaymentStatus;
@@ -26,10 +27,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name="order_payment_seq", initialValue=50, allocationSize=1)
 public class OrderPaymentEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order_payment_seq")
     @Column
     private Long id;
 	

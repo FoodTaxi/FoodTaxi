@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.aim.foodtaxi.enums.OrderStatus;
@@ -27,10 +28,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@SequenceGenerator(name="order_seq", initialValue=50, allocationSize=1)
 public class OrderEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order_seq")
 	@Column
 	private Long id;
 	

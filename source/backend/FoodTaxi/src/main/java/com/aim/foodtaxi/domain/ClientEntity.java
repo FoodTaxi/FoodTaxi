@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -16,10 +17,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name="client_seq", initialValue=50, allocationSize=1)
 public class ClientEntity {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="client_seq")
     @Column
     private Long id;
 	

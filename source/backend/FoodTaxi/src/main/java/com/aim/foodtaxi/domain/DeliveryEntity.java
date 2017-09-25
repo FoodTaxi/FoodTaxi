@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.aim.foodtaxi.enums.DeliveryStatus;
@@ -29,10 +30,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@SequenceGenerator(name="delivery_seq", initialValue=50, allocationSize=1)
 public class DeliveryEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="delivery_seq")
     @Column
     private Long id;
 
