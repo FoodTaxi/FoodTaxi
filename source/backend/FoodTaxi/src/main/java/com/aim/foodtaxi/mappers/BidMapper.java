@@ -14,7 +14,7 @@ public interface BidMapper {
     public BidEntity bidToBidEntity(Bid bid);
     
     @Mappings({
-    	@Mapping(target = "isWinning", ignore = true),
+    	@Mapping(target = "winning", ignore = true),
     	@Mapping(target = "delivery", ignore = true)
     })
     public HistoryBidEntity bidEntityToHistoryBidEntity(BidEntity entity);

@@ -67,7 +67,7 @@ public class HistoryDeliveryEntity {
     @JoinColumn(name = "ORDER_ID")
     private OrderEntity order;
     
-    @ManyToOne(optional = false, fetch=FetchType.LAZY)
+    @ManyToOne(optional = true, fetch=FetchType.LAZY)
     @JoinColumn(name = "DRIVER_ID")
     private DriverEntity driver;
 

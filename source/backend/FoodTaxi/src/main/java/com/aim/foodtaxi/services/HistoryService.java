@@ -62,7 +62,7 @@ public class HistoryService {
 		for (BidEntity bid : bids) {
 			HistoryBidEntity h_bid = bidMapper.bidEntityToHistoryBidEntity(bid);
 			h_bid.setDelivery(h_delivery);
-			if (bid.getId().equals(winBid.getId())) {
+			if (winBid != null && bid.getId().equals(winBid.getId())) {
 				h_bid.setWinning(true);
 			}
 		}
