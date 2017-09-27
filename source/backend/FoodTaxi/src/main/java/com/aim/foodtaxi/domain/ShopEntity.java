@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -21,7 +22,8 @@ import lombok.Setter;
 public class ShopEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="shop_seq_gen")
+    @SequenceGenerator(name="shop_seq_gen", sequenceName = "shop_seq", allocationSize = 1, initialValue=50)
     @Column
     private Long id;
 

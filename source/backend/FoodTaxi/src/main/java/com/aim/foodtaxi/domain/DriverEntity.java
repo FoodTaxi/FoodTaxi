@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.aim.foodtaxi.enums.DriverAccountStatus;
@@ -29,7 +30,8 @@ import lombok.Setter;
 public class DriverEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="driver_seq_gen")
+	@SequenceGenerator(name="driver_seq_gen", sequenceName = "driver_seq", allocationSize = 1, initialValue=50)
 	@Column
 	private Long id;
 	
