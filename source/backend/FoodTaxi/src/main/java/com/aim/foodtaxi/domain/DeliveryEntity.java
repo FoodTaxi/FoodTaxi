@@ -30,11 +30,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@SequenceGenerator(name="delivery_seq", initialValue=50, allocationSize=1)
 public class DeliveryEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="delivery_seq")
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="delivery_seq_gen")
+    @SequenceGenerator(name="delivery_seq_gen", sequenceName = "delivery_seq", allocationSize = 1, initialValue=50)
     @Column
     private Long id;
 

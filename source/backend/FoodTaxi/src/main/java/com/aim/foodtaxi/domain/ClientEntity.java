@@ -17,11 +17,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@SequenceGenerator(name="client_seq", initialValue=50, allocationSize=1)
 public class ClientEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="client_seq")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="client_seq_gen")
+    @SequenceGenerator(name="client_seq_gen", sequenceName = "client_seq", allocationSize = 1, initialValue=50)
     @Column
     private Long id;
 	

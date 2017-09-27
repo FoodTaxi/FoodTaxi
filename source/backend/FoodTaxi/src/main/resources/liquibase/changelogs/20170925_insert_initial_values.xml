@@ -1,0 +1,47 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+	<changeSet author="mihailkarev" id="1506373120900-3">
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_driver" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_bid" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_brand" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_client" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_delivery" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_delivery_payment" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_invoice" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_order" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_order_payment" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+		<insert dbms="mysql" tableName="hibernate_sequences">
+			<column name="sequence_name" type="varchar(255)" value="t_shop" />
+			<column name="sequence_next_hi_value" type="int(11)" value="50" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>

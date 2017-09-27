@@ -28,11 +28,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@SequenceGenerator(name="order_seq", initialValue=50, allocationSize=1)
 public class OrderEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order_seq")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="order_seq_gen")
+	@SequenceGenerator(name="order_seq_gen", sequenceName = "order_seq", allocationSize = 1, initialValue=50)
 	@Column
 	private Long id;
 	

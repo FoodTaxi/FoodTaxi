@@ -24,10 +24,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@SequenceGenerator(name="brand_seq", initialValue=50, allocationSize=1)
 public class BrandEntity {
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="brand_seq")
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="brand_seq_gen")
+    @SequenceGenerator(name="brand_seq_gen", sequenceName = "brand_seq", allocationSize = 1, initialValue=50)
     @Column
     private Long id;
     

@@ -27,12 +27,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@SequenceGenerator(name="order_payment_seq", initialValue=50, allocationSize=1)
 public class OrderPaymentEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="order_payment_seq")
-    @Column
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="order_payment_seq_gen")
+	@SequenceGenerator(name="order_payment_seq_gen", sequenceName = "order_payment_seq", allocationSize = 1, initialValue=50)
+	@Column
     private Long id;
 	
 	@ManyToOne

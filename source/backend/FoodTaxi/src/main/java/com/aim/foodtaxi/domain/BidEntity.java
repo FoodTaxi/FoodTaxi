@@ -22,10 +22,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@SequenceGenerator(name="bid_seq", initialValue=50, allocationSize=1)
 public class BidEntity {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="bid_seq")
+	@SequenceGenerator(name="bid_seq_gen", sequenceName = "bid_seq", allocationSize = 1, initialValue=50)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="bid_seq_gen")
 	@Column
 	private Long id;
 

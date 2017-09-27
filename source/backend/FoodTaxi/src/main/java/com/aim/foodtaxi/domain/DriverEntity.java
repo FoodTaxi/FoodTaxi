@@ -27,11 +27,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@SequenceGenerator(name="driver_seq", initialValue=50, allocationSize=1)
 public class DriverEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="driver_seq")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="driver_seq_gen")
+	@SequenceGenerator(name="driver_seq_gen", sequenceName = "driver_seq", allocationSize = 1, initialValue=50)
 	@Column
 	private Long id;
 	

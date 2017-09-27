@@ -29,7 +29,8 @@ import lombok.ToString;
 public class InvoiceEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="invoice_seq")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="invoice_seq_gen")
+	@SequenceGenerator(name="invoice_seq_gen", sequenceName = "invoice_seq", allocationSize = 1, initialValue=50)
     @Column
     private Long id;
 	

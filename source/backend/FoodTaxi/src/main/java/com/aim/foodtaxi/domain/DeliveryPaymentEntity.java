@@ -30,12 +30,12 @@ import lombok.ToString;
 @Setter
 @ToString
 @Check(constraints="DELIVERY_ID IS NOT NULL OR TH_DELIVERY_ID IS NOT NULL")
-@SequenceGenerator(name="delivary_payment_seq", initialValue=50, allocationSize=1)
 public class DeliveryPaymentEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="delivary_payment_seq")
-    @Column
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="delivary_payment_seq_gen")
+	@SequenceGenerator(name="delivary_payment_seq_gen", sequenceName = "delivary_payment_seq", allocationSize = 1, initialValue=50)
+	@Column
     private Long id;
 	
 	@ManyToOne(optional=true, fetch=FetchType.LAZY)

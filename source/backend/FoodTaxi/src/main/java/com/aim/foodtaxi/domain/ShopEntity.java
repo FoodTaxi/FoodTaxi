@@ -19,11 +19,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@SequenceGenerator(name="shop_seq", initialValue=50, allocationSize=1)
 public class ShopEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="shop_seq")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator="shop_seq_gen")
+    @SequenceGenerator(name="shop_seq_gen", sequenceName = "shop_seq", allocationSize = 1, initialValue=50)
     @Column
     private Long id;
 
