@@ -5,4 +5,7 @@
 
 	<include file="changelogs/20170925_initial.xml" relativeToChangelogFile="true"/>
 	<include file="changelogs/20170925_insert_initial_values.xml" relativeToChangelogFile="true"/>
+	<changeSet id="quartz_tables" author="dimitar.petkov" dbms="mysql">
+		<sqlFile path="liquibase/changelogs/tables_mysql_innodb.sql" splitStatements="true" stripComments="true"/>	
+	</changeSet>
 </databaseChangeLog>

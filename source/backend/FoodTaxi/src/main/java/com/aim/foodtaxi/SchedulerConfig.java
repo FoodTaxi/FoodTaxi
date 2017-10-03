@@ -5,9 +5,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.quartz.Trigger;
 import org.quartz.spi.JobFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
@@ -18,9 +16,6 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import liquibase.integration.spring.SpringLiquibase;
 
-/**
- * Created by david on 2015-01-20.
- */
 @Configuration
 @ConditionalOnProperty(name = "quartz.enabled")
 public class SchedulerConfig {
@@ -44,7 +39,6 @@ public class SchedulerConfig {
         factory.setJobFactory(jobFactory);
 
         factory.setQuartzProperties(quartzProperties());
-//        factory.setTriggers(sampleJobTrigger);
 
         return factory;
     }
