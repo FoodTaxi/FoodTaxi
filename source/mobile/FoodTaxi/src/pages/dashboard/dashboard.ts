@@ -2,42 +2,43 @@ import { Component } from '@angular/core';
 
 import { ModalController, NavController } from 'ionic-angular';
 import {BidService} from '../../providers/bid-service';
-import {OrderService} from '../../providers/order-service';
-import {Order} from '../order/order';
-import {Start} from '../start/start';
+import {DeliveryService} from '../../providers/delivery-service';
+import {Delivery} from '../delivery/delivery';
+import {Login} from '../login/login';
 
 
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html',
-  providers: [BidService,OrderService]
+  providers: [BidService,DeliveryService]
 })
 export class Dashboard {
-  public orders = [];
-  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public orderService: OrderService) {
-    this.presentLogineModal();
+  public deliveries = [];
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public deliveryService: DeliveryService) {
+    // this.presentLogineModal();
+    this.loadDeliveries();
   }
 
   presentLogineModal() {
-    let lofinModal = this.modalCtrl.create(Start);
+    let loginModal = this.modalCtrl.create(Login);
 
-    lofinModal.onDidDismiss(data => {
-      this.loadOrders();
+    loginModal.onDidDismiss(data => {
+      this.loadDeliveries();
     });
-    lofinModal.present();
+    loginModal.present();
   }
 
-  loadOrders(){
-    this.orderService.load()
+  loadDeliveries(){
+    this.deliveryService.load()
     .then(data => {
-      this.orders = data;
+      this.deliveries = data;
     });
   }
 
-  openOrder(order) {
+  openDelivery(delivery) {
     // That's right, we're pushing to ourselves!
-    this.navCtrl.push(Order, {
-      order: order
+    this.navCtrl.push(Delivery, {
+      delivery: delivery
     });
   }
 }

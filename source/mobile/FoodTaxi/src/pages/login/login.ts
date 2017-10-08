@@ -4,17 +4,17 @@ import { ViewController, LoadingController } from 'ionic-angular';
 import { LoginService } from '../../providers/login-service';
 
 @Component({
-  selector: 'page-start',
-  templateUrl: 'start.html',
+  selector: 'page-login',
+  templateUrl: 'login.html',
   providers: [LoginService]
 })
-export class Start {
+export class Login {
   public authenticated = false;
-  	constructor(public viewCtrl: ViewController, public loadingCtrl: LoadingController, public loginService: LoginService) {
+  constructor(public viewCtrl: ViewController, public loadingCtrl: LoadingController, public loginService: LoginService) {
   }
 
   login(username, password) {
-  	this.authenticated = true;
+
 	let loading = this.loadingCtrl.create({
 		content: 'Please wait...'
 	});
@@ -22,8 +22,14 @@ export class Start {
 	loading.present();
 	this.loginService.login(username, password)
 		.then(data => {
-		loading.dismiss();
-		this.viewCtrl.dismiss(data);
-	});
+			this.authenticated = true;
+			loading.dismiss();
+			this.viewCtrl.dismiss(data);
+		}, err => {
+			this.authenticated = false;
+			console.log(err);
+			alert(JSON.parse(err._body).message);
+			loading.dismiss();
+		});
   }
 }

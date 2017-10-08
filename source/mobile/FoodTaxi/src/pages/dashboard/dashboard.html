@@ -8,31 +8,31 @@
 </ion-header>
 
 <ion-content padding>
-  <h4>Active Orders</h4>
+  <h4>Active Deliveries</h4>
   <ion-list>
-    <ion-item class="order-row" *ngFor="let order of orders" (click)="openOrder(order)">
+    <ion-item class="order-row" *ngFor="let delivery of deliveries" (click)="openDelivery(delivery)">
       <table>
         <tr class="order-table-row">
           <td class="order-table-row-part10">
-            <img class="brand-icon" [src] = "order.brandLogoPath"/>
+            <img class="brand-icon" [src] = "delivery.brandLogoPath"/>
           </td>
           <td class="order-table-row-part20">
             <h2>From:</h2>
-            <h4>{{order.shopAddressText}}</h4>
+            <h4>{{delivery.startAddressText}}</h4>
           </td>
           <td class="order-table-row-part20">
             <h2>To:</h2>
-            <h4>{{order.addressText}}</h4>
+            <h4>{{delivery.endAddressText}}</h4>
           </td>
           <td class="order-table-row-part10">
             <h2 >Current Bid:</h2>
-            <h4 *ngIf="order.bestBid">{{ order.bestBid.price }}</h4>
-            <h4 *ngIf="!order.bestBid">No bid</h4>
+            <h4 *ngIf="delivery.bestBid">{{ delivery.bestBid.price }}</h4>
+            <h4 *ngIf="!delivery.bestBid">No bid</h4>
           </td>
           <td class="order-table-row-part20">
             <h2>Holder:</h2>
-            <h4 *ngIf="order.bestBid">{{order.bestBid.driverFullName || ""}}</h4>
-            <h4 *ngIf="!order.bestBid">No bid</h4>
+            <h4 *ngIf="delivery.bestBid">{{delivery.bestBid.driverFullName || ""}}</h4>
+            <h4 *ngIf="!delivery.bestBid">No bid</h4>
           </td>
           <td class="order-table-row-part20">
             <h2>Time Left:</h2>

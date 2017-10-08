@@ -1,10 +1,10 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Start } from '../pages/start/start';
+import { Login } from '../pages/login/login';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Page2 } from '../pages/page2/page2';
-import { Order } from '../pages/order/order';
+import { Delivery } from '../pages/delivery/delivery';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { IonicStorageModule, Storage } from '@ionic/storage';
@@ -24,10 +24,10 @@ export function getAuthHttp(http) {
 @NgModule({
   declarations: [
     MyApp,
-    Start,
+    Login,
     Dashboard,
     Page2,
-    Order
+    Delivery
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -36,10 +36,10 @@ export function getAuthHttp(http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Start,
+    Login,
     Dashboard,
     Page2,
-    Order
+    Delivery
   ],
 
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},

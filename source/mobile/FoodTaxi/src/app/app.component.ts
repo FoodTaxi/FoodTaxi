@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ModalController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Page2 } from '../pages/page2/page2';
+import { Login } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +16,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public modalCtrl: ModalController,) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -26,12 +27,22 @@ export class MyApp {
 
   }
 
+   presentLogineModal() {
+    let loginModal = this.modalCtrl.create(Login);
+
+    loginModal.onDidDismiss(data => {
+      this.nav.setRoot(Dashboard);
+    });
+    loginModal.present();
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+      this.presentLogineModal();
     });
   }
 
