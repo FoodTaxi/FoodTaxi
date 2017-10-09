@@ -52,7 +52,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> confirmOrder(@RequestBody ConfirmOrder confirmOrderInput) {
+	public ResponseEntity<?> confirmOrder(@RequestHeader(value = "authorization") String authString, @RequestBody ConfirmOrder confirmOrderInput) {
 		
 		try {
 			orderService.confirmOrder(confirmOrderInput.getOrderId(), confirmOrderInput.isConfirmed(), confirmOrderInput.getCompletionMinutes());

@@ -6,11 +6,10 @@ import { Storage } from '@ionic/storage';
 import {AppSettings} from '../common/appSettings';
 
 @Injectable()
-export class OrderService {
+export class DeliveryService {
   
   public data;
   constructor(public http: Http, public authHttp: AuthHttp, public storage: Storage) {
-    console.log('Hello OrderService Provider');
   }
   load() {
   	if (this.data) {

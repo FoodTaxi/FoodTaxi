@@ -6,18 +6,18 @@ declare var google;
 
 @Component({
   selector: 'page-order',
-  templateUrl: 'order.html'
+  templateUrl: 'delivery.html'
 })
-export class Order {
+export class Delivery {
 	
   @ViewChild('map') mapElement: ElementRef;
   map: any;
  
-  order: any;
+  delivery: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.order = navParams.get('order');
+    this.delivery = navParams.get('order');
     this.loadMap();
   }
 
