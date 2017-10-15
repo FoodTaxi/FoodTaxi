@@ -5,17 +5,18 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.aim.foodtaxi.services.BidService;
+import com.aim.foodtaxi.services.DeliveryService;
+import com.aim.foodtaxi.services.SchedulerService.JobDataKeys;
 
 public class BidExpiryJob implements Job{
 
 	@Autowired
-	BidService bidService;
+	DeliveryService deliveryService;
 	
 	@Override
 	public void execute(JobExecutionContext ctx) throws JobExecutionException {
-		//TODO Sample implementations
-		long id = Long.parseLong((String)ctx.getJobDetail().getJobDataMap().get("bidId"));
+		long id = Long.parseLong((String)ctx.getJobDetail().getJobDataMap().get(JobDataKeys.DELIVERY_ID.value()));
+		deliveryService.closeBidding(id);
 	}
 
 }

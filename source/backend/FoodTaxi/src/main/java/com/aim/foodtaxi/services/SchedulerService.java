@@ -21,31 +21,31 @@ public class SchedulerService {
 
 	@Autowired
 	Scheduler scheduler;
-	
-	public void scheduleBidExpiration(long bidId) throws SchedulerException{
+
+	public void scheduleBidExpiration(long deliveryId) throws SchedulerException {
 		String name = UUID.randomUUID().toString();
-		String group = BidExpiryJob.class.getSimpleName()+"_"+bidId;
-		
-		JobDetail jd = JobBuilder.newJob(BidExpiryJob.class).storeDurably().usingJobData(JobDataKeys.BID_ID.value(), Long.toString(bidId)).withIdentity(name, group).build();
-		//sample implementation
-		LocalDateTime fiveMinutesLater = LocalDateTime.now().plusMinutes(1);
-		Trigger t = TriggerBuilder.newTrigger().forJob(jd).startAt(Date.from(fiveMinutesLater.atZone(ZoneId.systemDefault()).toInstant())).build();
-		
+		String group = BidExpiryJob.class.getSimpleName() + "_" + deliveryId;
+
+		JobDetail jd = JobBuilder.newJob(BidExpiryJob.class).storeDurably()
+				.usingJobData(JobDataKeys.DELIVERY_ID.value(), Long.toString(deliveryId)).withIdentity(name, group).build();
+		LocalDateTime fiveMinutesLater = LocalDateTime.now().plusMinutes(5);
+		Trigger t = TriggerBuilder.newTrigger().forJob(jd)
+				.startAt(Date.from(fiveMinutesLater.atZone(ZoneId.systemDefault()).toInstant())).build();
+
 		scheduler.scheduleJob(jd, t);
 	}
-	
-	
-	public enum JobDataKeys{
-		
-		BID_ID("bidId");
-		
+
+	public enum JobDataKeys {
+
+		BID_ID("bidId"), DELIVERY_ID("deliveryId");
+
 		private String value;
-		
-		private JobDataKeys(String value){
+
+		private JobDataKeys(String value) {
 			this.value = value;
 		}
-		
-		public String value(){
+
+		public String value() {
 			return this.value;
 		}
 	}
