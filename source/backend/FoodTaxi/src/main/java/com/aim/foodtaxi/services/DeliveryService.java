@@ -41,7 +41,7 @@ public class DeliveryService {
 	@Transactional(readOnly=false)
 	public void closeBidding(long deliveryId) {
 		DeliveryEntity delivery = deliveryRepo.getOne(deliveryId);
-		if(delivery.getBestBid().getId() != null) {
+		if(delivery.getBestBid() != null) {
 			delivery.setStatus(DeliveryStatus.PICKING_UP);
 			delivery.setDriver(delivery.getBestBid().getDriver());
 		} else {
