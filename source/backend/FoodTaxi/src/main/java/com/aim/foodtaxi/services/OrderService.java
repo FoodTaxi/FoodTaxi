@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +36,6 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
-
 	@Autowired
 	private BrandRepository brandRepository;
 
@@ -50,6 +50,9 @@ public class OrderService {
 
 	@Autowired
 	private OrderMapper orderMapper;
+
+	@Autowired
+	private SchedulerService schedulerService;
 
 	public void createOrder(CreateOrder order) throws EntityNotFoundException {
 
@@ -131,7 +134,7 @@ public class OrderService {
 		}
 		List<OrderEntity> orders = orderRepository.getAllByStatusAndShop(OrderStatus.AWAITING_CONFIRMATION, shop);
 		List<Order> resp = new ArrayList<>();
-		
+
 		if (orders != null && !orders.isEmpty()) {
 			resp = orderMapper.orderEntitiesToOrders(orders);
 		}
@@ -141,17 +144,23 @@ public class OrderService {
 
 	public void confirmOrder(Long orderId, boolean confirmed, Integer completionMinutes) {
 		OrderEntity order = orderRepository.getOne(orderId);
-		if(confirmed){
+		if (confirmed) {
 			order.setStatus(OrderStatus.CONFIRMED);
 			DeliveryEntity delivery = order.getDelivery();
-			if(completionMinutes != null && completionMinutes > 0){
-				//TODO schedule to open bidding of delivery in "n" minutes
+			if (completionMinutes != null && completionMinutes > 0) {
+				// TODO schedule to open bidding of delivery in "n" minutes
 			}
 			delivery.setStatus(DeliveryStatus.BIDDING);
 			deliveryRepository.save(delivery);
 			orderRepository.save(order);
+			try {
+				schedulerService.scheduleBidExpiration(delivery.getId());
+			} catch (SchedulerException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
 		} else {
-			//TODO find new shop
+			// TODO find new shop
 		}
 	}
 }
