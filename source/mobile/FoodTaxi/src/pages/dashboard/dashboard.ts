@@ -13,7 +13,7 @@ import {Login} from '../login/login';
   providers: [BidService,DeliveryService]
 })
 export class Dashboard {
-  public deliveries = [];
+  public deliveries: any;
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public deliveryService: DeliveryService) {
     // this.presentLogineModal();
     this.loadDeliveries();
@@ -29,7 +29,7 @@ export class Dashboard {
   }
 
   loadDeliveries(){
-    this.deliveryService.load()
+    this.deliveryService.getOpenDeliveries()
     .then(data => {
       this.deliveries = data;
     });

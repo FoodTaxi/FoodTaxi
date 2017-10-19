@@ -11,7 +11,7 @@ export class DeliveryService {
   public data;
   constructor(public http: Http, public authHttp: AuthHttp, public storage: Storage) {
   }
-  load() {
+  getOpenDeliveries() {
   	if (this.data) {
     	// already loaded data
     	return Promise.resolve(this.data);
