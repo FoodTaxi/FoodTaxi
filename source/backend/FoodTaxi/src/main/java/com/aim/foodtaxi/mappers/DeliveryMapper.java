@@ -28,7 +28,7 @@ public abstract class DeliveryMapper {
 	@AfterMapping
 	public void calledWithSourceAndTarget(DeliveryEntity entity, @MappingTarget Delivery delivery) {
 	    if (entity.getBestBid() != null) {
-	        delivery.setBesBidDriverName(entity.getBestBid().getDriver().getFirstName() +  " " + entity.getBestBid().getDriver().getLastName());
+	        delivery.setBestBidDriverName(entity.getBestBid().getDriver().getFirstName() +  " " + entity.getBestBid().getDriver().getLastName());
 	    }
 	}
 	

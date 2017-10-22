@@ -27,7 +27,7 @@ public class Delivery {
 	private Date dueDate;
 	private Double bestBidAmount;
 	private Long bestBidDriverId;
-	private String besBidDriverName;
+	private String bestBidDriverName;
 	private DeliveryStatus status;
 	private boolean hasCod;
 	private BigDecimal codAmount;
