@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.inject.Named;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
 import com.aim.foodtaxi.domain.DeliveryEntity;
@@ -14,20 +16,27 @@ import com.aim.foodtaxi.domain.HistoryDeliveryEntity;
 import com.aim.foodtaxi.dto.Delivery;
 
 @Mapper(componentModel = "spring", uses = {})
-public interface DeliveryMapper {
+public abstract class DeliveryMapper {
 
 	@Named("deliveryEntityToDelivery")
 	@Mappings({ 
 		@Mapping(source = "bestBid.price", target = "bestBidAmount"),
 		@Mapping(source = "bestBid.driver.id", target = "bestBidDriverId") 
 	})
-	public Delivery deliveryEntityToDelivery(DeliveryEntity deliveryEntity);
+	public abstract Delivery deliveryEntityToDelivery(DeliveryEntity deliveryEntity);
 
+	@AfterMapping
+	public void calledWithSourceAndTarget(DeliveryEntity entity, @MappingTarget Delivery delivery) {
+	    if (entity.getBestBid() != null) {
+	        delivery.setBestBidDriverName(entity.getBestBid().getDriver().getFirstName() +  " " + entity.getBestBid().getDriver().getLastName());
+	    }
+	}
+	
 	@IterableMapping(qualifiedByName = "deliveryEntityToDelivery")
-	public List<Delivery> deliveryEntitiesToDeliveries(List<DeliveryEntity> entities);
+	public abstract List<Delivery> deliveryEntitiesToDeliveries(List<DeliveryEntity> entities);
 	
 	@Mappings({
 		@Mapping(target = "deliveryPayments", ignore=true)
 	})
-	public HistoryDeliveryEntity deliveryEntityToHistoryDeliveryEntity(DeliveryEntity entity);
+	public abstract HistoryDeliveryEntity deliveryEntityToHistoryDeliveryEntity(DeliveryEntity entity);
 }

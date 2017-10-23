@@ -14,6 +14,21 @@ export class LoginService {
   constructor(public http: Http, public authHttp: AuthHttp, private storage: Storage) {
     console.log('Hello LoginService Provider');
   }
+
+  isTokenSaved() {
+    return this.storage.get('token').then(token => {
+      if (token && token.length > 0) {
+        console.log(token);
+        return true;
+      }
+      return false;
+    });
+  }
+
+  cleanTheToken() {
+     this.storage.set('token', '');
+  }
+
   login(username, password) {
   	if (this.data) {
     	// already loaded data

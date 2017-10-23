@@ -26,13 +26,13 @@
           </td>
           <td class="order-table-row-part10">
             <h2 >Current Bid:</h2>
-            <h4 *ngIf="delivery.bestBid">{{ delivery.bestBid.price }}</h4>
-            <h4 *ngIf="!delivery.bestBid">No bid</h4>
+            <h4 *ngIf="delivery.bestBidAmount">{{ delivery.bestBidAmount }}</h4>
+            <h4 *ngIf="!delivery.bestBidAmount">No bid</h4>
           </td>
           <td class="order-table-row-part20">
             <h2>Holder:</h2>
-            <h4 *ngIf="delivery.bestBid">{{delivery.bestBid.driverFullName || ""}}</h4>
-            <h4 *ngIf="!delivery.bestBid">No bid</h4>
+            <h4 *ngIf="delivery.bestBidAmount">{{delivery.bestBidDriverId || ""}}</h4>
+            <h4 *ngIf="!delivery.bestBidAmount">No bid</h4>
           </td>
           <td class="order-table-row-part20">
             <h2>Time Left:</h2>

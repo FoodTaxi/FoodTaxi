@@ -5,9 +5,11 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Dashboard } from '../pages/dashboard/dashboard';
 import { Page2 } from '../pages/page2/page2';
 import { Login } from '../pages/login/login';
+import { LoginService } from '../providers/login-service';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [LoginService]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -16,7 +18,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public modalCtrl: ModalController,) {
+  constructor(public platform: Platform, public modalCtrl: ModalController, public loginService: LoginService) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -42,7 +44,15 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      this.presentLogineModal();
+      this.loginService.isTokenSaved().then(saved => {
+        console.log('tuk');
+        console.log(saved);
+        if(!saved) {
+          this.presentLogineModal();
+        } else {
+          this.nav.setRoot(Dashboard);
+        }
+      });
     });
   }
 
@@ -50,5 +60,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logout() {
+    this.loginService.cleanTheToken();
+    this.presentLogineModal();
   }
 }

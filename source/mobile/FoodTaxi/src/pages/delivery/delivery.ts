@@ -1,25 +1,40 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
+import { BidService }  from  '../../providers/bid-service'
+
 
 declare var google;
 
 @Component({
-  selector: 'page-order',
-  templateUrl: 'delivery.html'
+  selector: 'page-delivery',
+  templateUrl: 'delivery.html',
+  providers: [BidService]
 })
 export class Delivery {
 	
   @ViewChild('map') mapElement: ElementRef;
   map: any;
  
-  delivery: any;
+  public delivery: any;
+  public bidPrice: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public navParams: NavParams, public bidService: BidService) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.delivery = navParams.get('order');
+    this.delivery = navParams.get('delivery');
+    this.bidPrice = 5.50;
     this.loadMap();
   }
+
+  makeABid() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+    this.bidService.createBid(this.delivery.id, this.bidPrice).then(data => {
+      loading.dismiss();
+    });;
+  } 
 
 
   ionViewLoaded(){
