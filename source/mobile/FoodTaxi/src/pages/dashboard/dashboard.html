@@ -41,4 +41,17 @@
       </table>
     </ion-item>
   </ion-list>
+  <div class="profile">
+   <table class="profile-table">
+        <tr class="order-table-row">
+          <td class="profile-table-row-part50 ">
+            <h2>Name:</h2>
+            <h4  *ngIf="profile">{{profile.firstName}} {{profile.lastName}}</h4>
+          </td>
+          <td class="profile-table-row-part50 ">
+            <h2>Plate:</h2>
+            <h4 *ngIf="profile">{{profile.cabPlateNumber}}</h4>
+        </tr>
+      </table>
+  </div>
 </ion-content>

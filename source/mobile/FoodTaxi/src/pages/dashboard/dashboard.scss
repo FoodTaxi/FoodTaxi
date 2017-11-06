@@ -16,6 +16,10 @@ page-dashboard {
 		width:20%;
 	}
 
+	.profile-table-row-part50 {
+		width:50%;
+	}
+
 	.order-table-row-part10 {
 		width:10%;
 	}
@@ -26,5 +30,15 @@ page-dashboard {
 
 	.order-table {
 		width: 100%;
+	}
+
+	.profile-table {
+		width: 100%;
+	}
+	.profile {
+		width: 100%;
+		height: 30px;
+		position: fixed;
+		bottom: 40px;
 	}
 }
