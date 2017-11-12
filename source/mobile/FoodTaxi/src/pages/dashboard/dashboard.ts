@@ -4,28 +4,28 @@ import { ModalController, NavController } from 'ionic-angular';
 import {BidService} from '../../providers/bid-service';
 import {DeliveryService} from '../../providers/delivery-service';
 import {Delivery} from '../delivery/delivery';
-import {Login} from '../login/login';
+import { DriverService } from '../../providers/driver-service';
 
 
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html',
-  providers: [BidService,DeliveryService]
+  providers: [BidService, DeliveryService, DriverService]
 })
 export class Dashboard {
   public deliveries: any;
-  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public deliveryService: DeliveryService) {
-    // this.presentLogineModal();
+  public profile: any;
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public deliveryService: DeliveryService,
+    public driverService: DriverService) {
     this.loadDeliveries();
+    this.loadProfile();
   }
 
-  presentLogineModal() {
-    let loginModal = this.modalCtrl.create(Login);
-
-    loginModal.onDidDismiss(data => {
-      this.loadDeliveries();
-    });
-    loginModal.present();
+  loadProfile() {
+    this.driverService.getProfile()
+    .then(data => {
+      this.profile = data;
+    })
   }
 
   loadDeliveries(){
@@ -36,7 +36,6 @@ export class Dashboard {
   }
 
   openDelivery(delivery) {
-    // That's right, we're pushing to ourselves!
     this.navCtrl.push(Delivery, {
       delivery: delivery
     });

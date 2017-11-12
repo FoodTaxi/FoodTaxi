@@ -45,8 +45,6 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
       this.loginService.isTokenSaved().then(saved => {
-        console.log('tuk');
-        console.log(saved);
         if(!saved) {
           this.presentLogineModal();
         } else {

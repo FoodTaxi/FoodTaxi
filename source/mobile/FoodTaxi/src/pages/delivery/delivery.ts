@@ -53,12 +53,7 @@ export class Delivery {
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
-      console.log('map');
-      // console.log(this.map);
-      // console.log(this.mapElement);
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      console.log('map');
-      // console.log(this.map);
     }, (err) => {
       console.log('error- >>> ')
       console.log(err);
