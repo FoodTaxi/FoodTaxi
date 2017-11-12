@@ -16,8 +16,6 @@ export class DriverService {
       this.authHttp.get(AppSettings.API_ENDPOINT + '/private/driver/me')
        .map(res => res.json())
        .subscribe(data => {
-          console.log(data);
-          console.log("in driver me -->");
           resolve(data);
         });
     });
