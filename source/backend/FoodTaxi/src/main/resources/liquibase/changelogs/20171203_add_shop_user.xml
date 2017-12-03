@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Dimitar Petkov (generated)" id="1512302550150-1">
+        <createTable tableName="T_SHOP_USER">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(255)"/>
+            <column name="LAST_NAME" type="VARCHAR(255)"/>
+            <column name="PASSWORD" type="VARCHAR(255)"/>
+            <column name="REGISTER_DATE" type="datetime"/>
+            <column name="USERNAME" type="VARCHAR(255)"/>
+            <column name="CLIENT_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Dimitar Petkov (generated)" id="1512302550150-2">
+        <addPrimaryKey columnNames="id" constraintName="T_SHOP_USERPK" tableName="T_SHOP_USER"/>
+    </changeSet>
+    <changeSet author="Dimitar Petkov (generated)" id="1512302550150-3">
+        <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="T_SHOP_USER" constraintName="FK_7o8qlfaqf8l8ajyo3t8eysu58" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="T_CLIENT"/>
+    </changeSet>
+</databaseChangeLog>
