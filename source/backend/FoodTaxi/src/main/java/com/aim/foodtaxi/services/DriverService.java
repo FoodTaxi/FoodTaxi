@@ -59,4 +59,18 @@ public class DriverService {
         }
         return null;
     }
+    
+    @Transactional(readOnly=false)
+    public void updateLocation(String username, double lat, double lng){
+    	Optional<DriverEntity> entity = driverRepository.findOneByUsername(username);
+    	
+    	if(!entity.isPresent()){
+    		throw new RuntimeException("No driver with username: "+username);
+    	}
+    	DriverEntity driver = entity.get();
+    	driver.setLatitude(lat);
+    	driver.setLongitude(lng);
+    	driver.setLastLocationUpdate(new Date());
+    	driverRepository.save(driver);
+    }
 }

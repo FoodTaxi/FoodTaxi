@@ -32,12 +32,12 @@ public class DeliveryController {
 	private DriverService driverService;
 
 	@PreAuthorize("hasAuthority('driver')")
-	@RequestMapping(value = "/open", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/driver", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-	public ResponseEntity<List<Delivery>> getOpenDeliveries(@RequestHeader(value = "authorization") String authString, @ApiIgnore Principal principal){
+	public ResponseEntity<List<Delivery>> getDeliveries(@RequestHeader(value = "authorization") String authString, @ApiIgnore Principal principal){
 		try{
 			Driver driver = driverService.getDriverByUsername(principal.getName());
-			List<Delivery> resp = deliveryService.getOpenDeliveriesByDriver(driver.getId());
+			List<Delivery> resp = deliveryService.getDeliveriesByDriver(driver.getId());
 			return new ResponseEntity<List<Delivery>>(resp, HttpStatus.OK);
 		} catch(Exception e){
 			e.printStackTrace();

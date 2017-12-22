@@ -9,4 +9,5 @@
 		<sqlFile path="liquibase/changelogs/tables_mysql_innodb.sql" splitStatements="true" stripComments="true"/>	
 	</changeSet>
 	<include file="changelogs/20171203_add_shop_user.xml" relativeToChangelogFile="true"/>
+	<include file="changelogs/20171217_add_driver_location.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

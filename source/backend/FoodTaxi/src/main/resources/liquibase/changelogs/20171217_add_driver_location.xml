@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="dimitar.petkov (generated)" id="1513935053298-1">
+        <addColumn tableName="T_DRIVER">
+            <column name="LAST_LOC_UPD" type="datetime"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1513935053298-2">
+        <addColumn tableName="T_DRIVER">
+            <column name="LAT" type="double precision"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="dimitar.petkov (generated)" id="1513935053298-3">
+        <addColumn tableName="T_DRIVER">
+            <column name="LNG" type="double precision"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
