@@ -1,7 +1,9 @@
 package com.aim.foodtaxi.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,25 +25,31 @@ public class DeliveryService {
 	@Autowired
 	private DeliveryMapper deliveryMapper;
 
-	public List<Delivery> getOpenDeliveriesByDriver(Long driverId) {
+	public List<Delivery> getDeliveriesByDriver(Long driverId) {
 		List<Delivery> resp = new ArrayList<>();
 
 		List<DeliveryEntity> winningDelivery = deliveryRepo.getOpenDeliveriesByDriverWinningBids(driverId);
 		if (winningDelivery != null && !winningDelivery.isEmpty()) {
 			resp = deliveryMapper.deliveryEntitiesToDeliveries(winningDelivery);
 		} else {
-			List<DeliveryEntity> deliveries = deliveryRepo.getAllByStatus(DeliveryStatus.BIDDING);
-			if (deliveries != null && !deliveries.isEmpty()) {
-				resp = deliveryMapper.deliveryEntitiesToDeliveries(deliveries);
+			Optional<DeliveryEntity> activeDelivery = deliveryRepo.findOneByDriverIdAndStatusIn(driverId,
+					Arrays.asList(DeliveryStatus.PICKING_UP, DeliveryStatus.DELIVERY));
+			if(activeDelivery.isPresent()){
+				resp.add(deliveryMapper.deliveryEntityToDelivery(activeDelivery.get()));
+			}else{
+				List<DeliveryEntity> deliveries = deliveryRepo.getAllByStatus(DeliveryStatus.BIDDING);
+				if (deliveries != null && !deliveries.isEmpty()) {
+					resp = deliveryMapper.deliveryEntitiesToDeliveries(deliveries);
+				}
 			}
 		}
 		return resp;
 	}
 
-	@Transactional(readOnly=false)
+	@Transactional(readOnly = false)
 	public void closeBidding(long deliveryId) {
 		DeliveryEntity delivery = deliveryRepo.getOne(deliveryId);
-		if(delivery.getBestBid() != null) {
+		if (delivery.getBestBid() != null) {
 			delivery.setStatus(DeliveryStatus.PICKING_UP);
 			delivery.setDriver(delivery.getBestBid().getDriver());
 		} else {

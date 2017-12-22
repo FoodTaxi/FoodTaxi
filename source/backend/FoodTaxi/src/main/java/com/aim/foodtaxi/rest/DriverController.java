@@ -40,10 +40,13 @@ public class DriverController {
 		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
+	@RequestMapping(value = "/location", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
 	public ResponseEntity<?> updateLocation(@RequestHeader(value = "authorization") String authString,
 			@ApiIgnore Principal principal, @RequestParam(name = "lat", required = true) double lat,
 			@RequestParam(name = "lng", required = true) double lng) {
 
-		return null;
+		driverService.updateLocation(principal.getName(), lat, lng);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

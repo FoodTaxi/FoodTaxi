@@ -70,6 +70,15 @@ public class DriverEntity {
 	@Column(name="IMAGE_PATH")
     private String imagePath;
 	
+	@Column(name="LAT")
+	private Double latitude;
+	
+	@Column(name="LNG")
+	private Double longitude;
+	
+	@Column(name="LAST_LOC_UPD")
+	private Date lastLocationUpdate;
+	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="driver")
 	List<DeliveryEntity> deliveries;
 }
