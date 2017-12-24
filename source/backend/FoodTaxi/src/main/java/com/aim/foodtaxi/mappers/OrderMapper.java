@@ -20,7 +20,10 @@ public interface OrderMapper {
 		@Mapping(source = "brand.id", target = "brandId"),
 		@Mapping(source = "client.id", target = "clientId"),
 		@Mapping(source = "shop.id", target = "shopId"),
-		@Mapping(source = "shop.addressText", target = "shopAddressText") })
+		@Mapping(source = "shop.addressText", target = "shopAddressText"),
+		@Mapping(source = "delivery.status", target = "deliveryStatus"),
+		@Mapping(source = "delivery.pin", target = "pin")
+	})
 	public Order orderEntityToOrder(OrderEntity orderEntity);
 
 	

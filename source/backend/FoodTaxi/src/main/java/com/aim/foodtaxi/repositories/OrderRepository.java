@@ -1,5 +1,6 @@
 package com.aim.foodtaxi.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,9 +11,8 @@ import com.aim.foodtaxi.enums.OrderStatus;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
-	List<OrderEntity> getAllByStatusAndShop(OrderStatus awaitingConfirmation, ShopEntity shop);
-
-//    Optional<OrderEntity> findOneById(Long orderId);
-//
-//    List<OrderEntity> findAllByDriverIsNull();
+	List<OrderEntity> getAllByShopAndStatus(ShopEntity shop, OrderStatus status);
+	
+	List<OrderEntity> getAllByShopAndStatusInAndDeliveryDueDateGreaterThan(ShopEntity shop, List<OrderStatus> statuses, Date date);
+	
 }

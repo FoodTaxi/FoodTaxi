@@ -1,6 +1,8 @@
 package com.aim.foodtaxi.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -126,13 +128,17 @@ public class OrderService {
 		return bestShop;
 	}
 
-	public List<Order> getOrdersForConfirmation(long shopId) {
+	public List<Order> getShopOrders(long shopId) {
 
 		ShopEntity shop = shopRepository.findOne(shopId);
 		if (shop == null) {
 			throw new RuntimeException("No shop found for id: " + shopId);
 		}
-		List<OrderEntity> orders = orderRepository.getAllByStatusAndShop(OrderStatus.AWAITING_CONFIRMATION, shop);
+		List<OrderEntity> orders = new ArrayList<>();
+		orders.addAll(orderRepository.getAllByShopAndStatus(shop, OrderStatus.AWAITING_CONFIRMATION));
+		Calendar pastSixHOurs = Calendar.getInstance();
+		pastSixHOurs.add(Calendar.HOUR, -6);
+		orders.addAll(orderRepository.getAllByShopAndStatusInAndDeliveryDueDateGreaterThan(shop, Arrays.asList(OrderStatus.IN_DELIVERY, OrderStatus.DELIVERED, OrderStatus.NOT_DELIVERED), pastSixHOurs.getTime()));
 		List<Order> resp = new ArrayList<>();
 
 		if (orders != null && !orders.isEmpty()) {
