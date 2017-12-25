@@ -20,7 +20,7 @@ public class PublicController {
 	@Autowired
 	private DriverService driverService;
 
-	@RequestMapping(value = "/driver/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> driverLogin(@RequestBody(required = true) AccountCredentials credentials) {
 		return null;
 	}
