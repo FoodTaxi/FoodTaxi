@@ -17,12 +17,14 @@ export class DeliveryService {
     	return Promise.resolve(this.data);
   	}
   	return new Promise(resolve => {
-    	this.authHttp.get(AppSettings.API_ENDPOINT + '/private/delivery/open')
+    	this.authHttp.get(AppSettings.API_ENDPOINT + '/private/delivery/driver')
       .map(res => res.json())
      	.subscribe(data => {
         	this.data = data;
         	resolve(this.data);
-      	});
+      	}, err => {
+          console.log(err);
+        });
   	});
   }
 }
