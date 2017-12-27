@@ -138,7 +138,10 @@ public class OrderService {
 		orders.addAll(orderRepository.getAllByShopAndStatus(shop, OrderStatus.AWAITING_CONFIRMATION));
 		Calendar pastSixHOurs = Calendar.getInstance();
 		pastSixHOurs.add(Calendar.HOUR, -6);
-		orders.addAll(orderRepository.getAllByShopAndStatusInAndDeliveryDueDateGreaterThan(shop, Arrays.asList(OrderStatus.IN_DELIVERY, OrderStatus.DELIVERED, OrderStatus.NOT_DELIVERED), pastSixHOurs.getTime()));
+		orders.addAll(orderRepository.getAllByShopAndStatusInAndDeliveryDueDateGreaterThan(shop,
+				Arrays.asList(OrderStatus.CONFIRMED, OrderStatus.IN_DELIVERY, OrderStatus.DELIVERED,
+						OrderStatus.NOT_DELIVERED),
+				pastSixHOurs.getTime()));
 		List<Order> resp = new ArrayList<>();
 
 		if (orders != null && !orders.isEmpty()) {
