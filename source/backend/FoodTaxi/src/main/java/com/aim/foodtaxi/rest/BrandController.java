@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aim.foodtaxi.dto.Brand;
@@ -28,12 +27,4 @@ public class BrandController {
         brandService.createBrand(brand);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
-//
-//    @RequestMapping(value = "/brand", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> getBrand(@RequestHeader(value = "authorization") String authString,
-//            @RequestParam Long brandId) {
-//        Brand brand = brandService.getBrandById(brandId);
-//        return new ResponseEntity<>(brand, HttpStatus.OK);
-//    }
-
 }

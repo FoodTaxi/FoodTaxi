@@ -172,4 +172,14 @@ public class OrderService {
 			// TODO find new shop
 		}
 	}
+
+	@Transactional(readOnly=false)
+	public void handOver(long orderId) {
+		OrderEntity order = orderRepository.getOne(orderId);
+		DeliveryEntity delivery = order.getDelivery();
+		delivery.setStatus(DeliveryStatus.DELIVERY);
+		order.setStatus(OrderStatus.IN_DELIVERY);
+		deliveryRepository.save(delivery);
+		orderRepository.save(order);
+	}
 }
