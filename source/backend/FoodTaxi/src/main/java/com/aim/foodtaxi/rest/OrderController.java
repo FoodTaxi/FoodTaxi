@@ -1,5 +1,6 @@
 package com.aim.foodtaxi.rest;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +22,8 @@ import com.aim.foodtaxi.dto.CreateOrder;
 import com.aim.foodtaxi.dto.Order;
 import com.aim.foodtaxi.services.OrderService;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 @RestController
 @RequestMapping("/api/private/order")
 public class OrderController {
@@ -41,28 +44,38 @@ public class OrderController {
 
 	@PreAuthorize("hasAuthority('shop')")
 	@RequestMapping(value = "/shop", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Order>> getOrdersForShop(
-			@RequestHeader(value = "authorization") String authString, @RequestParam("sid")long shopId) {
+	public ResponseEntity<List<Order>> getOrdersForShop(@RequestHeader(value = "authorization") String authString,
+			@RequestParam("sid") long shopId) {
 		List<Order> respList = null;
-		try{
+		try {
 			respList = orderService.getShopOrders(shopId);
 			return new ResponseEntity<List<Order>>(respList, HttpStatus.OK);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@PreAuthorize("hasAuthority('shop')")
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> confirmOrder(@RequestHeader(value = "authorization") String authString, @RequestBody ConfirmOrder confirmOrderInput) {
-		
+	public ResponseEntity<?> confirmOrder(@RequestHeader(value = "authorization") String authString,
+			@RequestBody ConfirmOrder confirmOrderInput) {
+
 		try {
-			orderService.confirmOrder(confirmOrderInput.getOrderId(), confirmOrderInput.isConfirmed(), confirmOrderInput.getCompletionMinutes());
+			orderService.confirmOrder(confirmOrderInput.getOrderId(), confirmOrderInput.isConfirmed(),
+					confirmOrderInput.getCompletionMinutes());
 			return new ResponseEntity<>(HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	
+	@PreAuthorize("hasAuthority('shop')")
+	@RequestMapping(value = "/handover", method = RequestMethod.POST)
+	public ResponseEntity<?> handOverToDelivery(@RequestHeader(value = "authorization") String authString, @ApiIgnore Principal principal, @RequestParam(name="oid", required=true) long orderId) {
+		orderService.handOver(orderId);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
