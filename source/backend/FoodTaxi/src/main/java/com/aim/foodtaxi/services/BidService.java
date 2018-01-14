@@ -49,6 +49,12 @@ public class BidService {
 		}
 		DeliveryEntity savedDelivery = deliveryEntity.get();
 
+		// check double bidding
+		if (savedDelivery.getBestBid() != null
+				&& savedDelivery.getBestBid().getDriver().getUsername().equals(driverEntity.get().getUsername())) {
+			return deliveryMapper.deliveryEntityToDelivery(savedDelivery);
+		}
+
 		bidEntity.setDriver(driverEntity.get());
 		bidEntity.setDelivery(savedDelivery);
 		bidEntity.setActive(true);
