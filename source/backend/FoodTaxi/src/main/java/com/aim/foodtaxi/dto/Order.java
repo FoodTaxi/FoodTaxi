@@ -17,6 +17,7 @@ public class Order {
     private Long id;
     private OrderStatus status;
     private Date orderDate;
+    private Date pickupDate;
     private Double price;
     private String itemDescription;
     private Long brandId;

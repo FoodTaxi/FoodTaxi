@@ -1,5 +1,7 @@
 package com.aim.foodtaxi.services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -157,6 +159,8 @@ public class OrderService {
 			order.setStatus(OrderStatus.CONFIRMED);
 			DeliveryEntity delivery = order.getDelivery();
 			if (completionMinutes != null && completionMinutes > 0) {
+				order.setPickupDate(Date.from(
+						LocalDateTime.now().plusMinutes(completionMinutes).atZone(ZoneId.systemDefault()).toInstant()));
 				// TODO schedule to open bidding of delivery in "n" minutes
 			}
 			delivery.setStatus(DeliveryStatus.BIDDING);
@@ -173,11 +177,12 @@ public class OrderService {
 		}
 	}
 
-	@Transactional(readOnly=false)
+	@Transactional(readOnly = false)
 	public void handOver(long orderId) {
 		OrderEntity order = orderRepository.getOne(orderId);
 		DeliveryEntity delivery = order.getDelivery();
 		delivery.setStatus(DeliveryStatus.DELIVERY);
+		delivery.setPickedupDate(new Date());
 		order.setStatus(OrderStatus.IN_DELIVERY);
 		deliveryRepository.save(delivery);
 		orderRepository.save(order);

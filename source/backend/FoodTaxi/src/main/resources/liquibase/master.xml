@@ -10,4 +10,5 @@
 	</changeSet>
 	<include file="changelogs/20171203_add_shop_user.xml" relativeToChangelogFile="true"/>
 	<include file="changelogs/20171217_add_driver_location.xml" relativeToChangelogFile="true"/>
+	<include file="changelogs/20180115_add_pickup_dates.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

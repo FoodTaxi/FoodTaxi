@@ -1,7 +1,10 @@
 package com.aim.foodtaxi.services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +61,12 @@ public class DeliveryService {
 		if (delivery.getBestBid() != null) {
 			delivery.setStatus(DeliveryStatus.PICKING_UP);
 			delivery.setDriver(delivery.getBestBid().getDriver());
+			Date tenMinLater = Date.from(LocalDateTime.now().plusMinutes(10).atZone(ZoneId.systemDefault()).toInstant());
+			if(delivery.getOrder().getPickupDate().before(tenMinLater)){
+				delivery.setPickupDueDate(tenMinLater);
+			} else {
+				delivery.setPickupDueDate(delivery.getOrder().getPickupDate());
+			}
 		} else {
 			delivery.setStatus(DeliveryStatus.ESCALATED_BID);
 		}

@@ -68,6 +68,12 @@ public class DeliveryEntity {
     @Column(name = "DUE_DATE")
     private Date dueDate;
     
+    @Column(name = "PICKUP_DUE_DATE")
+    private Date pickupDueDate;
+    
+    @Column(name = "PICKEDUP_DATE")
+    private Date pickedupDate;
+    
     @OneToOne(optional = false, fetch=FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private OrderEntity order;
