@@ -65,6 +65,9 @@ public class OrderEntity {
 	@Column(name = "ORDER_DATE", nullable=false)
 	private Date orderDate;
 	
+	@Column(name = "PICKUP_DATE", nullable=true)
+	private Date pickupDate;
+	
 	@Column(name = "ORDER_VALUE", nullable=false)
     private BigDecimal orderValue;
 }
