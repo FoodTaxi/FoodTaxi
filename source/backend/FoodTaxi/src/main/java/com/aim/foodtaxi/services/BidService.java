@@ -1,6 +1,7 @@
 package com.aim.foodtaxi.services;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -48,6 +49,12 @@ public class BidService {
 			throw new EntityNotFoundException("Driver and/or delivery do not exists!");
 		}
 		DeliveryEntity savedDelivery = deliveryEntity.get();
+
+		// check double bidding
+		List<DeliveryEntity> winningDelivery = deliveryRepository.getOpenDeliveriesByDriverWinningBids(driverEntity.get().getId());
+		if (winningDelivery != null && winningDelivery.size() > 0) {
+			return deliveryMapper.deliveryEntityToDelivery(savedDelivery);
+		}
 
 		bidEntity.setDriver(driverEntity.get());
 		bidEntity.setDelivery(savedDelivery);
