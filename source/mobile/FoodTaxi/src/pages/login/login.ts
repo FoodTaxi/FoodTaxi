@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import { ViewController, LoadingController } from 'ionic-angular';
+import { ViewController, LoadingController, NavController } from 'ionic-angular';
 import { LoginService } from '../../providers/login-service';
+import { Dashboard } from '../dashboard/dashboard';
 
 @Component({
   selector: 'page-login',
@@ -9,27 +10,32 @@ import { LoginService } from '../../providers/login-service';
   providers: [LoginService]
 })
 export class Login {
-  public authenticated = false;
-  constructor(public viewCtrl: ViewController, public loadingCtrl: LoadingController, public loginService: LoginService) {
+	username:string;
+    password:string;
+
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController, public loadingCtrl: LoadingController, public loginService: LoginService) {
   }
 
-  login(username, password) {
+  login() {
 
 	let loading = this.loadingCtrl.create({
 		content: 'Please wait...'
 	});
 
 	loading.present();
-	this.loginService.login(username, password)
+	this.loginService.login(this.username, this.password)
 		.then(data => {
-			this.authenticated = true;
 			loading.dismiss();
-			this.viewCtrl.dismiss(data);
+			this.navCtrl.setRoot(Dashboard);
+			// this.navCtrl.popToRoot();
 		}, err => {
-			this.authenticated = false;
 			console.log(err);
 			alert(JSON.parse(err._body).message);
 			loading.dismiss();
 		});
+  }
+
+  onLogin() {
+
   }
 }

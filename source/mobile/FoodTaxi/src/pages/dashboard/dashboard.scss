@@ -2,26 +2,29 @@ page-dashboard {
 	.brand-icon {
 		width:50px;
 		height:50px;
+		display: block;
+	}
+	.dashboard-col {
+		height: 100px;
+	}
+	.gird-action-button {
+		bottom: 0;
+		position: absolute;	
+		width: 100%;
+		display:  block;
 	}
 
-	.order-row {
-		background-color: rgb(242, 242, 242);
+	.sub-row {
+		display: block;
+		width: 100%;
+	}
+	
+	.span-left {
+		float: left;
 	}
 
-	.order-table-row {
-		width:100%;
-	}
-
-	.order-table-row-part20 {
-		width:20%;
-	}
-
-	.profile-table-row-part50 {
-		width:50%;
-	}
-
-	.order-table-row-part10 {
-		width:10%;
+	.span-right {
+		float: right;
 	}
 
 	.order-table-row>td>h2, .order-table-row>td>h4 {
@@ -39,6 +42,7 @@ page-dashboard {
 		width: 100%;
 		height: 30px;
 		position: fixed;
-		bottom: 40px;
+		bottom: 50px;
+		margin: 20px;
 	}
 }

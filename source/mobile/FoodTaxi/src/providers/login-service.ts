@@ -17,10 +17,12 @@ export class LoginService {
 
   isTokenSaved() {
     return this.storage.get('token').then(token => {
+             console.log('mega greda');
       if (token && token.length > 0) {
         console.log(token);
         return true;
       }
+             console.log('greda brat');
       return false;
     });
   }
@@ -30,10 +32,6 @@ export class LoginService {
   }
 
   login(username, password) {
-  	if (this.data) {
-    	// already loaded data
-    	return Promise.resolve(this.data);
-  	}
     console.log('username ' + username + ' password ' + password);
     var credenials = JSON.stringify({"username": username,"password": password});
 

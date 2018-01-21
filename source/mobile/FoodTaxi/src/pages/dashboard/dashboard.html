@@ -1,57 +1,71 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+ <!--    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button> -->
     <ion-title>Dashboard</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h4>Active Deliveries</h4>
   <ion-list>
-    <ion-item class="order-row" *ngFor="let delivery of deliveries" (click)="openDelivery(delivery)">
-      <table>
-        <tr class="order-table-row">
-          <td class="order-table-row-part10">
-            <img class="brand-icon" [src] = "delivery.brandLogoPath"/>
-          </td>
-          <td class="order-table-row-part20">
-            <h2>From:</h2>
-            <h4>{{delivery.startAddressText}}</h4>
-          </td>
-          <td class="order-table-row-part20">
-            <h2>To:</h2>
-            <h4>{{delivery.endAddressText}}</h4>
-          </td>
-          <td class="order-table-row-part10">
-            <h2 >Current Bid:</h2>
-            <h4 *ngIf="delivery.bestBidAmount">{{ delivery.bestBidAmount }}</h4>
-            <h4 *ngIf="!delivery.bestBidAmount">No bid</h4>
-          </td>
-          <td class="order-table-row-part20">
-            <h2>Holder:</h2>
-            <h4 *ngIf="delivery.bestBidAmount">{{delivery.bestBidDriverId || ""}}</h4>
-            <h4 *ngIf="!delivery.bestBidAmount">No bid</h4>
-          </td>
-          <td class="order-table-row-part20">
-            <h2>Time Left:</h2>
-          </td>
-        </tr>
-      </table>
+    <ion-item *ngFor="let delivery of deliveries">
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col class="dashboard-col">
+            <p><img class="brand-icon" src="http://cdn.playbuzz.com/cdn/6e3a4963-ba68-4989-8161-f9ed4f139813/deacc6ca-1cab-4a16-87c5-b7c5a959724a.jpg"/></p>
+            <div class="gird-action-button">
+              <button ion-button (click)="openDelivery(delivery)">Поръчка</button>
+            </div>
+          </ion-col>
+          <ion-col class="dashboard-col">
+            <p>от: {{delivery.startAddressText}}</p>
+            <div class="gird-action-button">
+              <button ion-button (click)="openShopMap(delivery)">Виж Карта</button>
+            </div>
+          </ion-col>
+          <ion-col class="dashboard-col">
+            <p>за: {{delivery.endAddressText}}</p>
+            <div class="gird-action-button">
+            <button ion-button (click)="openClientMap(delivery)">Виж Карта</button>
+            </div>
+          </ion-col>
+          <ion-col col-5 class="dashboard-col">
+            <p *ngIf="delivery.bestBidAmount" class="sub-row">Печели: {{ delivery.bestBidDriverName}}</p>
+            <p *ngIf="!delivery.bestBidAmount" class="sub-row">Печели: ...</p>
+            <p class="sub-row">
+              <span class="span-left">Остава  Време!!!</span>
+              <span *ngIf="delivery.bestBidAmount" class="span-right">Бид {{ currentBidPrice(delivery) }} лв.</span>
+              <span *ngIf="!delivery.bestBidAmount" class="span-right">Няма бид</span>
+            </p>
+            <div class="gird-action-button sub-row">
+              <span class="span-left">
+                <button ion-button disabled > {{ newBidPrice(delivery) }} </button>
+              </span>
+              <span class="span-right">
+                <button ion-button>Предложи</button>
+              </span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </ion-list>
   <div class="profile">
-   <table class="profile-table">
-        <tr class="order-table-row">
-          <td class="profile-table-row-part50 ">
-            <h2>Name:</h2>
-            <h4  *ngIf="profile">{{profile.firstName}} {{profile.lastName}}</h4>
-          </td>
-          <td class="profile-table-row-part50 ">
-            <h2>Plate:</h2>
-            <h4 *ngIf="profile">{{profile.cabPlateNumber}}</h4>
-        </tr>
-      </table>
+   <ion-grid class="profile-table">
+        <ion-row justify-content-center>
+          <ion-col>
+            <p>Name:</p>
+            <p  *ngIf="profile">{{profile.firstName}} {{profile.lastName}}</p>
+          </ion-col>
+          <ion-col>
+            <p>Plate:</p>
+            <p *ngIf="profile">{{profile.cabPlateNumber}}</p>
+          </ion-col>
+          <ion-col>
+              <button  ion-button (click)="logout()">Logout</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </div>
 </ion-content>

@@ -2,25 +2,28 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, ModalController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { Dashboard } from '../pages/dashboard/dashboard';
+
 import { Page2 } from '../pages/page2/page2';
 import { Login } from '../pages/login/login';
+import { Dashboard } from '../pages/dashboard/dashboard';
 import { LoginService } from '../providers/login-service';
+import { DriverService } from '../providers/driver-service';
+
 
 @Component({
   templateUrl: 'app.html',
-  providers: [LoginService]
+  providers: [LoginService, DriverService]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = Dashboard;
+  rootPage: any = Login;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public modalCtrl: ModalController, public loginService: LoginService) {
+  constructor(public platform: Platform, public modalCtrl: ModalController, public loginService: LoginService, public driverService: DriverService) {
     this.initializeApp();
 
+    
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Active Bids', component: Dashboard },
@@ -29,27 +32,19 @@ export class MyApp {
 
   }
 
-   presentLogineModal() {
-    let loginModal = this.modalCtrl.create(Login);
-
-    loginModal.onDidDismiss(data => {
-      this.nav.setRoot(Dashboard);
-    });
-    loginModal.present();
-  }
-
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      Splashscreen.hide();
-      this.loginService.isTokenSaved().then(saved => {
-        if(!saved) {
-          this.presentLogineModal();
-        } else {
-          this.nav.setRoot(Dashboard);
-        }
+
+      this.driverService.getProfile().then(data => {
+      
+         this.nav.setRoot(Dashboard);
+         Splashscreen.hide();
+      })
+      .catch( error => {
+        Splashscreen.hide();
       });
     });
   }
@@ -62,6 +57,6 @@ export class MyApp {
 
   logout() {
     this.loginService.cleanTheToken();
-    this.presentLogineModal();
+    this.nav.setRoot(Login);
   }
 }

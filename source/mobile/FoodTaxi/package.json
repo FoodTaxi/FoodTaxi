@@ -19,10 +19,21 @@
     "@angular/platform-browser": "2.4.8",
     "@angular/platform-browser-dynamic": "2.4.8",
     "@angular/platform-server": "2.4.8",
+    "@ionic-native/core": "^4.5.2",
+    "@ionic-native/geolocation": "^4.5.2",
+    "@ionic-native/google-maps": "^4.5.2",
     "@ionic/storage": "2.0.0",
     "angular2-jwt": "0.2.3",
+    "cordova-android": "^7.0.0",
+    "cordova-plugin-console": "1.0.5",
+    "cordova-plugin-device": "1.1.4",
+    "cordova-plugin-inappbrowser": "~1.7.1",
+    "cordova-plugin-splashscreen": "~4.0.1",
+    "cordova-plugin-statusbar": "2.2.1",
+    "cordova-plugin-whitelist": "1.3.1",
     "ionic-angular": "2.2.0",
     "ionic-native": "2.0.0",
+    "ionic-plugin-keyboard": "~2.2.1",
     "ionicons": "3.0.0",
     "rxjs": "5.0.1",
     "sw-toolbox": "3.4.0",
@@ -32,7 +43,7 @@
     "@ionic/app-scripts": "1.1.4",
     "typescript": "2.0.9"
   },
-   "cordovaPlugins": [
+  "cordovaPlugins": [
     "cordova-plugin-inappbrowser",
     "cordova-plugin-whitelist",
     "cordova-plugin-console",
@@ -40,13 +51,26 @@
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
     "ionic-plugin-keyboard",
-
     {
-      "locator":"https://github.com/mapsplugin/cordova-plugin-googlemaps.git",
+      "locator": "https://github.com/mapsplugin/cordova-plugin-googlemaps.git",
       "variables": {
-        "API_KEY_FOR_ANDROID":"AIzaSyCbim9YFurUdAGfQSNmyC_lveY1HeOKV-M",
-        "API_KEY_FOR_IOS":"AIzaSyCbim9YFurUdAGfQSNmyC_lveY1HeOKV-M"
+        "API_KEY_FOR_ANDROID": "AIzaSyCbim9YFurUdAGfQSNmyC_lveY1HeOKV-M",
+        "API_KEY_FOR_IOS": "AIzaSyCbim9YFurUdAGfQSNmyC_lveY1HeOKV-M"
       }
     }
-  ]
+  ],
+  "cordova": {
+    "plugins": {
+      "ionic-plugin-keyboard": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-console": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-inappbrowser": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
 }

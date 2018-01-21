@@ -21,6 +21,8 @@ export class DeliveryService {
       .map(res => res.json())
      	.subscribe(data => {
         	this.data = data;
+          console.log(data);
+          console.log("dasda");
         	resolve(this.data);
       	}, err => {
           console.log(err);
