@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -80,6 +79,7 @@ public class OrderService {
 		orderEntity.setClient(clientEntity);
 		orderEntity.setBrand(brandEntity);
 		orderEntity.setOrderDate(new Date());
+		orderEntity.setDueDate(order.getDueDate());
 		orderEntity.setStatus(OrderStatus.AWAITING_CONFIRMATION);
 		orderEntity.setOrderValue(order.getOrderValue());
 		orderEntity.setShop(findBestShop(order, brandEntity));
@@ -137,13 +137,8 @@ public class OrderService {
 			throw new RuntimeException("No shop found for id: " + shopId);
 		}
 		List<OrderEntity> orders = new ArrayList<>();
-		orders.addAll(orderRepository.getAllByShopAndStatus(shop, OrderStatus.AWAITING_CONFIRMATION));
-		Calendar pastSixHOurs = Calendar.getInstance();
-		pastSixHOurs.add(Calendar.HOUR, -6);
-		orders.addAll(orderRepository.getAllByShopAndStatusInAndDeliveryDueDateGreaterThan(shop,
-				Arrays.asList(OrderStatus.CONFIRMED, OrderStatus.IN_DELIVERY, OrderStatus.DELIVERED,
-						OrderStatus.NOT_DELIVERED),
-				pastSixHOurs.getTime()));
+		orders.addAll(orderRepository.getAllByShopAndStatusIn(shop,
+				Arrays.asList(OrderStatus.AWAITING_CONFIRMATION, OrderStatus.CONFIRMED)));
 		List<Order> resp = new ArrayList<>();
 
 		if (orders != null && !orders.isEmpty()) {
