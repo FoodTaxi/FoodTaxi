@@ -11,4 +11,8 @@
 	<include file="changelogs/20171203_add_shop_user.xml" relativeToChangelogFile="true"/>
 	<include file="changelogs/20171217_add_driver_location.xml" relativeToChangelogFile="true"/>
 	<include file="changelogs/20180115_add_pickup_dates.xml" relativeToChangelogFile="true"/>
+	<changeSet id="table_collation" author="dimitar.petkov" dbms="mysql">
+		<sqlFile path="liquibase/changelogs/change_table_collation.sql" splitStatements="true" stripComments="true"/>	
+	</changeSet>
+	<include file="changelogs/20180121_add_orderDueDate.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

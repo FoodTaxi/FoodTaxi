@@ -1,6 +1,5 @@
 package com.aim.foodtaxi.repositories;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +12,5 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
 	List<OrderEntity> getAllByShopAndStatus(ShopEntity shop, OrderStatus status);
 	
-	List<OrderEntity> getAllByShopAndStatusInAndDeliveryDueDateGreaterThan(ShopEntity shop, List<OrderStatus> statuses, Date date);
-	
+	List<OrderEntity> getAllByShopAndStatusIn(ShopEntity shop, List<OrderStatus> status);
 }

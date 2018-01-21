@@ -65,6 +65,9 @@ public class OrderEntity {
 	@Column(name = "ORDER_DATE", nullable=false)
 	private Date orderDate;
 	
+	@Column(name = "DUE_DATE", nullable=false)
+	private Date dueDate;
+	
 	@Column(name = "PICKUP_DATE", nullable=true)
 	private Date pickupDate;
 	
