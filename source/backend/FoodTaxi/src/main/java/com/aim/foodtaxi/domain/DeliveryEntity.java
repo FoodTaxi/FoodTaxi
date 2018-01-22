@@ -74,6 +74,12 @@ public class DeliveryEntity {
     @Column(name = "PICKEDUP_DATE")
     private Date pickedupDate;
     
+    @Column(name = "EXPECTED_BID_END")
+    private Date expectedBidEnd;
+    
+    @Column(name = "ACTUAL_BID_END")
+    private Date actualBidEnd;
+    
     @OneToOne(optional = false, fetch=FetchType.LAZY)
     @JoinColumn(name = "ORDER_ID")
     private OrderEntity order;

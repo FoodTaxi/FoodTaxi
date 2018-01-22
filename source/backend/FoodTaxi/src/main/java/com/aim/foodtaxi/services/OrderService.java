@@ -36,6 +36,8 @@ import com.aim.foodtaxi.repositories.ShopRepository;
 @Transactional
 public class OrderService {
 
+	private final static short BID_MINUTES = 5;
+
 	@Autowired
 	private OrderRepository orderRepository;
 
@@ -159,10 +161,12 @@ public class OrderService {
 				// TODO schedule to open bidding of delivery in "n" minutes
 			}
 			delivery.setStatus(DeliveryStatus.BIDDING);
+			delivery.setExpectedBidEnd(
+					Date.from(LocalDateTime.now().plusMinutes(BID_MINUTES).atZone(ZoneId.systemDefault()).toInstant()));
 			deliveryRepository.save(delivery);
 			orderRepository.save(order);
 			try {
-				schedulerService.scheduleBidExpiration(delivery.getId());
+				schedulerService.scheduleBidExpiration(delivery.getId(), (short) 5);
 			} catch (SchedulerException e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);

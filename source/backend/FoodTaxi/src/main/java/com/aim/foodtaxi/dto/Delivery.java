@@ -26,6 +26,7 @@ public class Delivery {
 	private Date endDate;
 	private Date dueDate;
 	private Date pickupDueDate;
+	private Date expectedBidEnd;
 	private Double bestBidAmount;
 	private Long bestBidDriverId;
 	private String bestBidDriverName;

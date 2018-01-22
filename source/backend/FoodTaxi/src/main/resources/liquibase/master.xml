@@ -15,4 +15,5 @@
 		<sqlFile path="liquibase/changelogs/change_table_collation.sql" splitStatements="true" stripComments="true"/>	
 	</changeSet>
 	<include file="changelogs/20180121_add_orderDueDate.xml" relativeToChangelogFile="true"/>
+	<include file="changelogs/20180122_added_bid_end" relativeToChangelogFile="true"/>
 </databaseChangeLog>
