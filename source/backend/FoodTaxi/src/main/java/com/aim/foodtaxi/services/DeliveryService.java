@@ -61,6 +61,7 @@ public class DeliveryService {
 		if (delivery.getBestBid() != null) {
 			delivery.setStatus(DeliveryStatus.PICKING_UP);
 			delivery.setDriver(delivery.getBestBid().getDriver());
+			delivery.setActualBidEnd(new Date());
 			Date tenMinLater = Date.from(LocalDateTime.now().plusMinutes(10).atZone(ZoneId.systemDefault()).toInstant());
 			if(delivery.getOrder().getPickupDate().before(tenMinLater)){
 				delivery.setPickupDueDate(tenMinLater);

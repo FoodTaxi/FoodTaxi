@@ -22,15 +22,15 @@ public class SchedulerService {
 	@Autowired
 	Scheduler scheduler;
 
-	public void scheduleBidExpiration(long deliveryId) throws SchedulerException {
+	public void scheduleBidExpiration(long deliveryId, short minutes) throws SchedulerException {
 		String name = UUID.randomUUID().toString();
 		String group = BidExpiryJob.class.getSimpleName() + "_" + deliveryId;
 
 		JobDetail jd = JobBuilder.newJob(BidExpiryJob.class).storeDurably()
 				.usingJobData(JobDataKeys.DELIVERY_ID.value(), Long.toString(deliveryId)).withIdentity(name, group).build();
-		LocalDateTime fiveMinutesLater = LocalDateTime.now().plusMinutes(5);
+		LocalDateTime minutesLater = LocalDateTime.now().plusMinutes(minutes);
 		Trigger t = TriggerBuilder.newTrigger().forJob(jd)
-				.startAt(Date.from(fiveMinutesLater.atZone(ZoneId.systemDefault()).toInstant())).build();
+				.startAt(Date.from(minutesLater.atZone(ZoneId.systemDefault()).toInstant())).build();
 
 		scheduler.scheduleJob(jd, t);
 	}
