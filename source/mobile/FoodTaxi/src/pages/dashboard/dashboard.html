@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item *ngFor="let delivery of deliveries">
       <ion-grid>
-        <ion-row justify-content-center>
+        <ion-row justify-content-center align-items-end align-items-start>
           <ion-col class="dashboard-col">
             <p><img class="brand-icon" src="http://cdn.playbuzz.com/cdn/6e3a4963-ba68-4989-8161-f9ed4f139813/deacc6ca-1cab-4a16-87c5-b7c5a959724a.jpg"/></p>
             <div class="gird-action-button">
@@ -19,31 +19,27 @@
             </div>
           </ion-col>
           <ion-col class="dashboard-col">
-            <p>от: {{delivery.startAddressText}}</p>
+            <p class="inline-p">от: {{delivery.startAddressText}}</p>
             <div class="gird-action-button">
               <button ion-button (click)="openShopMap(delivery)">Виж Карта</button>
             </div>
           </ion-col>
           <ion-col class="dashboard-col">
-            <p>за: {{delivery.endAddressText}}</p>
+            <p lass="inline-p">за: {{delivery.endAddressText}}</p>
             <div class="gird-action-button">
             <button ion-button (click)="openClientMap(delivery)">Виж Карта</button>
             </div>
           </ion-col>
-          <ion-col col-5 class="dashboard-col">
-            <p *ngIf="delivery.bestBidAmount" class="sub-row">Печели: {{ delivery.bestBidDriverName}}</p>
-            <p *ngIf="!delivery.bestBidAmount" class="sub-row">Печели: ...</p>
-            <p class="sub-row">
-              <span class="span-left">Остава  Време!!!</span>
-              <span *ngIf="delivery.bestBidAmount" class="span-right">Бид {{ currentBidPrice(delivery) }} лв.</span>
-              <span *ngIf="!delivery.bestBidAmount" class="span-right">Няма бид</span>
-            </p>
+          <ion-col class="dashboard-col">
+           <p class="sub-row">Цена: {{currentBidPrice(delivery)}} лв.</p>
+           <p class="sub-row">Остават: {{ delivery.timeleft }}</p>
+           <p class="sub-row">Курс: {{ getDistanceFromLatLonInKm(delivery) }} км</p>
+          </ion-col>
+          <ion-col class="dashboard-col">
+            <button ion-button disabled > {{ newBidPrice(delivery) }} </button>
             <div class="gird-action-button sub-row">
-              <span class="span-left">
-                <button ion-button disabled > {{ newBidPrice(delivery) }} </button>
-              </span>
-              <span class="span-right">
-                <button ion-button>Предложи</button>
+              <span>
+                <button ion-button (click)="makeABid(delivery)">Предложи</button>
               </span>
             </div>
           </ion-col>

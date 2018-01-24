@@ -8,8 +8,7 @@ import {Login} from '../login/login';
 import {MapPage} from '../map/map';
 import { DriverService } from '../../providers/driver-service';
 import { LoginService } from '../../providers/login-service';
-
-
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'page-dashboard',
@@ -19,9 +18,15 @@ import { LoginService } from '../../providers/login-service';
 export class Dashboard {
   public deliveries: any;
   public profile: any;
+  private secondsTimer: any;
+
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public deliveryService: DeliveryService,
     public driverService: DriverService, public loginService: LoginService, public loadingCtrl: LoadingController,
     public bidService: BidService ) {
+    this.secondsTimer = Observable.timer(1000,1000);
+      this.secondsTimer.subscribe(t=> {
+        this.updateTime(this.deliveries);
+      });
     
   }
   
@@ -33,6 +38,7 @@ export class Dashboard {
   loadProfile() {
     this.driverService.getProfile()
     .then(data => {
+      console.log(data);
       this.profile = data;
     })
   }
@@ -41,6 +47,7 @@ export class Dashboard {
     this.deliveryService.getOpenDeliveries()
     .then(data => {
       this.deliveries = data;
+      this.updateTime(this.deliveries);
     });
   }
 
@@ -69,11 +76,32 @@ export class Dashboard {
   }
   
   newBidPrice(delivery) {
-     return (delivery.bestBidAmount - 0.10).toFixed(2);
+    if (delivery.bestBidAmount ) {
+      return (delivery.bestBidAmount - 0.10).toFixed(2);
+    } else {
+      return '5.00';
+    }
   }
 
   currentBidPrice(delivery) {
-     return delivery.bestBidAmount.toFixed(2);
+    if (delivery.bestBidAmount ) {
+      return delivery.bestBidAmount.toFixed(2);
+    } else {
+      return 5.00;
+    }
+  }
+  
+  formatTime(timestamp) {
+    var currentTime =  Math.floor(Date.now());
+    currentTime = timestamp - currentTime
+    currentTime = Math.floor(currentTime/1000)
+    return Math.floor(currentTime/60) + ':' + Math.abs(currentTime%60);
+  }
+
+  updateTime(deliveries) {
+     for (let delivery of deliveries) {
+      delivery.timeleft = this.formatTime(delivery.expectedBidEnd);
+    }
   }
 
   makeABid(delivery) {
@@ -85,6 +113,27 @@ export class Dashboard {
       loading.dismiss();
     });;
   } 
+
+
+  getDistanceFromLatLonInKm(delivery) {
+    var lat1 = delivery.startLatitude;
+    var lon1 = delivery.startLongtitude;
+    var lat2 = delivery.endLatitude;
+    var lon2 = delivery.endLongtitude;
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = this.deg2rad(lon2-lon1); 
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d.toFixed(2);;
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
 
 
   logout() {
