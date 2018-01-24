@@ -18,7 +18,6 @@ export class BidService {
       this.authHttp.post(AppSettings.API_ENDPOINT + '/private/bid/create', bid)
        .subscribe(data => {
           console.log(data);
-          console.log("in data -->");
           resolve(data);
         });
     });

@@ -17,9 +17,7 @@ export class LoginService {
 
   isTokenSaved() {
     return this.storage.get('token').then(token => {
-             console.log('mega greda');
       if (token && token.length > 0) {
-        console.log(token);
         return true;
       }
              console.log('greda brat');
