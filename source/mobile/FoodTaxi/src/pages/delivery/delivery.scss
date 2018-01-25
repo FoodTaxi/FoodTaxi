@@ -15,12 +15,6 @@ page-delivery {
   	height: 50px;
   }
 
-  #map {
-  	display: block;
-  	width: 100%;
-    height: 60%;
-  }
-
   .delivery-brand-icon {
   	display: block;
   	max-width:100%;
@@ -33,23 +27,8 @@ page-delivery {
   .delivery-row {
   	display: block;
   	margin: 20px;
-	background-color: rgb(242, 242, 242);
-  }
-
-  .delivery-table-row-part50 {
-	width: 50%;
-  }
-  
-  .delivery-table-row-part10 {
-	width:10%;
-  }
-
-  .delivery-table-row {
-	width:100%;
-  }
-
-  .delivery-table-row-part20 {
-	width:20%;
+    width: 100%;
+	  background-color: rgb(242, 242, 242);
   }
 
 
