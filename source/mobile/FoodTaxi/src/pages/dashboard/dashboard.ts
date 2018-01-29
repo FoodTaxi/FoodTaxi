@@ -51,11 +51,11 @@ export class Dashboard {
     });
   }
 
-  openDelivery(delivery) {
-    this.navCtrl.push(Delivery, {
-      delivery: delivery
-    });
-  }
+  // openDelivery(delivery) {
+  //   this.navCtrl.push(Delivery, {
+  //     delivery: delivery
+  //   });
+  // }
 
   openShopMap(delivery) {
     this.navCtrl.push(MapPage, {
@@ -128,13 +128,20 @@ export class Dashboard {
             Math.sin(dLon/2) * Math.sin(dLon/2); 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c; // Distance in km
-    return d.toFixed(2);;
+    return d.toFixed(2);
   }
 
   deg2rad(deg) {
     return deg * (Math.PI/180)
   }
 
+ openDelivery(delivery) {
+    let deliveryModal = this.modalCtrl.create(Delivery, { delivery: delivery });
+    deliveryModal.onDidDismiss(data => {
+       console.log(data);
+     });
+    deliveryModal.present();
+  }
 
   logout() {
     this.loginService.cleanTheToken();
