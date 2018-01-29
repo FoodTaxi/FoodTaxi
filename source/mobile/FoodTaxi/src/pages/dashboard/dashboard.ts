@@ -31,7 +31,6 @@ export class Dashboard {
   }
   
   ionViewWillEnter() {
-    this.loadDeliveries();
     this.loadProfile();
   }
 
@@ -40,7 +39,8 @@ export class Dashboard {
     .then(data => {
       console.log(data);
       this.profile = data;
-    })
+      this.loadDeliveries();
+    });
   }
 
   loadDeliveries(){
@@ -50,12 +50,6 @@ export class Dashboard {
       this.updateTime(this.deliveries);
     });
   }
-
-  // openDelivery(delivery) {
-  //   this.navCtrl.push(Delivery, {
-  //     delivery: delivery
-  //   });
-  // }
 
   openShopMap(delivery) {
     this.navCtrl.push(MapPage, {
@@ -141,6 +135,10 @@ export class Dashboard {
        console.log(data);
      });
     deliveryModal.present();
+  }
+
+  isMine(currentOwner) {
+    return currentOwner == this.profile.id;
   }
 
   logout() {
