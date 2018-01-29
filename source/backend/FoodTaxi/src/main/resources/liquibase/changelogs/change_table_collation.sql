@@ -1,3 +1,5 @@
+ALTER DATABASE heroku_17b99e2d36d1205 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
 ALTER TABLE `th_bid` COLLATE='utf8mb4_unicode_ci', CONVERT TO CHARSET utf8mb4;
 ALTER TABLE `th_delivery` COLLATE='utf8mb4_unicode_ci', CONVERT TO CHARSET utf8mb4;
 ALTER TABLE `t_bid` COLLATE='utf8mb4_unicode_ci', CONVERT TO CHARSET utf8mb4;
