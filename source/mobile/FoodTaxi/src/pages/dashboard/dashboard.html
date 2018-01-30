@@ -36,11 +36,20 @@
            <p class="sub-row">Курс: {{ getDistanceFromLatLonInKm(delivery) }} км</p>
           </ion-col>
           <ion-col class="dashboard-col">
+            <div *ngIf="!isMine(delivery.bestBidDriverId)" >
             <button ion-button disabled > {{ newBidPrice(delivery) }} </button>
             <div class="gird-action-button sub-row">
               <span>
                 <button ion-button (click)="makeABid(delivery)">Предложи</button>
               </span>
+            </div>
+           </div>
+           <div *ngIf="isMine(delivery.bestBidDriverId)">
+            <div class="gird-action-button sub-row">
+              <span>
+                <button ion-button disabled>ОК</button>
+              </span>
+            </div>
             </div>
           </ion-col>
         </ion-row>

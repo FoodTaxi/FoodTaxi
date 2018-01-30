@@ -10,30 +10,27 @@
 <ion-content class="single-delivery">
   <div> 
   	 <ion-grid>
-        <ion-row justify-content-center>
-          <ion-col>
-            <img class="delivery-brand-icon" [src] = "delivery.brandLogoPath"/>
-          </ion-col>
-          <ion-col col-2>
-            <p>From:</p>
-            <p>{{delivery.startAddressText}}</p>
-          </ion-col>
-          <ion-col col-2>
-            <p>To:</p>
-            <p>{{delivery.endAddressText}}</p>
-          </ion-col>
+        <ion-row justify-content-center>    
           <ion-col >
-            <p >Current Bid:</p>
-            <p *ngIf="delivery.bestBidDriverId">{{ delivery.bestBidAmount }}</p>
-            <p *ngIf="!delivery.bestBidDriverId">No bid</p>
+           <p>McDonalds</p>
           </ion-col>
-          <ion-col col-2>
-            <p>Holder:</p>
-            <p *ngIf="delivery.bestBidDriverId">{{delivery.bestBidDriverName || ""}}</p>
-            <p *ngIf="!delivery.bestBidDriverId">No bid</p>
+          <ion-col>
+            <img class="delivery-brand-icon"  src="http://cdn.playbuzz.com/cdn/6e3a4963-ba68-4989-8161-f9ed4f139813/deacc6ca-1cab-4a16-87c5-b7c5a959724a.jpg"/>
           </ion-col>
-          <ion-col col-2>
-            <p>Time Left:</p>
+        </ion-row>
+         <ion-row>
+          <ion-col>
+            <p>Поръчка: {{delivery.description}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>От: {{delivery.startAddressText}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>До: {{delivery.endAddressText}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>
