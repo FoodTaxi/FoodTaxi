@@ -1,6 +1,7 @@
 {
-  "name": "ionic-app-base",
-  "author": "Ionic Framework",
+  "name": "FoodTaxi",
+  "version": "0.0.0",
+  "author": "Mihail Karev",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
