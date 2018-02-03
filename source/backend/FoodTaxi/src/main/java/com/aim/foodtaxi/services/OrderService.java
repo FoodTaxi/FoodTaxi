@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +38,7 @@ import com.aim.foodtaxi.repositories.ShopRepository;
 public class OrderService {
 
 	private final static short BID_MINUTES = 5;
+	private final static int DEFAULT_DELIVERY_COMPLETION = 15;
 
 	@Autowired
 	private OrderRepository orderRepository;
@@ -155,18 +157,21 @@ public class OrderService {
 		if (confirmed) {
 			order.setStatus(OrderStatus.CONFIRMED);
 			DeliveryEntity delivery = order.getDelivery();
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MINUTE, DEFAULT_DELIVERY_COMPLETION);
 			if (completionMinutes != null && completionMinutes > 0) {
-				order.setPickupDate(Date.from(
-						LocalDateTime.now().plusMinutes(completionMinutes).atZone(ZoneId.systemDefault()).toInstant()));
-				// TODO schedule to open bidding of delivery in "n" minutes
+				cal.add(Calendar.MINUTE, completionMinutes);
 			}
+			Date pickUp = cal.getTime();
+			order.setPickupDate(pickUp);
+			delivery.setPickupDueDate(pickUp);
 			delivery.setStatus(DeliveryStatus.BIDDING);
 			delivery.setExpectedBidEnd(
 					Date.from(LocalDateTime.now().plusMinutes(BID_MINUTES).atZone(ZoneId.systemDefault()).toInstant()));
 			deliveryRepository.save(delivery);
 			orderRepository.save(order);
 			try {
-				schedulerService.scheduleBidExpiration(delivery.getId(), (short) 5);
+				schedulerService.scheduleBidExpiration(delivery.getId(), BID_MINUTES);
 			} catch (SchedulerException e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
