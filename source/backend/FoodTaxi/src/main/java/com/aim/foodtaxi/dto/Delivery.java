@@ -35,4 +35,5 @@ public class Delivery {
 	private BigDecimal codAmount;
 	private String pin;
 	private BigDecimal orderValue;
+	private String brandLogo;
 }

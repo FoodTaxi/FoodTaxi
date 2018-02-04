@@ -21,7 +21,8 @@ public abstract class DeliveryMapper {
 	@Named("deliveryEntityToDelivery")
 	@Mappings({ 
 		@Mapping(source = "bestBid.price", target = "bestBidAmount"),
-		@Mapping(source = "bestBid.driver.id", target = "bestBidDriverId") 
+		@Mapping(source = "bestBid.driver.id", target = "bestBidDriverId") ,
+		@Mapping(source = "order.brand.logoPath", target = "brandLogo")
 	})
 	public abstract Delivery deliveryEntityToDelivery(DeliveryEntity deliveryEntity);
 
