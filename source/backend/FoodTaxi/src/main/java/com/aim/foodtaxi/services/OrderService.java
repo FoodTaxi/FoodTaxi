@@ -87,6 +87,9 @@ public class OrderService {
 		orderEntity.setStatus(OrderStatus.AWAITING_CONFIRMATION);
 		orderEntity.setOrderValue(order.getOrderValue());
 		orderEntity.setShop(findBestShop(order, brandEntity));
+		orderEntity.setCustomerName(order.getCustName());
+		orderEntity.setCustomerEmail(order.getCustEmail());
+		orderEntity.setCustomerPhone(order.getCustPhone());
 		return orderEntity;
 	}
 

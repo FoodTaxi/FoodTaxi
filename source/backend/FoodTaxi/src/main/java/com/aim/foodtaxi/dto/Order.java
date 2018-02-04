@@ -28,4 +28,7 @@ public class Order {
     private String addressText;
     private DeliveryStatus deliveryStatus;
     private String pin;
+    private String custName;
+    private String custPhone;
+    private String custEmail;
 }

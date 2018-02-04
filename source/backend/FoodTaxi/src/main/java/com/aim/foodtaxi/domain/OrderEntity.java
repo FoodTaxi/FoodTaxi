@@ -73,4 +73,14 @@ public class OrderEntity {
 	
 	@Column(name = "ORDER_VALUE", nullable=false)
     private BigDecimal orderValue;
+	
+	@Column(name = "CUST_NAME", nullable=false)
+	private String customerName;
+	
+	@Column(name = "CUST_PHONE", nullable=false)
+	private String customerPhone;
+
+	@Column(name = "CUST_EMAIL", nullable=true)
+	private String customerEmail;
+	
 }

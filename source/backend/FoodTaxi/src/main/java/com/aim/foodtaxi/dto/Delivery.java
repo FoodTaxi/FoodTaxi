@@ -36,4 +36,7 @@ public class Delivery {
 	private String pin;
 	private BigDecimal orderValue;
 	private String brandLogo;
+	private String custName;
+    private String custPhone;
+    private String custEmail;
 }

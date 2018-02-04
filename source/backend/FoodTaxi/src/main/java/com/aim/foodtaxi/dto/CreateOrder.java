@@ -20,4 +20,7 @@ public class CreateOrder {
     private boolean hasCod;
     private BigDecimal codAmount;
     private BigDecimal orderValue;
+    private String custName;
+    private String custPhone;
+    private String custEmail;
 }

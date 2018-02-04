@@ -16,4 +16,5 @@
 	</changeSet>
 	<include file="changelogs/20180121_add_orderDueDate.xml" relativeToChangelogFile="true"/>
 	<include file="changelogs/20180122_added_bid_end.xml" relativeToChangelogFile="true"/>
+	<include file="changelogs/20180204_add_order_cust_data.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
