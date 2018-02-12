@@ -8,21 +8,32 @@ import {AppSettings} from '../common/appSettings';
 @Injectable()
 export class DeliveryService {
   
-  public data;
   constructor(public http: Http, public authHttp: AuthHttp, public storage: Storage) {
   }
+  delivered(delivery) {
+    var delivered = {
+      "delivered": true,
+      "deliveryId": delivery.id,
+      "denialReason": ""
+    };
+    return new Promise(resolve => {
+
+      this.authHttp.post(AppSettings.API_ENDPOINT + '/private/delivery/complete', delivered)
+       .subscribe(data => {
+          console.log(data);
+          resolve(data);
+        }, err => {
+          console.log(err);
+        });
+    });
+  }
   getOpenDeliveries() {
-  	if (this.data) {
-    	// already loaded data
-    	return Promise.resolve(this.data);
-  	}
   	return new Promise(resolve => {
     	this.authHttp.get(AppSettings.API_ENDPOINT + '/private/delivery/driver')
       .map(res => res.json())
      	.subscribe(data => {
-        	this.data = data;
-          console.log(data);
-        	resolve(this.data);
+         console.log(data);
+        	resolve(data);
       	}, err => {
           console.log(err);
         });

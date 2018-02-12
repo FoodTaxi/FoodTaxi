@@ -1,4 +1,9 @@
 page-delivery {
+
+  .overdue {
+    color: red;
+  }
+
   #single-delivery {
     width: 100%;
     height: 100%;
@@ -31,11 +36,25 @@ page-delivery {
 	  background-color: rgb(242, 242, 242);
   }
 
+  .order-info-grid {
+    margin: 20px;
+    font-size: 18px;
+    width: 90%;
+  }
 
+  .close-button-div {
+    width: 100%;
+  }
+  .close-button {
+    margin-left: 85%;
+    width: 70px;
+  }
 
 	.delivery-table-row>td>h2, .delivery-table-row>td>h4 {
 		text-align: center;
 	}
+  
+
 
 	.delivery-table {
 		width: 100%;

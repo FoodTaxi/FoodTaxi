@@ -26,19 +26,26 @@ export class MapPage {
   public nameOfPoint: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.latitude = navParams.get('latitude');
-  	this.longitude = navParams.get('longitude');
-  	this.nameOfPoint = navParams.get('nameOfPoint');
-  }
+    console.log("construct MAP");
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MapPage');
+    this.latitude = this.navParams.get('latitude');
+    this.longitude = this.navParams.get('longitude');
+    this.nameOfPoint = this.navParams.get('nameOfPoint');
     this.loadMap();
   }
 
-   loadMap() {
+  ionViewDidLoad() {
+        console.log('ionViewDidLoad MapPage');
+  }
 
-    Geolocation.getCurrentPosition().then((position) => {
+   loadMap() {
+     console.log("load MAP -----<<<<<<")
+     var options = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    Geolocation.getCurrentPosition(options).then((position) => {
       console.log('getCurrentPosition');
       console.log(position);
       let latLng = new google.maps.LatLng(this.latitude, this.longitude);
@@ -72,7 +79,7 @@ export class MapPage {
           .then(marker => {
             marker.on(GoogleMapsEvent.MARKER_CLICK)
               .subscribe(() => {
-                alert('clicked');
+         
               });
           });
 
@@ -88,6 +95,9 @@ export class MapPage {
 
 
       });
+    }).catch((error) => {
+        console.log('Error getting location', error);
+        this.loadMap();
     });
   }
 }

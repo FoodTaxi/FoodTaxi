@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalController, NavController, LoadingController } from 'ionic-angular';
+import { ModalController, NavController, LoadingController, AlertController } from 'ionic-angular';
 import {BidService} from '../../providers/bid-service';
 import {DeliveryService} from '../../providers/delivery-service';
 import {Delivery} from '../delivery/delivery';
@@ -19,36 +19,80 @@ export class Dashboard {
   public deliveries: any;
   public profile: any;
   private secondsTimer: any;
+  private refreshDelivaries2sec: any;
+  private refreshDelivaries10sec: any;
+  private refreshSubscriber: any;
+  private isInBidding: boolean;
+  private title: String;
+  private currentDelivery: any;
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public deliveryService: DeliveryService,
     public driverService: DriverService, public loginService: LoginService, public loadingCtrl: LoadingController,
-    public bidService: BidService ) {
+    public bidService: BidService, private alertController: AlertController ) {
+    this.title = "Търсене на поръчки";
     this.secondsTimer = Observable.timer(1000,1000);
-      this.secondsTimer.subscribe(t=> {
-        this.updateTime(this.deliveries);
-      });
-    
+    this.secondsTimer.subscribe(t=> {
+      this.updateTime(this.deliveries);
+    });
+
   }
   
   ionViewWillEnter() {
     this.loadProfile();
-  }
+   }
 
   loadProfile() {
     this.driverService.getProfile()
     .then(data => {
       console.log(data);
       this.profile = data;
+      this.generateTimers();
       this.loadDeliveries();
     });
+  }
+  generateTimers() {
+    this.refreshDelivaries10sec = Observable.timer(10000,10000);
+    this.refreshDelivaries2sec = Observable.timer(1000,2000);
+    this.updateTimerInterval(false);
   }
 
   loadDeliveries(){
     this.deliveryService.getOpenDeliveries()
     .then(data => {
+      console.log('delivery');
       this.deliveries = data;
+      this.checkForBidding();
       this.updateTime(this.deliveries);
     });
+  }
+
+  checkForBidding() {
+    var bidding = false; 
+    for (let delivery of this.deliveries) {
+        if (delivery.status == 'BIDDING') {
+           bidding = true; 
+           break;
+        }
+    }
+    if (this.isInBidding != bidding) {
+      this.updateTimerInterval(bidding);
+    }
+  }
+
+  updateTimerInterval(bidding) {
+    this.isInBidding = bidding;
+    if (this.refreshSubscriber) {
+      this.refreshSubscriber.unsubscribe();
+    }
+    if (this.isInBidding) {
+      this.refreshSubscriber = this.refreshDelivaries2sec.subscribe(t=> {
+        this.loadDeliveries();
+      });
+    } else {
+      this.refreshSubscriber = this.refreshDelivaries10sec.subscribe(t=> {
+        this.loadDeliveries();
+      });
+    }
   }
 
   openShopMap(delivery) {
@@ -81,20 +125,43 @@ export class Dashboard {
     if (delivery.bestBidAmount ) {
       return delivery.bestBidAmount.toFixed(2);
     } else {
-      return 5.00;
+      return '5.00';
     }
   }
   
   formatTime(timestamp) {
     var currentTime =  Math.floor(Date.now());
     currentTime = timestamp - currentTime
+    if (currentTime < 0) {
+      return "";
+    }
     currentTime = Math.floor(currentTime/1000)
-    return Math.floor(currentTime/60) + ':' + Math.abs(currentTime%60);
+    
+    return this.twoDigits(Math.floor(currentTime/60)) + ':' + this.twoDigits(Math.abs(currentTime%60));
+  }
+
+  twoDigits(number) {
+    if (number > -10  && number <10) {
+      return "0" + number;
+    } 
+    return "" + number;
   }
 
   updateTime(deliveries) {
-     for (let delivery of deliveries) {
-      delivery.timeleft = this.formatTime(delivery.expectedBidEnd);
+    if (deliveries === undefined  || deliveries.length == 0) {
+      this.title = "Търсене на поръчки";
+      return;
+    }
+    for (let delivery of deliveries) {
+      if (delivery.status == 'PICKING_UP') {
+        this.title = "На път към обекта";
+        delivery.timeleft = this.formatTime(delivery.pickupDueDate);
+      } else if (delivery.status == 'DELIVERY') {
+        this.title = "На път към клиента";
+        delivery.timeleft = this.formatTime(delivery.dueDate);
+      } else {
+        delivery.timeleft = this.formatTime(delivery.expectedBidEnd);
+      }
     }
   }
 
@@ -140,6 +207,65 @@ export class Dashboard {
   isMine(currentOwner) {
     return currentOwner == this.profile.id;
   }
+
+
+  calculateDeliveryTime(delivery) {
+    var currentTime =  Math.floor(Date.now());
+    currentTime = delivery.pickupDueDate - currentTime
+    currentTime = Math.floor(currentTime/1000)
+    if (currentTime < 0) {
+      return "0";
+    }
+    return this.twoDigits(Math.floor(currentTime/60));
+  }
+
+  presentPinPropmpt(delivery) {
+    let alert = this.alertController.create({
+      title: 'ПИН',
+      message: 'Вашият ПИН за поръчка #'+ delivery.id + ' е: ' + delivery.pin,      
+      buttons: [{
+        text: 'OK',
+        role: 'cancel'
+      }]
+    });
+    alert.present();
+  }
+
+   presentNextToClient(delivery) {
+    this.currentDelivery = delivery;
+    let alert = this.alertController.create({
+      title: 'При клиента',
+      message: 'Име '+ delivery.custName + ' телфон: ' + delivery.custPhone,      
+      buttons: [{
+        text: 'Откажи',
+        role: 'cancel'
+      },{
+        text: 'Предадох',
+        handler: () => {
+          this.delivered(this.currentDelivery);
+        }
+      }]
+    });
+    alert.present();
+  }
+
+
+  delivered(delivery) {
+     let loading = this.loadingCtrl.create({
+        content: 'Моля, изчакайте...'
+      });
+      loading.present();
+      this.deliveryService.delivered(delivery)
+      .then(data => {
+        this.loadDeliveries();
+        loading.dismiss();
+      })
+      .catch(error => {
+        console.log(error);
+        loading.dismiss();
+      });
+  }
+  
 
   logout() {
     this.loginService.cleanTheToken();

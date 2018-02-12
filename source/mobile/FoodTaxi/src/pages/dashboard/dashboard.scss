@@ -3,41 +3,49 @@ page-dashboard {
 		width:50px;
 		height:50px;
 		display: block;
+		margin: auto;
+		top: 0;
 	}
+	.overdue {
+    	color: red;
+  	}
+
 	.dashboard-col {
-		height: 100px;
+		height: 120px;
 	}
+
+
 	.gird-action-button {
 		bottom: 0;
 		position: absolute;	
-		width: 100%;
+		width: 80%;
 		display:  block;
-	}
-	.inline-p {
-		height: 40px;
-    	display: inline-block;
+		// margin-top:10px;
+		height: 35px;
 	}
 	
-
-	.sub-row {
+	.small-text-column {
+		font-size: 12px;
 		display: block;
 		width: 100%;
+		height: 100%;
+	}
+
+	.avatar{
+   		
+   		position: absolute;
+   		width: 50px;
+   		height: 50px;
+	}
+
+
+
+	.duedate-label {
+		font-size: 22px;
 	}
 	
-	.span-left {
-		float: left;
-	}
-
-	.span-right {
-		float: right;
-	}
-
-	.order-table-row>td>h2, .order-table-row>td>h4 {
-		text-align: center;
-	}
-
-	.order-table {
-		width: 100%;
+	.dashboard-grid {
+		font-size:16px;
 	}
 
 	.profile-table {
