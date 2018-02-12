@@ -1,74 +1,103 @@
 <ion-header>
   <ion-navbar>
- <!--    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
-    <ion-title>Dashboard</ion-title>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons end>
+                <button ion-button icon-only  (click)="logout()">Изход
+                   <ion-icon name="exit"></ion-icon>
+                </button>
+            </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let delivery of deliveries">
-      <ion-grid>
-        <ion-row justify-content-center align-items-end align-items-start>
-          <ion-col class="dashboard-col">
-            <p><img class="brand-icon" src="http://cdn.playbuzz.com/cdn/6e3a4963-ba68-4989-8161-f9ed4f139813/deacc6ca-1cab-4a16-87c5-b7c5a959724a.jpg"/></p>
-            <div class="gird-action-button">
+      <ion-grid class="dashboard-grid" >
+        <ion-row justify-content: center *ngFor="let delivery of deliveries" >
+          <ion-col class="dashboard-col" col-4 col-md>
+             <ion-avatar class="avatar">
+              <img class="brand-icon" src="{{delivery.brandLogo}}"/>
+              </ion-avatar>
+            <div class="gird-action-button" col-4 col-md >
               <button ion-button (click)="openDelivery(delivery)">Поръчка</button>
             </div>
           </ion-col>
-          <ion-col class="dashboard-col">
+          <ion-col class="dashboard-col" col-4 col-md >
             <p class="inline-p">от: {{delivery.startAddressText}}</p>
             <div class="gird-action-button">
               <button ion-button (click)="openShopMap(delivery)">Виж Карта</button>
             </div>
           </ion-col>
-          <ion-col class="dashboard-col">
-            <p lass="inline-p">за: {{delivery.endAddressText}}</p>
+          <ion-col class="dashboard-col" col-4 col-md>
+            <p>за: {{delivery.endAddressText}}</p>
             <div class="gird-action-button">
             <button ion-button (click)="openClientMap(delivery)">Виж Карта</button>
             </div>
           </ion-col>
-          <ion-col class="dashboard-col">
-           <p class="sub-row">Цена: {{currentBidPrice(delivery)}} лв.</p>
-           <p class="sub-row">Остават: {{ delivery.timeleft }}</p>
-           <p class="sub-row">Курс: {{ getDistanceFromLatLonInKm(delivery) }} км</p>
+          <ion-col class="dashboard-col" *ngIf="delivery.status == 'BIDDING'"  col-4 col-md >
+            <div class="small-text-column">
+            <p >Цена: {{currentBidPrice(delivery)}} лв.</p>
+            <p >Остават: {{ delivery.timeleft }}</p>
+            <p >Курс: {{ getDistanceFromLatLonInKm(delivery) }} км</p>
+            <p class="{{calculateDeliveryTime(delivery) == '0'? 'overdue' :'normal'}} ">Вземи след: {{ calculateDeliveryTime(delivery) }} мин</p>
+            </div>
           </ion-col>
-          <ion-col class="dashboard-col">
-            <div *ngIf="!isMine(delivery.bestBidDriverId)" >
-            <button ion-button disabled > {{ newBidPrice(delivery) }} </button>
-            <div class="gird-action-button sub-row">
-              <span>
-                <button ion-button (click)="makeABid(delivery)">Предложи</button>
-              </span>
+          <ion-col class="dashboard-col" col-4 col-md>
+            <div *ngIf="delivery.status == 'BIDDING'">
+              <div *ngIf="!isMine(delivery.bestBidDriverId)" >
+                <button ion-button disabled > {{ newBidPrice(delivery) }} </button>
+                <div class="gird-action-button sub-row">
+                  <span>
+                    <button ion-button (click)="makeABid(delivery)">Предложи</button>
+                  </span>
+                </div>
+               </div>
+               <div *ngIf="isMine(delivery.bestBidDriverId)">
+                <div class="gird-action-button sub-row">
+                  <span>
+                    <button ion-button icon-only disabled>
+                       <ion-icon name="checkmark-circle"></ion-icon>
+                    </button>
+                  </span>
+                </div>
+              </div>
             </div>
-           </div>
-           <div *ngIf="isMine(delivery.bestBidDriverId)">
-            <div class="gird-action-button sub-row">
-              <span>
-                <button ion-button disabled>ОК</button>
-              </span>
-            </div>
+            <div *ngIf="delivery.status != 'BIDDING'">
+              <p class="sub-row duedate-label">{{ delivery.timeleft }}</p>
+
+              <div *ngIf="delivery.status == 'PICKING_UP'">
+                <div class="gird-action-button sub-row">
+                  <span>
+                    <button ion-button (click)="presentPinPropmpt(delivery)">При Обекта</button>
+                  </span>
+                </div>
+              </div>
+              
+              <div *ngIf="delivery.status == 'DELIVERY'">
+                <div class="gird-action-button sub-row">
+                  <span>
+                    <button ion-button (click)="presentNextToClient(delivery)">При клиента</button>
+                  </span>
+                </div>
+              </div>
             </div>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-item>
-  </ion-list>
+
+
   <div class="profile">
    <ion-grid class="profile-table">
-        <ion-row justify-content-center>
-          <ion-col>
-            <p>Name:</p>
-            <p  *ngIf="profile">{{profile.firstName}} {{profile.lastName}}</p>
+        <ion-row justify-content-center *ngIf="profile">
+          <ion-col *ngIf="profile.imagePath">
+           <ion-avatar class="avatar">
+            <img class="brand-icon" src="{{profile.imagePath}}"/>
+            </ion-avatar>
           </ion-col>
           <ion-col>
-            <p>Plate:</p>
-            <p *ngIf="profile">{{profile.cabPlateNumber}}</p>
+            <p>{{profile.firstName}} {{profile.lastName}}</p>
           </ion-col>
           <ion-col>
-              <button  ion-button (click)="logout()">Logout</button>
+            <p>Номер на такси:</p>
+            <p>{{profile.cabNumber}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>

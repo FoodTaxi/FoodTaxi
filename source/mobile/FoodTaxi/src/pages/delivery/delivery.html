@@ -1,21 +1,24 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Delivery</ion-title>
+    <ion-title>Поръчка</ion-title>
+     <ion-buttons end>
+        <button ion-button icon-only (click)="closeModal()">
+          <ion-icon item-right name="ios-close-outline"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="single-delivery">
   <div> 
-  	 <ion-grid>
+  	 <ion-grid class="order-info-grid">
         <ion-row justify-content-center>    
           <ion-col >
-           <p>McDonalds</p>
+           <b>Поръчка: # {{delivery.id}}</b>
+           <p class="{{calculateDeliveryTime(delivery) == '0'? 'overdue' :'normal'}} ">Вземи след: {{ calculateDeliveryTime(delivery) }} мин</p>
           </ion-col>
           <ion-col>
-            <img class="delivery-brand-icon"  src="http://cdn.playbuzz.com/cdn/6e3a4963-ba68-4989-8161-f9ed4f139813/deacc6ca-1cab-4a16-87c5-b7c5a959724a.jpg"/>
+            <p><img src="{{delivery.brandLogo}}"/></p>
           </ion-col>
         </ion-row>
          <ion-row>
@@ -30,10 +33,11 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <p>До: {{delivery.endAddressText}}</p>
+            <p>До: {{delivery.endAddressText}}
+            <button class="close-button" ion-button icon-only (click)="closeModal()">Излез</button>
+            </p>
           </ion-col>
         </ion-row>
       </ion-grid>
   </div>
-
 </ion-content>

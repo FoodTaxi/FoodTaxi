@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 import { BidService }  from  '../../providers/bid-service'
 
 @Component({
@@ -20,11 +20,25 @@ export class Delivery {
     this.bidPrice = this.bidPrice.toFixed(2);
   }
 
+  twoDigits(number) {
+    if (number > -10  && number <10) {
+      return "0" + number;
+    } 
+    return "" + number;
+  }
 
-   dismiss() {
-     let data = { 'foo': 'bar' };
-     this.viewCtrl.dismiss(data);
-   }
+  calculateDeliveryTime(delivery) {
+    var currentTime =  Math.floor(Date.now());
+    currentTime = delivery.pickupDueDate - currentTime
+    currentTime = Math.floor(currentTime/1000)
+    if (currentTime < 0) {
+      return "0";
+    }
+    return this.twoDigits(Math.floor(currentTime/60));
+  }
 
+  closeModal() {
+    this.viewCtrl.dismiss();
+  }
 
 }
